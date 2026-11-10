@@ -1,8 +1,8 @@
+import { auditStructuredProgramme } from './genericRequirementEngine'
 import { ECONOMICS, ECONOMICS_SPECIALISATIONS, ECONOMICS_SPECIALISATION_SOURCE, type EconomicsSpecialisation } from './economicsData'
-import { requirementId, PS_RECOGNISED_NON_PS } from './requirementRules'
-import { PS_SINGAPORE, EC_MINOR_RECOGNISED, URBAN_CORE, URBAN_ELECTIVES, CHS_PILLARS } from './academicData'
+import { requirementId } from './requirementRules'
+import { EC_MINOR_RECOGNISED, URBAN_CORE, URBAN_ELECTIVES, CHS_PILLARS } from './academicData'
 export { URBAN_CORE, URBAN_ELECTIVES, CHS_PILLARS } from './academicData'
-import { PS_SUBFIELDS, PS_SUBFIELD_NAMES } from './politicalScienceSubfields'
 import type { PlannedCourse } from './types'
 
 export type RequirementStatus = 'completed' | 'current' | 'planned' | 'missing'
@@ -36,9 +36,6 @@ export function courseLevel(code: string): number {
   const match = code.match(/^[A-Z]+(\d)/)
   return match ? Number(match[1]) * 1000 : 0
 }
-function status(code: string, plan: PlannedCourse[]): RequirementStatus {
-  return plan.find(c => c.code === code)?.status ?? 'missing'
-}
 function units(courses: PlannedCourse[], completedOnly = false): number {
   return courses.filter(c => !completedOnly || c.status === 'completed')
     .reduce((sum, c) => sum + c.units, 0)
@@ -56,39 +53,10 @@ function presence(label: string, codes: readonly string[], plan: PlannedCourse[]
 }
 
 export function auditPoliticalScience(plan: PlannedCourse[]): Audit {
-  const ps = plan.filter(c => c.code.startsWith('PS'))
-  const level5 = ps.filter(c => courseLevel(c.code) === 5000)
-  const recognised = plan.filter(c => (PS_RECOGNISED_NON_PS as string[]).includes(c.code))
-  const majorCourses = [...ps, ...recognised]
-  return withIds({
-    id: 'ps-major', programme: 'Political Science — Primary Major (60 units)',
-    source: 'https://fass.nus.edu.sg/pol/graduation-requirements-cohort-2021-onwards/',
-    core: ['PS1101E', 'PS3257'].map(code => ({ code, status: status(code, plan) })),
-    checks: [
-      check('PS-coded units (minimum)', ps, 52),
-      check('Major total (PS-coded candidate units)', majorCourses, 60,
-        'Working assumption: non-PS courses in the Political Science subfield list count towards the major total; each course is counted once.'),
-      presence('Singapore Politics: one approved course', PS_SINGAPORE, plan,
-        `Provisional approved-course list: ${PS_SINGAPORE.join(', ')}. Verify for your cohort.`),
-      check('Level-3000 PS units', ps.filter(c => courseLevel(c.code) === 3000), 16),
-      check('Level-4000+ PS units', ps.filter(c => courseLevel(c.code) >= 4000), 20),
-      { id: '', label: 'Level-5000 PS courses (maximum one)', courses: level5,
-        completed: level5.filter(c => c.status === 'completed').length,
-        scheduled: level5.length, target: 1, unit: 'courses', maximum: true,
-        manual: true, detail: 'Departmental approval and applicable restrictions require verification.' },
-      ...PS_SUBFIELD_NAMES.map(field => presence(
-        `Subfield: ${field}`, PS_SUBFIELDS[field], plan,
-        'Recognised undergraduate course codes from the department subfield listing; special topics and cross-listed courses may need confirmation.'
-      ))
-    ],
-    notes: [
-      'PS1101E and PS3257 are tracked separately as compulsory courses.',
-      'Four subfields must be represented. Listed undergraduate PS courses are checked automatically; unlisted special topics require confirmation.',
-      'PS-recognised courses, substitutions, and programme overlaps still require review.'
-    ]
-  })
+  const audit = auditStructuredProgramme('ps-major', plan)
+  if (!audit) throw new Error('Political Science programme definition is missing')
+  return audit
 }
-
 
 /** Primary and second major audits use the same AY2021/22+ departmental data. */
 export function auditEconomicsMajor(plan: PlannedCourse[], kind: 'primary'|'second'): Audit {
@@ -156,7 +124,7 @@ export function auditEconomicsMinor(plan: PlannedCourse[]): Audit {
   const recognised = plan.filter(c => EC_MINOR_RECOGNISED.includes(c.code))
   // The department caps EC-recognised non-EC contributions at 4 units.
   // Prefer completed courses, then currently taking, then planned courses.
-  const rank = (c: PlannedCourse) => c.status === 'completed' ? 0 : 1
+  const rank = (c: PlannedCourse) => c.status === 'completed' ? 0 : c.status === 'current' ? 1 : 2
   const candidates = [...recognised].sort((a,b) => rank(a) - rank(b))
   const allocated: PlannedCourse[] = [...ec]
   let remaining = 4

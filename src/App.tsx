@@ -1,3 +1,4 @@
+import type { Audit } from './degreeRequirements'
 import { ECONOMICS_SPECIALISATIONS, type EconomicsSpecialisation } from './economicsData'
 import { APP_CONFIG } from './config'
 import { getSubject, getSubjectStyle, type SubjectColorMap } from './subjectColors'
@@ -10,7 +11,8 @@ import { checkPrerequisites } from './prerequisites'
 import type { PrereqTree } from './prerequisites'
 import type { AcademicProfile, PlannedCourse, CourseStatus } from './types'
 import { DEFAULT_PROFILE } from './types'
-import { auditPoliticalScience, auditEconomicsMinor, auditUrbanStudiesMinor, auditEconomicsMajor, auditEconomicsSpecialisation, auditCHS, overlapCandidates, type Audit } from './degreeRequirements'
+import { overlapCandidates } from './degreeRequirements'
+import { getProgrammeRegistry } from './programmeRegistry'
 import { PRIMARY_MAJORS, SECOND_MAJORS, MINORS } from './programmeCatalog'
 import { checkTimetable, type TimetableResult } from './timetable'
 import { EligibleCourseExplorer } from './EligibleCourseExplorer'
@@ -454,21 +456,9 @@ function App() {
   }
   const totalUnits=plan.reduce((n,c)=>n+c.units,0)
   const completedUnits=plan.filter(c=>c.status==='completed').reduce((n,c)=>n+c.units,0)
-  const cohortSupported=profile.college==='CHS' && profile.matriculationYear===2025
-  const primary=profile.primaryMajor.trim().toLowerCase().replace(/[^a-z]+/g, ' ').trim()
-  const minors=profile.minors.map(m=>m.trim().toLowerCase().replace(/\s+/g, ' '))
-  const audits:Audit[]=[]
-  if(cohortSupported){
-    audits.push(auditCHS(plan, utcp))
-    if(primary==='political science')audits.push(auditPoliticalScience(plan))
-    if(primary==='economics') {
-      audits.push(auditEconomicsMajor(plan,'primary'))
-      for(const key of profile.economicsSpecialisations??[]) if(key in ECONOMICS_SPECIALISATIONS) audits.push(auditEconomicsSpecialisation(plan,key as EconomicsSpecialisation))
-    }
-    if(profile.secondMajor.trim().toLowerCase()==='economics')audits.push(auditEconomicsMajor(plan,'second'))
-    if(minors.includes('economics'))audits.push(auditEconomicsMinor(plan))
-    if(minors.includes('urban studies'))audits.push(auditUrbanStudiesMinor(plan))
-  }
+  const programmeEntries=getProgrammeRegistry(plan,profile,utcp)
+  const audits=programmeEntries.flatMap(entry=>entry.audit?[entry.audit]:[])
+  const unsupported=programmeEntries.filter(entry=>!entry.supported)
   const overlaps=overlapCandidates(audits)
   const availableSemesters=Object.fromEntries(courses.map(c=>[c.moduleCode,c.semesters??[]])) as Record<string,number[]>
   return <div className="app">
@@ -556,8 +546,8 @@ function App() {
       </section>
       </div>
       <section className="requirements-section"><h2>Graduation Requirements</h2>
-        {!cohortSupported && <p className="requirements-note">Detailed rules currently supported only for AY2025/26 CHS students.</p>}
-        {cohortSupported && !audits.length && <p className="requirements-note">Set Political Science as your primary major and Economics and Urban Studies as minors to see the supported checks.</p>}
+        {profile.college==='CHS' && profile.matriculationYear!==2025 && <p className="requirements-note">CHS common curriculum audit is currently verified only for AY2025/26.</p>}
+        {unsupported.map(entry=><p className="requirements-note" key={entry.id}>{entry.name} ({entry.kind}): requirements not yet supported. Manual planning is available.</p>)}
         {audits.length > 0 && <div className="degree-overview">
           {audits.map(a => {
             const applicable = a.checks.filter(c => !c.maximum && !c.manual)

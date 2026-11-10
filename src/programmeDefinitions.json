@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "programmes": [
+    {
+      "id": "ps-major",
+      "name": "Political Science \u2014 Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Political Science",
+      "minCohort": 2021,
+      "source": "https://fass.nus.edu.sg/pol/graduation-requirements-cohort-2021-onwards/",
+      "core": [
+        "PS1101E",
+        "PS3257"
+      ],
+      "requirements": [
+        {
+          "id": "ps:ps-coded",
+          "label": "PS-coded units (minimum)",
+          "type": "minimum_units",
+          "target": 52,
+          "selector": {
+            "prefix": "PS"
+          }
+        },
+        {
+          "id": "ps:major-total",
+          "label": "Major total (PS-coded candidate units)",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "PS",
+            "namedBasket": "ps-recognised-non-ps"
+          },
+          "detail": "Working assumption: non-PS courses in the Political Science subfield list count towards the major total."
+        },
+        {
+          "id": "ps:singapore",
+          "label": "Singapore Politics: one approved course",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "namedBasket": "ps-singapore"
+          }
+        },
+        {
+          "id": "ps:level-3000",
+          "label": "Level-3000 PS units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "PS",
+            "exactLevel": 3
+          }
+        },
+        {
+          "id": "ps:level-4000",
+          "label": "Level-4000+ PS units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "PS",
+            "minLevel": 4
+          }
+        },
+        {
+          "id": "ps:level-5000-max",
+          "label": "Level-5000 PS courses (maximum one)",
+          "type": "maximum_courses",
+          "target": 1,
+          "selector": {
+            "prefix": "PS",
+            "exactLevel": 5
+          },
+          "manual": true
+        },
+        {
+          "id": "ps:subfields",
+          "label": "Political Science subfields",
+          "type": "basket_groups",
+          "namedBasketGroup": "ps-subfields",
+          "targetPerGroup": 1
+        }
+      ]
+    },
+    {
+      "id": "chs",
+      "name": "CHS Common Curriculum",
+      "kind": "common",
+      "minCohort": 2025,
+      "maxCohort": 2025,
+      "adapter": "chs",
+      "source": "https://chs.nus.edu.sg/programmes/common-curriculum/",
+      "requirements": []
+    },
+    {
+      "id": "ec-primary",
+      "name": "Economics \u2014 Primary Major",
+      "kind": "primary",
+      "subject": "Economics",
+      "minCohort": 2021,
+      "adapter": "ec-primary",
+      "source": "https://fass.nus.edu.sg/ecs/",
+      "requirements": []
+    },
+    {
+      "id": "ec-second",
+      "name": "Economics \u2014 Second Major",
+      "kind": "second",
+      "subject": "Economics",
+      "minCohort": 2021,
+      "adapter": "ec-second",
+      "source": "https://fass.nus.edu.sg/ecs/",
+      "requirements": []
+    },
+    {
+      "id": "ec-minor",
+      "name": "Economics \u2014 Minor",
+      "kind": "minor",
+      "subject": "Economics",
+      "minCohort": 2021,
+      "adapter": "ec-minor",
+      "source": "https://fass.nus.edu.sg/ecs/",
+      "requirements": []
+    },
+    {
+      "id": "urban-minor",
+      "name": "Urban Studies \u2014 Minor",
+      "kind": "minor",
+      "subject": "Urban Studies",
+      "minCohort": 2024,
+      "adapter": "urban-minor",
+      "source": "https://cde.nus.edu.sg/",
+      "requirements": []
+    }
+  ]
+}
