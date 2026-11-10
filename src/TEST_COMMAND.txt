@@ -1,0 +1,2 @@
+From the main project folder: node --test src/tests/*.test.cjs
+Or add to package.json scripts: "test": "node --test src/tests/*.test.cjs"
