@@ -241,7 +241,7 @@ function RequirementCourseOption({option,plan,semesters,onAdd}:{
 }
 
 function AuditPanel({audit,catalogue,plan,semesters,onAdd}:{audit:Audit;catalogue:Course[];plan:PlannedCourse[];semesters:Semester[];onAdd:(code:string,semesterId:string)=>Promise<string|null>}) {
-  const done = audit.checks.filter(c => !c.maximum && c.completed >= c.target).length
+  const done = audit.checks.filter(c => !c.maximum && (c.exact ? c.completed === c.target : c.completed >= c.target)).length
   const total = audit.checks.filter(c => !c.maximum).length
   return <details className="audit-panel" >
     <summary className="audit-title">
@@ -260,7 +260,7 @@ function AuditPanel({audit,catalogue,plan,semesters,onAdd}:{audit:Audit;catalogu
       </details>}
       <div className="audit-checks">{audit.checks.map(c => {
         const isCap = Boolean(c.maximum)
-        const complete = isCap ? c.scheduled <= c.target : c.completed >= c.target
+        const complete = isCap ? c.scheduled <= c.target : c.exact ? c.completed === c.target : c.completed >= c.target
         return <details className="audit-check" key={c.label}>
           <summary className="audit-check-heading">
             <span className={`audit-dot ${complete ? 'is-complete' : ''}`} aria-hidden="true" />
@@ -551,8 +551,8 @@ function App() {
         {audits.length > 0 && <div className="degree-overview">
           {audits.map(a => {
             const applicable = a.checks.filter(c => !c.maximum && !c.manual)
-            const complete = applicable.filter(c => c.completed >= c.target).length
-            const planned = applicable.filter(c => c.scheduled >= c.target).length
+            const complete = applicable.filter(c => c.exact ? c.completed === c.target : c.completed >= c.target).length
+            const planned = applicable.filter(c => c.exact ? c.scheduled === c.target : c.scheduled >= c.target).length
             return <div className="degree-overview-card" key={a.id}>
               <strong>{a.programme.split(' — ')[0]}</strong>
               <span>{complete}/{applicable.length} checks completed · {planned}/{applicable.length} covered in plan</span>

@@ -3,7 +3,7 @@
   "programmes": [
     {
       "id": "ps-major",
-      "name": "Political Science \u2014 Primary Major (60 units)",
+      "name": "Political Science — Primary Major (60 units)",
       "kind": "primary",
       "subject": "Political Science",
       "minCohort": 2021,
@@ -95,7 +95,7 @@
     },
     {
       "id": "ec-primary",
-      "name": "Economics \u2014 Primary Major",
+      "name": "Economics — Primary Major",
       "kind": "primary",
       "subject": "Economics",
       "minCohort": 2021,
@@ -105,7 +105,7 @@
     },
     {
       "id": "ec-second",
-      "name": "Economics \u2014 Second Major",
+      "name": "Economics — Second Major",
       "kind": "second",
       "subject": "Economics",
       "minCohort": 2021,
@@ -115,7 +115,7 @@
     },
     {
       "id": "ec-minor",
-      "name": "Economics \u2014 Minor",
+      "name": "Economics — Minor",
       "kind": "minor",
       "subject": "Economics",
       "minCohort": 2021,
@@ -125,7 +125,7 @@
     },
     {
       "id": "urban-minor",
-      "name": "Urban Studies \u2014 Minor",
+      "name": "Urban Studies — Minor",
       "kind": "minor",
       "subject": "Urban Studies",
       "minCohort": 2024,
@@ -135,7 +135,7 @@
     },
     {
       "id": "ps-second",
-      "name": "Political Science \u2014 Second Major",
+      "name": "Political Science — Second Major",
       "kind": "second",
       "subject": "Political Science",
       "minCohort": 2021,
@@ -202,7 +202,7 @@
     },
     {
       "id": "ps-minor",
-      "name": "Political Science \u2014 Minor",
+      "name": "Political Science — Minor",
       "kind": "minor",
       "subject": "Political Science",
       "minCohort": 2021,
@@ -258,7 +258,7 @@
     },
     {
       "id": "ge-primary",
-      "name": "Geography \u2014 Primary Major",
+      "name": "Geography — Primary Major",
       "kind": "primary",
       "subject": "Geography",
       "minCohort": 2021,
@@ -322,7 +322,7 @@
     },
     {
       "id": "ge-second",
-      "name": "Geography \u2014 Second Major",
+      "name": "Geography — Second Major",
       "kind": "second",
       "subject": "Geography",
       "minCohort": 2021,
@@ -365,7 +365,7 @@
     },
     {
       "id": "ch-primary",
-      "name": "Chinese Studies \u2014 Primary Major",
+      "name": "Chinese Studies — Primary Major",
       "kind": "primary",
       "subject": "Chinese Studies",
       "minCohort": 2023,
@@ -505,7 +505,7 @@
     },
     {
       "id": "ch-second",
-      "name": "Chinese Studies \u2014 Second Major",
+      "name": "Chinese Studies — Second Major",
       "kind": "second",
       "subject": "Chinese Studies",
       "minCohort": 2021,
@@ -631,7 +631,7 @@
     },
     {
       "id": "ch-minor",
-      "name": "Chinese Studies \u2014 Minor",
+      "name": "Chinese Studies — Minor",
       "kind": "minor",
       "subject": "Chinese Studies",
       "minCohort": 2021,
@@ -678,7 +678,7 @@
     },
     {
       "id": "hy-primary",
-      "name": "History \u2014 Primary Major",
+      "name": "History — Primary Major",
       "kind": "primary",
       "subject": "History",
       "minCohort": 2021,
@@ -714,24 +714,14 @@
         },
         {
           "id": "hy:level-4000",
-          "label": "Level-4000+ HY units",
-          "type": "minimum_units",
-          "target": 20,
-          "selector": {
-            "prefix": "HY",
-            "minLevel": 4,
-            "namedBasket": "historyMajor"
-          }
-        },
-        {
-          "id": "hy:level-4000-max",
-          "label": "Level-4000 HY units (maximum without approval)",
-          "type": "maximum_units",
+          "label": "Level-4000 History courses (exactly 20 units)",
+          "type": "exact_units",
           "target": 20,
           "selector": {
             "prefix": "HY",
             "exactLevel": 4
-          }
+          },
+          "detail": "Exactly 20 level-4000 HY units under the no-departmental-approval assumption. Level-5000 courses require approval and are excluded from this normal pathway."
         }
       ],
       "recognisedSource": "https://fass.nus.edu.sg/hist/history-recognised-modules/",
@@ -739,7 +729,7 @@
     },
     {
       "id": "hy-second",
-      "name": "History \u2014 Second Major",
+      "name": "History — Second Major",
       "kind": "second",
       "subject": "History",
       "minCohort": 2021,
@@ -778,7 +768,7 @@
     },
     {
       "id": "hy-minor",
-      "name": "History \u2014 Minor",
+      "name": "History — Minor",
       "kind": "minor",
       "subject": "History",
       "minCohort": 2023,
@@ -828,7 +818,7 @@
     },
     {
       "id": "sc-primary",
-      "name": "Sociology \u2014 Primary Major",
+      "name": "Sociology — Primary Major",
       "kind": "primary",
       "subject": "Sociology",
       "minCohort": 2021,
@@ -881,7 +871,7 @@
     },
     {
       "id": "sc-second",
-      "name": "Sociology \u2014 Second Major",
+      "name": "Sociology — Second Major",
       "kind": "second",
       "subject": "Sociology",
       "minCohort": 2021,
@@ -922,7 +912,7 @@
     },
     {
       "id": "sc-minor",
-      "name": "Sociology \u2014 Minor",
+      "name": "Sociology — Minor",
       "kind": "minor",
       "subject": "Sociology",
       "minCohort": 2021,

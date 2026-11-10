@@ -16,6 +16,7 @@ export type Check = {
   detail?: string
   manual?: boolean
   maximum?: boolean
+  exact?: boolean
   unit?: 'units' | 'courses'
 }
 export type Audit = {

@@ -1,0 +1,1 @@
+Version 33: History level-4000 exactly-20 check; research inventory for all FASS majors. This does NOT implement all majors. Replace source files, run npm run build and node --test src/tests/*.test.cjs.

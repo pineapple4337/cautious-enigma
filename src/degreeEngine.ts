@@ -146,7 +146,7 @@ export function eligibleForRequirement(id: RuleId, code: string): boolean {
 
 
 type Selector = { prefix?: string; prefixes?: string[]; codes?: string[]; namedBasket?: string; exactLevel?: number; minLevel?: number; maxLevel?: number; excludeCodes?: string[] }
-type Rule = { id:string; label:string; type:'minimum_units'|'minimum_courses'|'maximum_units'|'maximum_courses'|'basket_groups'|'capped_total_units'; target?:number; selector?:Selector; namedBasketGroup?:string; targetPerGroup?:number; detail?:string; manual?:boolean; recognisedBasket?:string; recognisedCap?:number; capSelector?:Selector }
+type Rule = { id:string; label:string; type:'minimum_units'|'minimum_courses'|'maximum_units'|'maximum_courses'|'exact_units'|'basket_groups'|'capped_total_units'; target?:number; selector?:Selector; namedBasketGroup?:string; targetPerGroup?:number; detail?:string; manual?:boolean; recognisedBasket?:string; recognisedCap?:number; capSelector?:Selector }
 type Definition = {id:string;name:string;kind:string;subject?:string;minCohort:number;maxCohort?:number;source:string;core?:string[];requirements:Rule[];notes?:string[]}
 
 const baskets: Record<string,readonly string[]> = {
@@ -177,7 +177,7 @@ function makeCheck(rule:Rule, plan:PlannedCourse[], id=rule.id, label=rule.label
   const count=(list:PlannedCourse[])=>isCourses?list.length:list.reduce((n,c)=>n+c.units,0)
   return {id,label,target:target??1,unit:isCourses?'courses':'units',courses:selected,
     completed:count(selected.filter(c=>c.status==='completed')),
-    scheduled:count(selected),maximum:rule.type.startsWith('maximum'),manual:rule.manual,detail:rule.detail}
+    scheduled:count(selected),maximum:rule.type.startsWith('maximum'),exact:rule.type==='exact_units',manual:rule.manual,detail:rule.detail}
 }
 export function getStructuredDefinition(id:string, cohort:number):Definition|undefined {
   return (definitions.programmes as Definition[]).find(d=>d.id===id && cohort>=d.minCohort && (d.maxCohort===undefined || cohort<=d.maxCohort))

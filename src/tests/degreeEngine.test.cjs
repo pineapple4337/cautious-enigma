@@ -111,3 +111,17 @@ test('Geography uses GE-coded courses for its unit requirement',()=>{
   const total=check(audit,'ge:total')
   assert.equal(total.scheduled,4)
 })
+
+test('History primary level-4000 exact target uses one shared basket',()=>{
+  const def=getStructuredDefinition('hy-primary',2025)
+  assert.equal(def.requirements.filter(r=>r.id.startsWith('hy:level-4000')).length,1)
+  const rule=def.requirements.find(r=>r.id==='hy:level-4000')
+  assert.equal(rule.type,'exact_units')
+  assert.equal(rule.target,20)
+  const audit=auditStructuredProgramme('hy-primary',Array.from({length:5},(_,i)=>course(`HY42${String(i+10)}`)),2025)
+  const item=check(audit,'hy:level-4000')
+  assert.equal(item.scheduled,20)
+  assert.equal(item.exact,true)
+  assert.equal(check(auditStructuredProgramme('hy-primary',Array.from({length:6},(_,i)=>course(`HY42${String(i+10)}`)),2025),'hy:level-4000').scheduled,24)
+  assert.equal(check(auditStructuredProgramme('hy-primary',[course('HY5101')],2025),'hy:level-4000').scheduled,0)
+})
