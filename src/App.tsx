@@ -532,15 +532,6 @@ function App() {
           I am taking the University Town College Programme (UTCP)
         </label>
         {utcp.enrolled && <>
-          <label className="utcp-college">Residential College
-            <select value={utcp.college} onChange={e=>setUtcp(old=>({...old,college:e.target.value}))}>
-              <option value="RC4">Residential College 4 (RC4)</option>
-              <option value="Tembusu">Tembusu College</option>
-              <option value="CAPT">College of Alice & Peter Tan</option>
-              <option value="Other">Other UTCP college</option>
-            </select>
-          </label>
-
           <div className="utcp-slots">
             {UTCP_SLOTS.map(slot=>{
               const code=utcp.courseCodes[slot.id]
@@ -549,7 +540,12 @@ function App() {
               return <label key={slot.id}>{slot.label}
                 <select value={code} onChange={e=>setUtcp(old=>({...old,courseCodes:{...old.courseCodes,[slot.id]:e.target.value}}))}>
                   <option value="">Not assigned</option>
-                  {plan.map(c=><option key={c.code} value={c.code}>{c.code} — {c.title}</option>)}
+                  <optgroup label="UTCP-coded courses">
+                    {plan.filter(c=>/^UT[A-Z]\d/i.test(c.code)).map(c=><option key={c.code} value={c.code}>{c.code} — {c.title}</option>)}
+                  </optgroup>
+                  <optgroup label="Other courses in your plan">
+                    {plan.filter(c=>!/^UT[A-Z]\d/i.test(c.code)).map(c=><option key={c.code} value={c.code}>{c.code} — {c.title}</option>)}
+                  </optgroup>
                 </select>
                 <small className={duplicates?'utcp-warning':''}>{duplicates?'Same course assigned to multiple slots — please correct':match?`Status: ${match.status}`:'Choose a course from your plan'}</small>
               </label>
@@ -609,7 +605,7 @@ function App() {
       </div>}
       <section className="planner"><div className="planner-topline"><h2>My Degree Plan</h2><div className="planner-navigation"><button type="button" onClick={()=>scrollSemesters(-1)} aria-label="Previous semester">‹</button><button type="button" onClick={()=>scrollSemesters(1)} aria-label="Next semester">›</button></div></div><div className="summary">
         <div><strong>{plan.length}</strong><span>Courses in plan</span></div>
-        <div><strong>{completedUnits}</strong><span>Completed units</span></div>
+        <div><strong>{completedUnits}</strong><span>Completed units (self-reported)</span></div>
         <div><strong>{totalUnits}</strong><span>Total planned + completed units</span></div>
       </div><div className="year-jump" aria-label="Jump to academic year">{[0,1,2,3].map(i=><button key={i} type="button" onClick={()=>jumpToYear(i)}>Year {i+1}</button>)}<span>Scroll sideways to see all semesters</span></div>
       <DndContext sensors={sensors} autoScroll onDragEnd={handleDragEnd}><div className="semester-grid" ref={semesterBoardRef}>
