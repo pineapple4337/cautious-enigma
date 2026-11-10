@@ -165,6 +165,7 @@ function SemesterCard({semester,plan,semesters,subjectColors,onRemove,onUpdate,o
         </button>
       </div>
     </div>
+    {units>24&&<p className="semester-load-warning">High workload: {units} units</p>}
     <div className="semester-search-wrap">
       <button className="semester-add-button" type="button" onClick={()=>onOpenSearch(semester.id)}
         aria-expanded={searchOpen}> {searchOpen?'× Close search':'+ Add course'} </button>
@@ -207,7 +208,37 @@ function SemesterCard({semester,plan,semesters,subjectColors,onRemove,onUpdate,o
     </div>
   </div>
 }
-function AuditPanel({audit,catalogue}:{audit:Audit;catalogue:Course[]}) {
+function RequirementCourseOption({option,plan,semesters,onAdd}:{
+  option:Course;plan:PlannedCourse[];semesters:Semester[];
+  onAdd:(code:string,semesterId:string)=>Promise<string|null>
+}) {
+  const existing=plan.find(c=>c.code===option.moduleCode)
+  const available=semesters.filter(s=>option.semesters?.includes(s.sem))
+  const [semesterId,setSemesterId]=useState('')
+  const [busy,setBusy]=useState(false)
+  const [message,setMessage]=useState('')
+  const choice=available.some(s=>s.id===semesterId)?semesterId:(available[0]?.id??'')
+  async function submit(){
+    if(!choice||busy||existing)return
+    setBusy(true);setMessage('')
+    try { const error=await onAdd(option.moduleCode,choice);setMessage(error??'Added to plan.') }
+    catch(e){setMessage(e instanceof Error?e.message:'Unable to add course.')}
+    finally{setBusy(false)}
+  }
+  return <div className="eligible-course-row" key={option.moduleCode}>
+    <strong>{option.moduleCode}</strong><span>{option.title}</span>
+    {existing?<small>In plan · {existing.semester}</small>:
+      available.length?<div className="eligible-add-controls">
+        <select aria-label={`Semester for ${option.moduleCode}`} value={choice} onChange={e=>setSemesterId(e.target.value)}>
+          {available.map(s=><option key={s.id} value={s.id}>{`Y${s.year-semesters[0].year+1} S${s.sem}`}</option>)}
+        </select>
+        <button type="button" disabled={busy} onClick={submit}>{busy?'Adding…':'+ Add'}</button>
+      </div>:<small>Not offered in Sem 1 or 2</small>}
+    {message&&<small className="eligible-add-message" role="status">{message}</small>}
+  </div>
+}
+
+function AuditPanel({audit,catalogue,plan,semesters,onAdd}:{audit:Audit;catalogue:Course[];plan:PlannedCourse[];semesters:Semester[];onAdd:(code:string,semesterId:string)=>Promise<string|null>}) {
   const done = audit.checks.filter(c => !c.maximum && c.completed >= c.target).length
   const total = audit.checks.filter(c => !c.maximum).length
   return <details className="audit-panel" >
@@ -243,10 +274,7 @@ function AuditPanel({audit,catalogue}:{audit:Audit;catalogue:Course[]}) {
               return eligible.length > 0 ? <details className="eligible-courses-list">
                 <summary>Eligible course options ({eligible.length})</summary>
                 <div className="eligible-courses-scroll">
-                  {eligible.map(option=><div className="eligible-course-row" key={option.moduleCode}>
-                    <strong>{option.moduleCode}</strong><span>{option.title}</span>
-                    {c.courses.some(course=>course.code===option.moduleCode) && <small>In plan</small>}
-                  </div>)}
+                  {eligible.map(option=><RequirementCourseOption key={option.moduleCode} option={option} plan={plan} semesters={semesters} onAdd={onAdd}/>)}
                 </div>
               </details> : <p className="eligible-courses-empty">No verified course-code list available for this check.</p>
             })()}
@@ -287,6 +315,8 @@ function App() {
   const [explorerSemester,setExplorerSemester]=useState(`${profile.matriculationYear+1}-1`)
   // Undo is session-only. Editing a course in that semester invalidates the snapshot.
   const [undo,setUndo]=useState<Record<string,UndoRecord>>({})
+  const [lastRemoved,setLastRemoved]=useState<PlannedCourse|null>(null)
+  const [requirementMessage,setRequirementMessage]=useState('')
   const planRef=useRef(plan)
   const semesters=makeSemesters(profile.matriculationYear)
   const semesterBoardRef=useRef<HTMLDivElement|null>(null)
@@ -344,9 +374,34 @@ function App() {
     invalidateUndo([semesterId])
     setSearch('');setSelected(null);setActiveSearchSemester(null)
   }
+  async function addFromRequirement(code:string,semesterId:string):Promise<string|null> {
+    if(planRef.current.some(c=>c.code===code))return 'Already in your plan.'
+    const semester=semesters.find(s=>s.id===semesterId)
+    const listing=courses.find(c=>c.moduleCode===code)
+    if(!semester||!listing?.semesters?.includes(semester.sem))return 'Not offered in the selected semester.'
+    const response=await fetch(`${API}/${CATALOGUE_YEAR}/modules/${encodeURIComponent(code)}.json`)
+    if(!response.ok)return `Unable to fetch ${code} details from NUSMods.`
+    const detail:CourseDetails=await response.json()
+    const units=Number(detail.moduleCredit)
+    if(!Number.isFinite(units)||units<=0)return 'Invalid course units.'
+    if(planRef.current.some(c=>c.code===code))return 'Already in your plan.'
+    const newCourse:PlannedCourse={code,title:detail.title,units,semester:semesterId,status:'planned',suExercised:false,prereqTree:detail.prereqTree,prerequisite:detail.prerequisite}
+    const total=planRef.current.filter(c=>c.semester===semesterId).reduce((n,c)=>n+c.units,0)+units
+    setPlan(old=>old.some(c=>c.code===code)?old:[...old,newCourse])
+    invalidateUndo([semesterId])
+    setLastRemoved(null)
+    setRequirementMessage(`${code} added to ${semester.label}.${total>24?` Workload: ${total} units (over 24).`:''}`)
+    return null
+  }
+  function undoRemoval(){
+    if(!lastRemoved)return
+    const restored=lastRemoved
+    setPlan(old=>old.some(c=>c.code===restored.code)?old:[...old,restored])
+    setLastRemoved(null)
+  }
   function removeCourse(code:string) {
     const found=plan.find(c=>c.code===code)
-    if(found)invalidateUndo([found.semester])
+    if(found){invalidateUndo([found.semester]);setLastRemoved(found)}
     setPlan(old=>old.filter(c=>c.code!==code))
   }
   function updateCourse(code:string,changes:Partial<PlannedCourse>) {
@@ -521,7 +576,8 @@ function App() {
           })}
         </div>}
         <p className="degree-expand-hint">Select a programme below to view its requirements and the courses counted.</p>
-        {audits.map(a=><AuditPanel key={a.programme} audit={a} catalogue={courses}/>)}
+        {requirementMessage&&<p className="requirements-action-message" role="status">{requirementMessage}</p>}
+        {audits.map(a=><AuditPanel key={a.programme} audit={a} catalogue={courses} plan={plan} semesters={semesters} onAdd={addFromRequirement}/>)}
         {audits.length>1 && <div className="overlap-panel"><h3>Course overlaps</h3>
           {overlaps.length ? <div className="overlap-list">{overlaps.map(o=><div className="overlap-row" key={o.code}>
             <div><strong>{o.code}</strong> · {o.units} units · {o.status}<br/>
@@ -547,6 +603,11 @@ function App() {
           primaryMajor={profile.primaryMajor} minors={profile.minors} />
       </section>
       <PlanBackup />
+      {lastRemoved&&<div className="undo-remove-banner" role="status">
+        <span>Removed {lastRemoved.code} from {lastRemoved.semester}.</span>
+        <button type="button" onClick={undoRemoval}>Undo removal</button>
+        <button type="button" onClick={()=>setLastRemoved(null)} aria-label="Dismiss">×</button>
+      </div>}
       <section className="planner"><div className="planner-topline"><h2>My Degree Plan</h2><div className="planner-navigation"><button type="button" onClick={()=>scrollSemesters(-1)} aria-label="Previous semester">‹</button><button type="button" onClick={()=>scrollSemesters(1)} aria-label="Next semester">›</button></div></div><div className="summary">
         <div><strong>{plan.length}</strong><span>Courses in plan</span></div>
         <div><strong>{completedUnits}</strong><span>Completed units (self-reported)</span></div>

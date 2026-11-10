@@ -285,3 +285,16 @@ main h2{font-size:19px;margin:0 0 12px}
 .plan-backup-actions button { border: 1px solid #cbd5e1; background: #f8fafc; color: #1e3a5f; border-radius: 7px; padding: 7px 12px; font-size: 12px; cursor: pointer; }
 .plan-backup-actions button:hover { background: #eaf1fa; }
 .plan-backup-message { font-size: 12px; color: #375b79; margin: 8px 0 0; }
+
+/* Version 27: compact, direct requirement-to-semester actions */
+.eligible-course-row{align-items:center;flex-wrap:wrap}
+.eligible-add-controls{display:flex;align-items:center;gap:5px;margin-left:auto}
+.eligible-add-controls select{font-size:11px;padding:5px 6px;max-width:92px;border:1px solid #d5dce5;border-radius:5px}
+.eligible-add-controls button,.undo-remove-banner button{font-size:11px;padding:5px 9px;border:1px solid #a8c1e4;background:#edf4ff;color:#174ea6;border-radius:5px;cursor:pointer;white-space:nowrap}
+.eligible-add-controls button:disabled{opacity:.5;cursor:wait}
+.eligible-add-message{width:100%;color:#49637a;font-size:10px}
+.requirements-action-message{padding:7px 10px;border-radius:6px;background:#eff6ff;color:#1e4e85;font-size:12px}
+.undo-remove-banner{position:sticky;top:8px;z-index:50;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 12px;background:#fff9e9;border:1px solid #f0dca4;border-radius:8px;font-size:12px;margin:12px 0}
+.undo-remove-banner button:last-child{margin-left:auto;background:transparent;border:none;font-size:16px}
+.semester-load-warning{font-size:11px;color:#96540b;background:#fff4dd;padding:5px 8px;border-radius:5px;margin:4px 0 8px}
+@media(max-width:600px){.eligible-course-row strong{flex-basis:65px}.eligible-add-controls{width:100%;justify-content:flex-end}}
