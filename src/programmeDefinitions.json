@@ -947,6 +947,1361 @@
       ],
       "recognisedSource": "https://fass.nus.edu.sg/socanth/recognised-courses-undergraduate/",
       "dataComplete": true
+    },
+    {
+      "id": "ms-primary",
+      "name": "Malay Studies — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Malay Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/mls/honours-programme-and-single-major/",
+      "core": [
+        "MS1102E",
+        "MS4101"
+      ],
+      "requirements": [
+        {
+          "id": "ms:total",
+          "label": "MS eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "MS"
+          }
+        },
+        {
+          "id": "ms:3000",
+          "label": "Level-3000 MS units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "MS",
+            "exactLevel": 3
+          }
+        },
+        {
+          "id": "ms:4000",
+          "label": "Level-4000+ MS units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "MS",
+            "minLevel": 4
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "ms-second",
+      "name": "Malay Studies — Second Major (40 units)",
+      "kind": "second",
+      "subject": "Malay Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/mls/second-major/",
+      "core": [
+        "MS1102E",
+        "MS4101"
+      ],
+      "requirements": [
+        {
+          "id": "ms:total",
+          "label": "MS eligible units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "MS"
+          }
+        },
+        {
+          "id": "ms-second:3000",
+          "label": "Level-3000+ MS units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "MS",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "el-primary",
+      "name": "English Language and Linguistics — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "English Language and Linguistics",
+      "minCohort": 2024,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/elts/single-major-b-a-honours-in-english-language-and-linguistics/",
+      "core": [
+        "EL1101E"
+      ],
+      "requirements": [
+        {
+          "id": "el:total",
+          "label": "EL eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "EL"
+          }
+        },
+        {
+          "id": "el:3000",
+          "label": "Level-3000+ eligible units",
+          "type": "minimum_units",
+          "target": 28,
+          "selector": {
+            "prefix": "EL",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "el:4000",
+          "label": "Level-4000+ EL units (excluding thesis and ISM)",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "EL",
+            "minLevel": 4,
+            "excludeCodes": [
+              "EL4401",
+              "EL4660"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "el-second",
+      "name": "English Language and Linguistics — Second Major (40 units)",
+      "kind": "second",
+      "subject": "English Language and Linguistics",
+      "minCohort": 2024,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/elts/second-major-in-english-language-and-linguistics/",
+      "core": [
+        "EL1101E"
+      ],
+      "requirements": [
+        {
+          "id": "el:total",
+          "label": "EL eligible units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "EL"
+          }
+        },
+        {
+          "id": "el-second:3000",
+          "label": "Level-3000+ EL units",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "EL",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "el-minor",
+      "name": "English Language and Linguistics — Minor (20 units)",
+      "kind": "minor",
+      "subject": "English Language and Linguistics",
+      "minCohort": 2024,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/elts/minor-in-english-language-and-linguistics/",
+      "core": [
+        "EL1101E"
+      ],
+      "requirements": [
+        {
+          "id": "el:total",
+          "label": "EL eligible units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "EL"
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "en-primary",
+      "name": "English Literature — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "English Literature",
+      "minCohort": 2024,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/elts/single-major-b-a-honours-in-english-literature/",
+      "core": [
+        "EN1101E"
+      ],
+      "requirements": [
+        {
+          "id": "en:total",
+          "label": "EN eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "EN"
+          }
+        },
+        {
+          "id": "en-primary:2000",
+          "label": "Level-2000 EN units",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "prefix": "EN",
+            "exactLevel": 2
+          }
+        },
+        {
+          "id": "en-primary:before1800",
+          "label": "Literature before 1800 units",
+          "type": "minimum_units",
+          "target": 8,
+          "selector": {
+            "codes": [
+              "EN2201",
+              "EN2205",
+              "EN2209",
+              "EN2214",
+              "EN3218",
+              "EN3220",
+              "EN3221",
+              "EN3222",
+              "EN3226",
+              "EN3227",
+              "EN3228",
+              "EN3229",
+              "EN4221",
+              "EN4222",
+              "EN4227",
+              "EN4251",
+              "EN4269",
+              "EN4880A"
+            ]
+          }
+        },
+        {
+          "id": "en-primary:3000",
+          "label": "Level-3000+ EN units",
+          "type": "minimum_units",
+          "target": 28,
+          "selector": {
+            "prefix": "EN",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "en:4000",
+          "label": "Level-4000+ EN units excluding thesis and ISM",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "EN",
+            "minLevel": 4,
+            "excludeCodes": [
+              "EN4401",
+              "EN4660"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "en-second",
+      "name": "English Literature — Second Major (40 units)",
+      "kind": "second",
+      "subject": "English Literature",
+      "minCohort": 2024,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/elts/second-major-in-english-literature/",
+      "core": [
+        "EN1101E"
+      ],
+      "requirements": [
+        {
+          "id": "en:total",
+          "label": "EN eligible units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "EN"
+          }
+        },
+        {
+          "id": "en-second:2000",
+          "label": "Level-2000 EN units",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "prefix": "EN",
+            "exactLevel": 2
+          }
+        },
+        {
+          "id": "en-second:before1800",
+          "label": "Literature before 1800 units",
+          "type": "minimum_units",
+          "target": 8,
+          "selector": {
+            "codes": [
+              "EN2201",
+              "EN2205",
+              "EN2209",
+              "EN2214",
+              "EN3218",
+              "EN3220",
+              "EN3221",
+              "EN3222",
+              "EN3226",
+              "EN3227",
+              "EN3228",
+              "EN3229",
+              "EN4221",
+              "EN4222",
+              "EN4227",
+              "EN4251",
+              "EN4269",
+              "EN4880A"
+            ]
+          }
+        },
+        {
+          "id": "en-second:3000",
+          "label": "Level-3000+ EN units",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "EN",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "an-primary",
+      "name": "Anthropology — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Anthropology",
+      "minCohort": 2022,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/socanth/b-soc-sci-hons-anthropology/",
+      "core": [
+        "AN1101E",
+        "AN2101",
+        "AN3101",
+        "SC4101"
+      ],
+      "requirements": [
+        {
+          "id": "an:total",
+          "label": "AN eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "AN"
+          }
+        },
+        {
+          "id": "an:3000",
+          "label": "Level-3000+ AN/SC4101 units",
+          "type": "minimum_units",
+          "target": 36,
+          "selector": {
+            "prefix": "AN",
+            "codes": [
+              "SC4101"
+            ],
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "an:4000",
+          "label": "Level-4000+ AN/SC4101 units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "AN",
+            "codes": [
+              "SC4101"
+            ],
+            "minLevel": 4
+          }
+        }
+      ],
+      "notes": [
+        "SC4101 is compulsory and AN-recognised. Other recognised-course eligibility and the 20-unit recognised cap require separate allocation.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "ph-primary",
+      "name": "Philosophy — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Philosophy",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/philo/overview/academic-requirements/",
+      "core": [
+        "GEX1015",
+        "GEX1014"
+      ],
+      "requirements": [
+        {
+          "id": "ph:total",
+          "label": "PH eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "PH"
+          }
+        },
+        {
+          "id": "ph-primary:3000",
+          "label": "Level-3000+ PH units",
+          "type": "minimum_units",
+          "target": 36,
+          "selector": {
+            "prefix": "PH",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "ph:4000",
+          "label": "Level-4000+ PH units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "PH",
+            "minLevel": 4
+          }
+        }
+      ],
+      "notes": [
+        "GEX1015 and GEX1014 are compulsory major exceptions to ordinary GE counting. Recognised-course cap is 8 units for majors, 4 for minor.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "ph-second",
+      "name": "Philosophy — Second Major (40 units)",
+      "kind": "second",
+      "subject": "Philosophy",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/philo/overview/academic-requirements/",
+      "core": [
+        "GEX1015",
+        "GEX1014"
+      ],
+      "requirements": [
+        {
+          "id": "ph:total",
+          "label": "PH eligible units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "PH"
+          }
+        },
+        {
+          "id": "ph-second:3000",
+          "label": "Level-3000+ PH units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "PH",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "GEX1015 and GEX1014 are compulsory major exceptions to ordinary GE counting. Recognised-course cap is 8 units for majors, 4 for minor.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "ph-minor",
+      "name": "Philosophy — Minor (20 units)",
+      "kind": "minor",
+      "subject": "Philosophy",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/philo/overview/academic-requirements/",
+      "core": [
+        "GEX1015"
+      ],
+      "requirements": [
+        {
+          "id": "ph:total",
+          "label": "PH eligible units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "PH"
+          }
+        },
+        {
+          "id": "ph-minor:3000",
+          "label": "Level-3000 PH units",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "prefix": "PH",
+            "exactLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "GEX1015 and GEX1014 are compulsory major exceptions to ordinary GE counting. Recognised-course cap is 8 units for majors, 4 for minor.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "js-primary",
+      "name": "Japanese Studies — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Japanese Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/jps/honours-programme/",
+      "core": [
+        "JS1101E",
+        "JS2101",
+        "JS3101",
+        "LAJ1201",
+        "LAJ2201",
+        "LAJ2202",
+        "LAJ2203"
+      ],
+      "requirements": [
+        {
+          "id": "js:total",
+          "label": "JS eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "JS"
+          }
+        },
+        {
+          "id": "js:languageadvanced",
+          "label": "One advanced Japanese language course",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LAJ3201",
+              "LAJ3202",
+              "LAJ3203",
+              "LAJ3204",
+              "LAJ3205"
+            ]
+          }
+        },
+        {
+          "id": "js:3000",
+          "label": "Level-3000+ JS units",
+          "type": "minimum_units",
+          "target": 36,
+          "selector": {
+            "prefix": "JS",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "js:4000",
+          "label": "Level-4000+ JS units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "JS",
+            "minLevel": 4
+          }
+        }
+      ],
+      "notes": [
+        "Language waivers are not assumed; LAJ courses and recognised JS courses contribute to the 60-unit total under departmental limits.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "js-second",
+      "name": "Japanese Studies — Second Major (40 units)",
+      "kind": "second",
+      "subject": "Japanese Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/jps/second-major/",
+      "core": [
+        "JS1101E",
+        "JS2101",
+        "LAJ1201",
+        "LAJ2201"
+      ],
+      "requirements": [
+        {
+          "id": "js:total",
+          "label": "JS eligible units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "JS"
+          }
+        },
+        {
+          "id": "js-second:3000",
+          "label": "Level-3000+ JS units",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "JS",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "js-minor",
+      "name": "Japanese Studies — Minor (20 units)",
+      "kind": "minor",
+      "subject": "Japanese Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/jps/minor/",
+      "core": [
+        "JS1101E"
+      ],
+      "requirements": [
+        {
+          "id": "js:total",
+          "label": "JS eligible units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "JS"
+          }
+        },
+        {
+          "id": "js-minor:3000",
+          "label": "Level-3000 JS units",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "prefix": "JS",
+            "exactLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "sn-primary",
+      "name": "South Asian Studies — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "South Asian Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/sas/honours-programme/",
+      "core": [
+        "SN1101E"
+      ],
+      "requirements": [
+        {
+          "id": "sn:total",
+          "label": "SN eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "SN"
+          }
+        },
+        {
+          "id": "sn:sncoded",
+          "label": "Minimum SN-coded units",
+          "type": "minimum_units",
+          "target": 28,
+          "selector": {
+            "prefix": "SN"
+          }
+        },
+        {
+          "id": "sn:3000",
+          "label": "Level-3000+ SN units",
+          "type": "minimum_units",
+          "target": 36,
+          "selector": {
+            "prefix": "SN",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "sn:4000",
+          "label": "Level-4000+ SN units",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "SN",
+            "minLevel": 4
+          }
+        }
+      ],
+      "notes": [
+        "Recognised non-SN courses and Tamil/Hindi language courses may contribute to total, subject to language cap.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "sn-second",
+      "name": "South Asian Studies — Second Major (40 units)",
+      "kind": "second",
+      "subject": "South Asian Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/sas/second-major/",
+      "core": [
+        "SN1101E"
+      ],
+      "requirements": [
+        {
+          "id": "sn:total",
+          "label": "SN eligible units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "SN"
+          }
+        },
+        {
+          "id": "sn-second:sncoded",
+          "label": "Minimum SN-coded units",
+          "type": "minimum_units",
+          "target": 24,
+          "selector": {
+            "prefix": "SN"
+          }
+        },
+        {
+          "id": "sn-second:3000",
+          "label": "Level-3000+ SN units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "SN",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "se-primary",
+      "name": "Southeast Asian Studies — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Southeast Asian Studies",
+      "minCohort": 2023,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/sea/single-major/",
+      "core": [
+        "SE1101E",
+        "SE4101"
+      ],
+      "requirements": [
+        {
+          "id": "se:total",
+          "label": "SE eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "SE"
+          }
+        },
+        {
+          "id": "se:3000",
+          "label": "Level-3000+ SE units",
+          "type": "minimum_units",
+          "target": 28,
+          "selector": {
+            "prefix": "SE",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "se:4000",
+          "label": "Level-4000+ SE units",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "SE",
+            "minLevel": 4
+          }
+        }
+      ],
+      "notes": [
+        "12 units in one Southeast Asian language track required; track validation not yet encoded.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "se-second",
+      "name": "Southeast Asian Studies — Second Major (40 units)",
+      "kind": "second",
+      "subject": "Southeast Asian Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/sea/second-major/",
+      "core": [
+        "SE1101E"
+      ],
+      "requirements": [
+        {
+          "id": "se:total",
+          "label": "SE eligible units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "SE"
+          }
+        },
+        {
+          "id": "se-second:3000",
+          "label": "Level-3000+ SE units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "SE",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "12 units in one Southeast Asian language track required; track validation not yet encoded.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "nm-primary",
+      "name": "Communications and New Media — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Communications and New Media",
+      "minCohort": 2025,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/cnm/undergraduate-major/",
+      "core": [
+        "NM2101",
+        "NM2103",
+        "NM2104",
+        "NM2105"
+      ],
+      "requirements": [
+        {
+          "id": "nm:total",
+          "label": "NM eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "NM"
+          }
+        },
+        {
+          "id": "nm:gateway",
+          "label": "NM gateway (one of NM1101E / NM1101X)",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "NM1101E",
+              "NM1101X"
+            ]
+          }
+        },
+        {
+          "id": "nm:internship",
+          "label": "Internship NM3550C or approved replacement",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "NM3550C",
+              "TR3202S",
+              "ETP3201S"
+            ]
+          }
+        },
+        {
+          "id": "nm:3000",
+          "label": "Level-3000 NM units (excluding internship)",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "NM",
+            "exactLevel": 3,
+            "excludeCodes": [
+              "NM3550C"
+            ]
+          }
+        },
+        {
+          "id": "nm:4000",
+          "label": "Level-4000+ NM units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "NM",
+            "minLevel": 4
+          }
+        }
+      ],
+      "notes": [
+        "Internship is 8 units IN ADDITION to 60 NM major units; alternatives require combined-unit verification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "nm-second",
+      "name": "Communications and New Media — Second Major (40 units)",
+      "kind": "second",
+      "subject": "Communications and New Media",
+      "minCohort": 2025,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/cnm/undergraduate-major/",
+      "core": [
+        "NM1101E",
+        "NM2101",
+        "NM2103",
+        "NM2104"
+      ],
+      "requirements": [
+        {
+          "id": "nm:total",
+          "label": "NM eligible units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "NM"
+          }
+        },
+        {
+          "id": "nm-second:3000",
+          "label": "Level-3000 NM units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "NM",
+            "exactLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "pl-primary",
+      "name": "Psychology — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Psychology",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/psy/honours-programme/",
+      "core": [
+        "PL1101E",
+        "PL2131",
+        "PL2132",
+        "PL3102",
+        "PL3103",
+        "PL3104",
+        "PL3105",
+        "PL3106"
+      ],
+      "requirements": [
+        {
+          "id": "pl:total",
+          "label": "PL eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "PL"
+          }
+        },
+        {
+          "id": "pl:research",
+          "label": "PL3231 or one PL328x lab",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "PL3231",
+              "PL3280",
+              "PL3281",
+              "PL3282",
+              "PL3283",
+              "PL3284",
+              "PL3285",
+              "PL3286",
+              "PL3287",
+              "PL3288",
+              "PL3289"
+            ]
+          }
+        },
+        {
+          "id": "pl:4000",
+          "label": "Level-4000+ PL units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "PL",
+            "minLevel": 4
+          }
+        }
+      ],
+      "notes": [
+        "Three level-4000 group requirements and extra 4 units of level-2000/3000 electives require additional basket mapping.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "gl-primary",
+      "name": "Global Studies — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Global Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/globalstudies/wp-content/uploads/sites/27/2025/06/Global-Studies-Honours-Prospectus-2025-2026-V1.0.pdf",
+      "core": [
+        "GL1101E",
+        "GL2101",
+        "GL2102",
+        "GL2103",
+        "GL4101",
+        "GL4102"
+      ],
+      "requirements": [
+        {
+          "id": "gl:total",
+          "label": "GL eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "GL"
+          }
+        },
+        {
+          "id": "gl:methods",
+          "label": "Methods: GL2104 or SC2101",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "GL2104",
+              "SC2101"
+            ]
+          }
+        },
+        {
+          "id": "gl:3000",
+          "label": "Level-3000 GL units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "GL",
+            "exactLevel": 3
+          }
+        },
+        {
+          "id": "gl:4000",
+          "label": "Level-4000+ GL units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "GL",
+            "minLevel": 4
+          }
+        }
+      ],
+      "notes": [
+        "Theme, region and language requirements need a cohort-specific basket allocation.",
+        "Partial audit: does not certify full graduation eligibility."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "sw-primary",
+      "name": "Social Work — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Social Work",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/swk/entry-graduation-requirement-undergraduate/",
+      "core": [
+        "SW1101E",
+        "SW2101",
+        "SW2104",
+        "SW2105",
+        "SW2106",
+        "SW3105",
+        "SW4102",
+        "SW4103"
+      ],
+      "requirements": [
+        {
+          "id": "sw:total",
+          "label": "SW eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "SW"
+          }
+        },
+        {
+          "id": "sw:methods",
+          "label": "Research methods: one of SW3101 / PL2131 / SC2101",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "SW3101",
+              "PL2131",
+              "SC2101"
+            ]
+          }
+        },
+        {
+          "id": "sw:3000",
+          "label": "Level-3000+ SW units",
+          "type": "minimum_units",
+          "target": 36,
+          "selector": {
+            "prefix": "SW",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "sw:4000",
+          "label": "Level-4000+ SW units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "SW",
+            "minLevel": 4
+          }
+        },
+        {
+          "id": "sw:field1",
+          "label": "Field Practice I (CHS project)",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "SW3103C"
+            ]
+          }
+        },
+        {
+          "id": "sw:field2",
+          "label": "Field Practice II (CHS project)",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "SW3104B"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "SW3103C and SW3104B count to CHS project requirement, not the 60-unit SW major total.",
+        "Partial audit: does not certify full graduation eligibility."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "sw-second",
+      "name": "Social Work — Second Major (40 units)",
+      "kind": "second",
+      "subject": "Social Work",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/swk/entry-graduation-requirement-undergraduate/",
+      "core": [
+        "SW1101E",
+        "SW2101",
+        "SW2104",
+        "SW2105",
+        "SW2106",
+        "SW3105",
+        "SW3103C",
+        "SW3104B"
+      ],
+      "requirements": [
+        {
+          "id": "sw:total",
+          "label": "SW eligible units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "SW"
+          }
+        },
+        {
+          "id": "sw:methods",
+          "label": "Research methods: one of SW3101 / PL2131 / SC2101",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "SW3101",
+              "PL2131",
+              "SC2101"
+            ]
+          }
+        },
+        {
+          "id": "sw-second:3000",
+          "label": "Level-3000+ SW units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "SW",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "Partial audit: does not certify full graduation eligibility."
+      ],
+      "implementationStatus": "partial"
+    },
+    {
+      "id": "ts-primary",
+      "name": "Theatre and Performance Studies — Primary Major (60 units)",
+      "kind": "primary",
+      "subject": "Theatre and Performance Studies",
+      "minCohort": 2024,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/elts/single-major-b-a-honours-in-theatre-and-performance-studies/",
+      "core": [
+        "TS1101E",
+        "TS3103"
+      ],
+      "requirements": [
+        {
+          "id": "ts:total",
+          "label": "TS eligible units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "TS"
+          }
+        },
+        {
+          "id": "ts:3000",
+          "label": "Level-3000+ TS units",
+          "type": "minimum_units",
+          "target": 28,
+          "selector": {
+            "prefix": "TS",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "ts:4000",
+          "label": "Level-4000+ TS units excluding thesis/ISM",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "TS",
+            "minLevel": 4,
+            "excludeCodes": [
+              "TS4401",
+              "TS4660"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Three compulsory strand baskets (Framing Histories, Cultures in Practice, Researching Performance) require complete course mapping.",
+        "Partial audit: does not certify full graduation eligibility."
+      ],
+      "implementationStatus": "partial"
     }
   ]
 }

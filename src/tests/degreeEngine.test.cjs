@@ -125,3 +125,40 @@ test('History primary level-4000 exact target uses one shared basket',()=>{
   assert.equal(check(auditStructuredProgramme('hy-primary',Array.from({length:6},(_,i)=>course(`HY42${String(i+10)}`)),2025),'hy:level-4000').scheduled,24)
   assert.equal(check(auditStructuredProgramme('hy-primary',[course('HY5101')],2025),'hy:level-4000').scheduled,0)
 })
+const newCases = [
+ ['Malay Studies','primary','ms-primary','MS1102E'],
+ ['English Language and Linguistics','primary','el-primary','EL1101E'],
+ ['English Literature','primary','en-primary','EN1101E'],
+ ['Anthropology','primary','an-primary','AN1101E'],
+ ['Philosophy','primary','ph-primary','GEX1015'],
+ ['Japanese Studies','primary','js-primary','JS1101E'],
+ ['South Asian Studies','primary','sn-primary','SN1101E'],
+ ['Southeast Asian Studies','primary','se-primary','SE1101E'],
+ ['Communications and New Media','primary','nm-primary','NM2101'],
+ ['Psychology','primary','pl-primary','PL1101E'],
+ ['Global Studies','primary','gl-primary','GL1101E'],
+ ['Social Work','primary','sw-primary','SW1101E'],
+ ['Theatre and Performance Studies','primary','ts-primary','TS1101E']
+]
+for (const [subject,kind,id,required] of newCases) {
+ test(`${subject} has a cohort-2025 partial audit and required-course check`,()=>{
+  const def=getStructuredDefinition(id,2025)
+  assert.ok(def,`${id} missing`)
+  assert.equal(def.implementationStatus,'partial')
+  const audit=auditStructuredProgramme(id,[],2025)
+  assert.equal(check(audit,`${id}:core:${required}`).scheduled,0)
+  const registry=getProgrammeRegistry([],{primaryMajor:subject,secondMajor:'',minors:[],college:'Other',matriculationYear:2025},{enrolled:false,college:'RC4',courseCodes:{junior:'',writing:'',senior1:'',senior2:''}})
+  assert.ok(registry[0].audit)
+  assert.equal(registry[0].supported,false,'Partial definitions must not be certified as supported')
+ })
+}
+test('Alternative-course requirements accept either course',()=>{
+ const audit=auditStructuredProgramme('gl-primary',[course('SC2101')],2025)
+ assert.equal(check(audit,'gl:methods').scheduled,1)
+})
+test('History level-4000 exact-unit rule remains intact after expansion',()=>{
+ const a=auditStructuredProgramme('hy-primary',[course('HY4201'),course('HY4202'),course('HY4203'),course('HY4204'),course('HY4205')],2025)
+ const exact=a.checks.find(x=>x.exact)
+ assert.ok(exact)
+ assert.equal(exact.scheduled,20)
+})

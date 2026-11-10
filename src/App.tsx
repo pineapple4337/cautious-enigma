@@ -547,7 +547,7 @@ function App() {
       </div>
       <section className="requirements-section"><h2>Graduation Requirements</h2>
         {profile.college==='CHS' && profile.matriculationYear!==2025 && <p className="requirements-note">CHS common curriculum audit is currently verified only for AY2025/26.</p>}
-        {unsupported.map(entry=><p className="requirements-note" key={entry.id}>{entry.name} ({entry.kind}): requirements not yet supported. Manual planning is available.</p>)}
+        {unsupported.map(entry=><p className="requirements-note" key={entry.id}>{entry.name} ({entry.kind}): {entry.note ?? "Requirements not yet supported."} Manual planning is available.</p>)}
         {audits.length > 0 && <div className="degree-overview">
           {audits.map(a => {
             const applicable = a.checks.filter(c => !c.maximum && !c.manual)

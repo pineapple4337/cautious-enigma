@@ -9,7 +9,10 @@ export type ProgrammeProfile = { primaryMajor: string; secondMajor?: string; min
 export type ProgrammeKind = 'common' | 'primary' | 'second' | 'minor'
 export type ProgrammeEntry = { id: string; name: string; kind: ProgrammeKind; supported: boolean; audit?: Audit; note?: string }
 const norm = (s: string) => s.trim().toLowerCase()
-type DefinitionRef = {id:string;subject?:string;kind:string;adapter?:string;dataComplete?:boolean}
+function isPartial(subject:string,kind:ProgrammeKind):boolean {
+  return defined.some(d=>d.subject && norm(d.subject)===norm(subject) && d.kind===kind && d.implementationStatus==='partial')
+}
+type DefinitionRef = {id:string;subject?:string;kind:string;adapter?:string;dataComplete?:boolean;implementationStatus?:string}
 const defined = definitions.programmes as DefinitionRef[]
 function structuredAudit(subject:string, kind:ProgrammeKind, plan:PlannedCourse[], cohort:number):Audit|undefined {
   const definition=defined.find(d=>d.subject && norm(d.subject)===norm(subject) && d.kind===kind && !d.adapter)
@@ -33,20 +36,20 @@ export function getProgrammeRegistry(plan: PlannedCourse[], profile: ProgrammePr
   if (profile.primaryMajor) {
     const audit=primaryAuditors[norm(profile.primaryMajor)]?.(plan,profile.matriculationYear??2025) ?? structuredAudit(profile.primaryMajor,'primary',plan,profile.matriculationYear??2025)
     entries.push({id:audit?.id??`primary:${norm(profile.primaryMajor)}`,name:profile.primaryMajor,
-      kind:'primary',supported:!!audit,audit,note:audit?undefined:'Primary-major rules have not been encoded for this cohort.'})
+      kind:'primary',supported:!!audit&&!isPartial(profile.primaryMajor,'primary'),audit,note:audit&&isPartial(profile.primaryMajor,'primary')?'Partial audit: some course baskets or restrictions are not yet encoded.':audit?undefined:'Primary-major rules have not been encoded for this cohort.'})
   }
   if (profile.secondMajor) {
     const audit=secondAuditors[norm(profile.secondMajor)]?.(plan) ?? structuredAudit(profile.secondMajor,'second',plan,profile.matriculationYear??2025)
     entries.push({id:audit?.id??`second:${norm(profile.secondMajor)}`,name:profile.secondMajor,
-      kind:'second',supported:!!audit,audit,note:audit?undefined:'Second-major rules have not been encoded.'})
+      kind:'second',supported:!!audit&&!isPartial(profile.secondMajor,'second'),audit,note:audit&&isPartial(profile.secondMajor,'second')?'Partial audit: some course baskets or restrictions are not yet encoded.':audit?undefined:'Second-major rules have not been encoded.'})
   }
   if(norm(profile.primaryMajor)==='economics') for(const key of profile.economicsSpecialisations??[]) {
     if(key in ECONOMICS_SPECIALISATIONS) entries.push({id:`ec-spec:${key}`,name:ECONOMICS_SPECIALISATIONS[key as EconomicsSpecialisation].name,kind:'primary',supported:true,audit:auditEconomicsSpecialisation(plan,key as EconomicsSpecialisation)})
   }
   for (const name of [...profile.minors].sort((a,b)=>a.localeCompare(b))) {
     const audit=minorAuditors[norm(name)]?.(plan) ?? structuredAudit(name,'minor',plan,profile.matriculationYear??2025)
-    entries.push({id:audit?.id??`minor:${norm(name)}`,name,kind:'minor',supported:!!audit,audit,
-      note:audit?undefined:'Minor rules have not been encoded.'})
+    entries.push({id:audit?.id??`minor:${norm(name)}`,name,kind:'minor',supported:!!audit&&!isPartial(name,'minor'),audit,
+      note:audit&&isPartial(name,'minor')?'Partial audit: some course baskets or restrictions are not yet encoded.':audit?undefined:'Minor rules have not been encoded.'})
   }
   return entries
 }
