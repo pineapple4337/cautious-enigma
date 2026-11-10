@@ -1,0 +1,300 @@
+.app{max-width:1200px;margin:0 auto;padding:40px 24px 80px}header{margin-bottom:35px;padding-bottom:20px;border-bottom:1px solid #ddd}header h1{font-size:32px;margin:0 0 8px}header p{color:#777;margin:0}main h2{margin-bottom:20px}.error{color:#c62828}select{padding:10px;border:1px solid #ccc;border-radius:7px;background:white;color:#222;font:inherit}
+.profile-section,.requirements-section{margin-bottom:48px;padding:26px;background:white;border:1px solid #ddd;border-radius:12px}.profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.profile-grid label{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600}.profile-grid input,.profile-grid select{width:100%;box-sizing:border-box;padding:11px;border:1px solid #ccc;border-radius:7px;background:white;color:#222;font-weight:400}.profile-grid .full-width{grid-column:1/-1}
+.search-section>input{width:100%;padding:15px;font-size:16px;border:1px solid #ccc;border-radius:8px;box-sizing:border-box;margin-bottom:20px}.results{display:flex;flex-direction:column;gap:8px;margin-bottom:30px}.course{display:flex;gap:20px;align-items:center;text-align:left;padding:15px;background:#f8f9fa;color:#222;border:1px solid #e5e5e5;border-radius:8px;cursor:pointer}.course:hover{background:#e8f0fe;border-color:#4285f4}.course strong{min-width:90px;color:#174ea6}.details{margin-top:30px;padding:25px;border:1px solid #ddd;border-radius:12px;background:white;color:#222}.details h2{color:#174ea6}.details h3{margin-top:24px}.details select{width:100%;max-width:450px}.primary-button{display:block;margin-top:18px;padding:12px 22px;border:0;border-radius:8px;background:#174ea6;color:white;font-weight:600;cursor:pointer}.primary-button:hover{background:#0d397e}.warning{padding:12px;background:#fff4d6;color:#805500;border-radius:8px;margin-top:14px}.semester-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.semester-badge{background:#e6f4ea;color:#137333;border:1px solid #a8dab5;border-radius:20px;padding:7px 14px;font-size:14px;font-weight:500}
+.planner{margin-top:55px}.planner-hint{color:#777;font-size:14px;margin-bottom:24px}.summary{display:flex;gap:15px;margin-bottom:25px}.summary>div{flex:1;padding:20px;background:white;border:1px solid #ddd;border-radius:10px;display:flex;flex-direction:column;gap:6px}.summary strong{font-size:28px;color:#174ea6}.summary span{color:#777;font-size:14px}.semester-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:stretch}.semester-card{min-width:0;min-height:180px;padding:20px;background:white;border:1px solid #ddd;border-radius:12px;transition:background .15s,border-color .15s,box-shadow .15s}.semester-card.drop-target{background:#eef5ff;border:2px dashed #4285f4;box-shadow:0 0 0 3px rgba(66,133,244,.08)}.semester-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid #eee;margin-bottom:16px}.semester-heading h3{font-size:16px;font-weight:650;margin:0}.semester-heading span{white-space:nowrap;font-size:13px;color:#777}.semester-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:10px}.complete-semester-button{padding:6px 10px;border:1px solid #a8dab5;border-radius:6px;background:#e6f4ea;color:#137333;font-size:12px;font-weight:600;white-space:nowrap;cursor:pointer}.complete-semester-button:hover:not(:disabled){background:#ceead6}.complete-semester-button:disabled{background:#f1f3f4;border-color:#e5e5e5;color:#999;cursor:default}.semester-content{display:flex;flex-direction:column;gap:10px;min-height:85px}.empty-semester{display:flex;align-items:center;justify-content:center;min-height:85px;border:1px dashed #ddd;border-radius:8px;color:#aaa;font-size:13px}
+.planned-course{position:relative;background:#f7f8fa;border:1px solid transparent;border-radius:9px;transition:background .15s,box-shadow .15s}.planned-course:hover{background:#f0f3f8;border-color:#e0e5ed}.planned-course.dragging{opacity:.45;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,.12)}.course-drag-area{padding:15px 42px 15px 16px}.drag-handle{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:grab;touch-action:none;user-select:none}.drag-handle:active{cursor:grabbing}.drag-icon{color:#aaa;font-size:20px;line-height:1}.course-code{display:block;font-size:16px;font-weight:700;color:#222}.course-title{margin:6px 0 0;font-size:14px;line-height:1.45;color:#555}.remove-x{position:absolute;top:8px;right:8px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:6px;background:transparent;color:#999;font-size:22px;line-height:1;cursor:pointer;z-index:2}.remove-x:hover{background:#fee2e2;color:#c62828}.course-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px}.course-controls select{font-size:12px;padding:6px 8px;max-width:170px}.su-control{display:flex;align-items:center;gap:6px;font-size:12px;color:#555;cursor:pointer}.su-control input{width:auto;margin:0}.prereq-success,.prereq-warning,.prereq-unknown{margin-top:12px;padding:8px 10px;border-radius:6px;font-size:12px;line-height:1.4}.prereq-success{background:#e6f4ea;color:#137333}.prereq-warning{background:#fff3cd;color:#856404}.prereq-unknown{background:#e9ecef;color:#666}
+.requirements-note{color:#777;font-size:13px;line-height:1.5}.audit-panel{border-top:1px solid #e6e6e6;padding-top:22px;margin-top:22px}.audit-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.audit-title h3{margin:0}.audit-title a{font-size:13px;color:#174ea6}.audit-panel h4{margin:24px 0 12px}.requirements-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.requirement-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;background:#f7f8fa;border-radius:8px}.requirement-item strong{font-size:14px}.requirement-status{text-transform:capitalize;font-size:12px;white-space:nowrap}.requirement-status.completed{color:#137333}.requirement-status.current{color:#174ea6}.requirement-status.planned{color:#805500}.requirement-status.missing{color:#999}.audit-checks{display:grid;gap:12px}.audit-check{padding:14px;border:1px solid #eee;border-radius:8px}.audit-check-heading{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px}.audit-check-heading span{color:#666}.audit-check p{font-size:12px;color:#777;margin:8px 0 0}.audit-check small{display:block;color:#a16608;margin-top:8px}.progress-track{height:7px;background:#e9edf4;border-radius:99px;margin-top:10px;overflow:hidden}.progress-fill{height:100%;background:#4285f4;border-radius:99px}.audit-notes{padding-left:20px;color:#555;font-size:13px;line-height:1.6}.audit-notes li{margin-bottom:6px}
+@media(max-width:750px){.semester-grid,.profile-grid,.requirements-list{grid-template-columns:1fr}.summary{flex-direction:column}.app{padding:24px 16px 60px}header h1{font-size:26px}.course{flex-direction:column;align-items:flex-start;gap:5px}}@media(max-width:600px){.semester-heading{align-items:flex-start}.semester-actions{flex-direction:column;align-items:flex-end}}
+
+/* EXPLAINABLE REQUIREMENTS AND OVERLAP REVIEW */
+.counted-courses { margin-top: 10px; font-size: 13px; }
+.counted-courses summary { cursor: pointer; color: #174ea6; font-weight: 600; }
+.counted-courses ul, .overlap-panel ul { padding-left: 20px; line-height: 1.8; }
+.counted-courses li { color: #444; }
+.overlap-panel { margin-top: 24px; padding: 20px; border: 1px solid #e2d7a8; background: #fffdf4; border-radius: 10px; }
+.overlap-panel h3 { margin-top: 0; }
+.overlap-panel p { font-size: 13px; line-height: 1.6; }
+
+/* Cross-programme overlap review */
+.overlap-list { display: grid; gap: 12px; margin: 16px 0; }
+.overlap-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px; background: white; border: 1px solid #e6dfbd; border-radius: 8px; }
+.overlap-row small { display: inline-block; color: #666; margin-top: 5px; line-height: 1.5; }
+.overlap-row label { display: grid; gap: 5px; min-width: 220px; font-size: 12px; font-weight: 600; }
+.overlap-row select { width: 100%; font-size: 12px; }
+@media (max-width: 750px) { .overlap-row { flex-direction: column; align-items: stretch; } .overlap-row label { min-width: 0; } }
+
+/* UTCP pathway and course-to-slot mapping */
+.utcp-section{margin-bottom:48px;padding:26px;background:white;border:1px solid #ddd;border-radius:12px}
+.utcp-enrolment{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.utcp-enrolment input{width:18px;height:18px}
+.utcp-college{display:grid;gap:8px;margin-top:20px;max-width:440px;font-size:14px;font-weight:600}
+.utcp-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.utcp-slots label{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:600;min-width:0}
+.utcp-slots select,.utcp-college select{width:100%;min-width:0}
+.utcp-slots small{font-size:12px;color:#666;font-weight:400}
+.utcp-slots small.utcp-warning{color:#a32626}
+@media(max-width:750px){.utcp-slots{grid-template-columns:1fr}}
+
+/* V5: compact, expandable graduation audit */
+.requirements-section{padding:18px 20px;margin-bottom:28px}
+.requirements-section>h2{margin:0 0 14px;font-size:20px}
+.audit-panel{margin:0 0 8px;padding:0;border:1px solid #e3e7ee;border-radius:9px;overflow:hidden}
+.audit-title{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#f8f9fb;cursor:pointer;list-style:none}
+.audit-title::-webkit-details-marker,.audit-check-heading::-webkit-details-marker{display:none}
+.audit-title::before{content:'▸';color:#777;font-size:12px}
+.audit-panel[open]>.audit-title::before{content:'▾'}
+.audit-name{font-size:14px;font-weight:700;flex:1}
+.audit-count{font-size:12px;color:#64748b;white-space:nowrap}
+.audit-body{padding:10px 12px 14px}
+.audit-subsection{margin:4px 0 10px;font-size:13px}
+.audit-subsection>summary{cursor:pointer;font-weight:600;padding:8px}
+.audit-subsection .requirements-list{margin:5px 0 10px}
+.requirement-item{padding:8px 10px}
+.audit-checks{display:grid;gap:4px}
+.audit-check{padding:0;border:1px solid #edf0f3;border-radius:7px}
+.audit-check-heading{display:flex;align-items:center;gap:9px;padding:10px 11px;cursor:pointer;list-style:none;font-size:12px}
+.audit-check-heading strong{flex:1;font-weight:600}
+.audit-dot{width:8px;height:8px;border-radius:50%;background:#d0d7df;flex:none}
+.audit-dot.is-complete{background:#2a9b66}
+.audit-values{font-variant-numeric:tabular-nums;white-space:nowrap;color:#475569}
+.audit-planned{color:#89929f}
+.audit-check-body{border-top:1px solid #edf0f3;padding:9px 13px;font-size:12px;color:#64748b}
+.audit-check-body p{margin:5px 0}
+.audit-course-list{margin:4px 0;padding-left:18px}
+.audit-course-list li{margin:4px 0}
+.audit-source{display:inline-block;margin:12px 2px 0;font-size:12px;color:#174ea6}
+.overlap-panel{padding:12px 15px;margin-top:12px}
+.overlap-panel h3{font-size:14px}
+@media(max-width:600px){.audit-title{flex-wrap:wrap}.audit-check-heading{flex-wrap:wrap}.audit-values{margin-left:17px}}
+
+/* Degree audit: always-visible overview */
+.degree-overview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 16px}
+.degree-overview-card{display:flex;flex-direction:column;gap:7px;border:1px solid #e3e7ee;border-radius:9px;padding:13px;background:#fafbfc;min-width:0}
+.degree-overview-card strong{font-size:14px;color:#222}
+.degree-overview-card span{font-size:12px;color:#657080;line-height:1.4}
+.degree-progress-track{height:7px;background:#e5eaf0;border-radius:99px;overflow:hidden}
+.degree-progress-track>div{height:100%;background:#287a61;border-radius:99px}
+.degree-expand-hint{font-size:12px;color:#697586;margin:10px 0}
+@media(max-width:700px){.degree-overview{grid-template-columns:1fr}}
+
+/* V8: course search lives inside each semester */
+.semester-search-wrap{margin:0 0 14px}
+.semester-add-button{border:1px dashed #a5b8d5;background:#f7faff;color:#174ea6;border-radius:8px;padding:9px 12px;font-weight:600;font-size:13px;cursor:pointer;width:100%;text-align:center}
+.semester-add-button:hover{background:#eaf2ff}
+.semester-search-panel{margin-top:10px;padding:12px;border:1px solid #dbe4f0;background:#fff;border-radius:9px}
+.semester-search-input{width:100%;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:7px;padding:10px;font-size:14px;color:#222;background:#fff}
+.semester-search-results{max-height:205px;overflow-y:auto;margin:8px 0;display:flex;flex-direction:column;gap:4px}
+.semester-search-result{display:flex;gap:10px;align-items:flex-start;text-align:left;border:0;background:#f5f7fa;color:#222;border-radius:6px;padding:9px;cursor:pointer;font-size:12px}
+.semester-search-result:hover{background:#e8f0fe}
+.semester-search-result strong{min-width:75px;color:#174ea6}
+.semester-search-note{font-size:12px;color:#697586}
+.semester-selected-course{border-top:1px solid #e5e7eb;margin-top:10px;padding-top:10px;font-size:12px;line-height:1.5}
+.semester-selected-course p{margin:6px 0}
+.semester-selected-course .primary-button{font-size:12px;padding:9px 12px;margin-top:10px}
+
+/* Programme selection */
+.minor-picker{display:flex;flex-direction:column;gap:8px}
+.minor-picker>label{font-size:14px;font-weight:600}
+.minor-chips{display:flex;gap:8px;flex-wrap:wrap}
+.minor-chip{display:inline-flex;align-items:center;gap:8px;border-radius:20px;background:#e8f0fe;color:#174ea6;padding:6px 10px;font-size:13px}
+.minor-chip button{border:0;background:transparent;color:inherit;cursor:pointer;font-size:18px;line-height:1}
+.overlap-alert{color:#9a3412;font-size:12px;font-weight:600}
+.overlap-ok{color:#166534;font-size:12px;font-weight:600}
+
+/* Profile and residential college desktop layout */
+.profile-utcp-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:stretch;margin-bottom:32px}
+.profile-utcp-grid>.profile-section,.profile-utcp-grid>.utcp-section{margin:0;min-width:0;height:100%;box-sizing:border-box}
+.profile-utcp-grid .profile-grid{grid-template-columns:1fr}
+.profile-utcp-grid .utcp-slots{grid-template-columns:1fr}
+@media(max-width:850px){.profile-utcp-grid{grid-template-columns:1fr}}
+/* Rule-based suggestion panel */
+.auto-planner-section{background:white;border:1px solid #ddd;border-radius:12px;padding:24px;margin-top:30px}
+.auto-planner-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.auto-planner-heading h2{margin:0 0 16px}
+.auto-planner-heading span{font-size:12px;color:#777}
+.auto-planner-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.auto-planner-controls label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:600;min-width:0}
+.auto-planner-controls input,.auto-planner-controls select{width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:7px;color:#222;background:white;font:inherit}
+.auto-planner-results{margin-top:22px;border-top:1px solid #eee;padding-top:14px}
+.auto-suggestion-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.auto-suggestion{display:flex;flex-direction:column;gap:4px;background:#f7f8fa;border-radius:8px;padding:12px;font-size:13px}
+.auto-suggestion span{color:#555}.auto-suggestion small{color:#64748b}
+.auto-unresolved{margin-top:16px;color:#555;font-size:13px}.auto-unresolved summary{cursor:pointer;font-weight:600}
+.auto-unresolved li{margin:6px 0}
+.auto-result-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.auto-cancel{margin-top:18px;border:1px solid #ddd;background:white;color:#444;padding:12px;border-radius:8px;cursor:pointer}
+@media(max-width:700px){.auto-planner-controls,.auto-suggestion-list{grid-template-columns:1fr}}
+
+.auto-audit-comparison{font-size:13px;color:#475569;margin:6px 0 16px}
+
+/* Semester timetable compatibility */
+.timetable-status{margin:10px 0 14px;border:1px solid #e0e6ef;border-radius:8px;font-size:12px;background:#f8fafc}
+.timetable-status>summary{padding:9px 11px;cursor:pointer;font-weight:600}
+.timetable-clear{color:#17683c;background:#f0faf4;border-color:#c8e9d2}
+.timetable-clash{color:#9d2b2b;background:#fff3f3;border-color:#f0c6c6}
+.timetable-unknown{color:#78550c;background:#fffaf0;border-color:#e8d7ac}
+.timetable-body{padding:0 12px 9px;line-height:1.5;color:#344054}
+.timetable-body p{margin:6px 0;overflow-wrap:anywhere}
+.auto-timetable-warnings{border:1px solid #e8d7ac;background:#fffaf0;border-radius:8px;padding:12px;margin:12px 0;font-size:12px;color:#78550c}
+.auto-timetable-warnings p{margin:7px 0}
+
+/* Version 16 individual suggestion actions */
+.auto-suggestion-actions{display:flex;gap:8px;margin-top:9px}
+.auto-suggestion-actions button{padding:6px 12px;border-radius:6px;border:1px solid #cbd5e1;background:white;color:#174ea6;cursor:pointer;font-size:12px}
+.auto-suggestion-actions button:first-child{background:#174ea6;color:white;border-color:#174ea6}
+.auto-suggestion-actions button:hover{filter:brightness(.95)}
+
+/* Version 17: compact desktop dashboard and horizontally scrollable semesters */
+.app{max-width:1440px;padding:20px 20px 48px}
+header{margin-bottom:18px;padding-bottom:12px}
+header h1{font-size:25px;margin-bottom:3px}
+header p{font-size:12px}
+main h2{font-size:19px;margin:0 0 12px}
+.profile-utcp-grid{gap:12px;margin-bottom:16px}
+.profile-section,.utcp-section,.requirements-section,.auto-planner-section{padding:16px!important;border-radius:10px}
+.profile-grid,.profile-utcp-grid .profile-grid,.profile-utcp-grid .utcp-slots{gap:10px}
+.profile-grid label,.utcp-slots label,.auto-planner-controls label{font-size:12px;gap:4px}
+.profile-grid input,.profile-grid select,.utcp-section select,.auto-planner-controls input,.auto-planner-controls select{padding:7px 9px;font-size:12px;min-height:34px}
+.profile-utcp-grid .profile-section,.profile-utcp-grid .utcp-section{height:auto}
+.minor-chip{font-size:11px;padding:4px 8px}
+.minor-chips{gap:5px}
+.requirements-section{margin-top:16px}
+.degree-overview{gap:8px;margin:8px 0 10px}
+.degree-overview-card{padding:9px;gap:4px}
+.degree-overview-card strong{font-size:12px}
+.degree-overview-card span{font-size:11px}
+.audit-title{padding:9px 11px}
+.audit-body{padding:8px 10px}
+.audit-check-heading{padding:7px 9px}
+.auto-planner-section{margin-top:16px}
+.auto-planner-controls{gap:9px 12px}
+.auto-planner-section .primary-button{padding:9px 14px;margin-top:12px;font-size:12px}
+.auto-planner-results{margin-top:12px;padding-top:10px}
+.auto-suggestion{padding:9px;gap:3px;font-size:12px}
+.auto-suggestion-actions{margin-top:5px}
+.planner{margin-top:20px}
+.planner-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.planner-topline h2{margin:0}
+.planner-navigation{display:flex;gap:6px}
+.planner-navigation button,.year-jump button{border:1px solid #d5dbe4;border-radius:7px;background:#fff;color:#174ea6;cursor:pointer;font-weight:600}
+.planner-navigation button{width:34px;height:30px;font-size:22px;line-height:1}
+.planner-navigation button:hover,.year-jump button:hover{background:#edf4ff}
+.summary{gap:8px;margin-bottom:10px;flex-direction:row}
+.summary>div{padding:10px 12px;gap:2px}
+.summary strong{font-size:21px}
+.summary span{font-size:11px}
+.year-jump{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:8px 0 10px}
+.year-jump button{padding:6px 11px;font-size:11px}
+.year-jump span{margin-left:auto;font-size:11px;color:#7b8492}
+.semester-grid{display:flex!important;flex-direction:row!important;grid-template-columns:none!important;align-items:flex-start;gap:12px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:thin;padding:4px 4px 16px;min-width:0}
+.semester-card{box-sizing:border-box;flex:0 0 302px;min-width:302px;max-width:302px;min-height:150px;padding:12px;border-radius:10px;scroll-snap-align:start}
+.semester-heading{align-items:flex-start;gap:6px;padding-bottom:8px;margin-bottom:9px}
+.semester-heading h3{font-size:13px;line-height:1.35}
+.semester-heading span{font-size:11px}
+.semester-actions{gap:5px;flex-direction:column;align-items:flex-end}
+.complete-semester-button{font-size:10px;padding:4px 6px;white-space:normal;text-align:center}
+.semester-content{gap:6px;min-height:60px}
+.empty-semester{min-height:56px;font-size:11px}
+.planned-course{border-radius:7px}
+.course-drag-area{padding:10px 30px 10px 10px}
+.course-code{font-size:13px}
+.course-title{font-size:12px;line-height:1.35;margin:3px 0 0}
+.drag-icon{font-size:15px}
+.remove-x{top:5px;right:5px;width:22px;height:22px;font-size:18px}
+.course-controls{gap:5px;margin-top:7px}
+.course-controls select{font-size:11px;padding:4px 6px;max-width:150px}
+.su-control{font-size:10px}
+.prereq-success,.prereq-warning,.prereq-unknown{font-size:10px;padding:6px;margin-top:7px}
+.semester-search-wrap{margin-bottom:8px}
+.semester-add-button{font-size:11px;padding:7px 9px}
+.semester-search-panel{padding:9px}
+.semester-search-input{padding:7px 8px;font-size:12px}
+.semester-search-results{max-height:180px;overflow-y:auto}
+.timetable-status{margin:7px 0 9px;font-size:11px}
+.timetable-status>summary{padding:7px 8px}
+@media(max-width:850px){.profile-utcp-grid{grid-template-columns:1fr}}
+@media(max-width:750px){.app{padding:14px 12px 32px}.semester-grid{display:flex!important;grid-template-columns:none!important}.semester-card{flex:0 0 280px;min-width:280px;max-width:280px}.summary{flex-direction:row}.summary>div{padding:8px}.summary strong{font-size:18px}.summary span{font-size:10px}.year-jump span{display:none}}
+
+/* Version 18: compact course overlap panel */
+.overlap-panel{padding:10px 12px;margin-top:10px;font-size:12px}
+.overlap-panel h3{font-size:13px;margin:0 0 8px}
+.overlap-row{padding:7px 9px;gap:10px;font-size:12px;line-height:1.35}
+.overlap-row strong{font-size:12px}
+.overlap-row small{font-size:11px;color:#64748b}
+.overlap-ok,.overlap-alert{font-size:10px;padding:3px 6px}
+
+/* Version 19: compact diagnostic details */
+.auto-diagnostics{margin:10px 0;padding:10px 12px;border:1px solid #dce3ed;border-radius:8px;font-size:12px}
+.auto-diagnostics summary{cursor:pointer;font-weight:600;padding:4px 0}
+.auto-diagnostics details{margin:6px 0 4px 10px;border-top:1px solid #eef1f5;padding-top:5px}
+.auto-diagnostics ul{margin:6px 0 8px;padding-left:22px;line-height:1.6}
+.auto-diagnostics li{overflow-wrap:anywhere}
+
+/* Full-catalogue eligible-course explorer (independent of auto-planner limits) */
+.eligible-explorer{margin:12px 0;border:1px solid #dbe2ea;border-radius:9px;background:#fff;font-size:12px}
+.eligible-explorer>summary{cursor:pointer;padding:11px 13px;font-size:12px;font-weight:650}
+.eligible-explorer-body{padding:0 13px 13px;color:#465364}
+.eligible-explorer-body p{font-size:12px;line-height:1.5}
+.eligible-explorer-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.eligible-explorer-controls label{display:flex;flex-direction:column;gap:5px;font-size:12px}
+.eligible-explorer-controls select,.eligible-explorer-controls input{width:100%;min-width:0;box-sizing:border-box;padding:7px;font-size:12px}
+.eligible-explorer-filters{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0}
+.eligible-explorer-filters label{display:flex;align-items:center;gap:5px;font-size:12px}
+.eligible-explorer-list{max-height:350px;overflow-y:auto;border:1px solid #e6eaf0;border-radius:7px}
+.eligible-explorer-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px;border-bottom:1px solid #edf0f4;font-size:12px}
+.eligible-explorer-row:last-child{border-bottom:0}
+.eligible-explorer-row>div{min-width:0}
+.eligible-explorer-row strong{margin-right:7px}
+.eligible-explorer-row small{display:block;margin-top:3px;color:#718096;font-size:11px}
+.eligible-explorer-row a{font-size:11px;white-space:nowrap}
+@media(max-width:650px){.eligible-explorer-controls{grid-template-columns:1fr}}
+
+/* V22: availability directly in semester search */
+.semester-search-result.course-unavailable {opacity:.42;cursor:not-allowed;background:#f1f2f4;}
+.semester-search-result.course-unavailable:hover {background:#f1f2f4;border-color:transparent;}
+.semester-search-result small {font-size:10px;color:#697586;margin-left:auto;white-space:nowrap;}
+/* V22: expanded eligible options */
+.eligible-courses-list {margin:9px 0;border:1px solid #e3e8ef;border-radius:7px;overflow:hidden;}
+.eligible-courses-list>summary {cursor:pointer;padding:8px 10px;font-size:12px;font-weight:600;color:#245b88;}
+.eligible-courses-scroll {max-height:240px;overflow-y:auto;border-top:1px solid #e3e8ef;}
+.eligible-course-row {display:flex;align-items:baseline;gap:10px;padding:6px 10px;border-bottom:1px solid #eef1f4;font-size:11px;line-height:1.4;}
+.eligible-course-row strong {flex:0 0 85px;color:#243b53;}
+.eligible-course-row span {flex:1;min-width:0;}
+.eligible-course-row small {font-size:10px;color:#21835e;white-space:nowrap;}
+.eligible-courses-empty {font-size:11px;color:#89929f;}
+
+/* Subject colour tokens: assigned persistently by first-seen prefix. */
+.planned-course,.auto-suggestion{background:var(--subject-bg,#f7f8fa);border:1px solid var(--subject-border,transparent)}
+.planned-course:hover{background:var(--subject-bg,#f0f3f8);border-color:var(--subject-border,#e0e5ed)}
+.planned-course .course-code,.auto-suggestion>strong{color:var(--subject-fg,#222)}
+.semester-search-result.course-unavailable{opacity:.48;cursor:not-allowed;filter:grayscale(.25)}
+
+/* Manual course explorer (automatic course suggestions removed) */
+.eligible-explorer-section{margin-top:18px;padding:14px;background:#fff;border:1px solid #e2e6ec;border-radius:12px}
+.explorer-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.explorer-topline h2{font-size:17px;margin:0}
+.explorer-topline label{display:flex;align-items:center;gap:8px;font-size:12px;color:#526071}
+.explorer-topline select{font:inherit;padding:6px 8px;border:1px solid #d2d7de;border-radius:6px;background:white;color:#20242a;max-width:260px}
+
+/* Backup / transfer panel */
+.plan-backup-section { margin: 12px 0; padding: 14px 16px; border: 1px solid #dce2e8; border-radius: 12px; background: #fff; }
+.plan-backup-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.plan-backup-header h2 { font-size: 16px; margin: 0 0 4px; }
+.plan-backup-header p { font-size: 12px; color: #64748b; margin: 0; }
+.plan-backup-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.plan-backup-actions button { border: 1px solid #cbd5e1; background: #f8fafc; color: #1e3a5f; border-radius: 7px; padding: 7px 12px; font-size: 12px; cursor: pointer; }
+.plan-backup-actions button:hover { background: #eaf1fa; }
+.plan-backup-message { font-size: 12px; color: #375b79; margin: 8px 0 0; }
+
+/* Version 27: compact, direct requirement-to-semester actions */
+.eligible-course-row{align-items:center;flex-wrap:wrap}
+.eligible-add-controls{display:flex;align-items:center;gap:5px;margin-left:auto}
+.eligible-add-controls select{font-size:11px;padding:5px 6px;max-width:92px;border:1px solid #d5dce5;border-radius:5px}
+.eligible-add-controls button,.undo-remove-banner button{font-size:11px;padding:5px 9px;border:1px solid #a8c1e4;background:#edf4ff;color:#174ea6;border-radius:5px;cursor:pointer;white-space:nowrap}
+.eligible-add-controls button:disabled{opacity:.5;cursor:wait}
+.eligible-add-message{width:100%;color:#49637a;font-size:10px}
+.requirements-action-message{padding:7px 10px;border-radius:6px;background:#eff6ff;color:#1e4e85;font-size:12px}
+.undo-remove-banner{position:sticky;top:8px;z-index:50;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 12px;background:#fff9e9;border:1px solid #f0dca4;border-radius:8px;font-size:12px;margin:12px 0}
+.undo-remove-banner button:last-child{margin-left:auto;background:transparent;border:none;font-size:16px}
+.semester-load-warning{font-size:11px;color:#96540b;background:#fff4dd;padding:5px 8px;border-radius:5px;margin:4px 0 8px}
+@media(max-width:600px){.eligible-course-row strong{flex-basis:65px}.eligible-add-controls{width:100%;justify-content:flex-end}}

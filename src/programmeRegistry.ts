@@ -1,4 +1,4 @@
-import { auditStructuredProgramme } from './genericRequirementEngine'
+import { auditStructuredProgramme } from './degreeEngine'
 import definitions from './programmeDefinitions.json'
 import { ECONOMICS_SPECIALISATIONS, type EconomicsSpecialisation } from './economicsData'
 import type { PlannedCourse } from './types'
@@ -9,7 +9,7 @@ export type ProgrammeProfile = { primaryMajor: string; secondMajor?: string; min
 export type ProgrammeKind = 'common' | 'primary' | 'second' | 'minor'
 export type ProgrammeEntry = { id: string; name: string; kind: ProgrammeKind; supported: boolean; audit?: Audit; note?: string }
 const norm = (s: string) => s.trim().toLowerCase()
-type DefinitionRef = {id:string;subject?:string;kind:string;adapter?:string}
+type DefinitionRef = {id:string;subject?:string;kind:string;adapter?:string;dataComplete?:boolean}
 const defined = definitions.programmes as DefinitionRef[]
 function structuredAudit(subject:string, kind:ProgrammeKind, plan:PlannedCourse[], cohort:number):Audit|undefined {
   const definition=defined.find(d=>d.subject && norm(d.subject)===norm(subject) && d.kind===kind && !d.adapter)

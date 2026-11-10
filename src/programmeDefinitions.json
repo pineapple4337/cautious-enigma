@@ -3,7 +3,7 @@
   "programmes": [
     {
       "id": "ps-major",
-      "name": "Political Science — Primary Major (60 units)",
+      "name": "Political Science \u2014 Primary Major (60 units)",
       "kind": "primary",
       "subject": "Political Science",
       "minCohort": 2021,
@@ -95,7 +95,7 @@
     },
     {
       "id": "ec-primary",
-      "name": "Economics — Primary Major",
+      "name": "Economics \u2014 Primary Major",
       "kind": "primary",
       "subject": "Economics",
       "minCohort": 2021,
@@ -105,7 +105,7 @@
     },
     {
       "id": "ec-second",
-      "name": "Economics — Second Major",
+      "name": "Economics \u2014 Second Major",
       "kind": "second",
       "subject": "Economics",
       "minCohort": 2021,
@@ -115,7 +115,7 @@
     },
     {
       "id": "ec-minor",
-      "name": "Economics — Minor",
+      "name": "Economics \u2014 Minor",
       "kind": "minor",
       "subject": "Economics",
       "minCohort": 2021,
@@ -125,7 +125,7 @@
     },
     {
       "id": "urban-minor",
-      "name": "Urban Studies — Minor",
+      "name": "Urban Studies \u2014 Minor",
       "kind": "minor",
       "subject": "Urban Studies",
       "minCohort": 2024,
@@ -135,7 +135,7 @@
     },
     {
       "id": "ps-second",
-      "name": "Political Science — Second Major",
+      "name": "Political Science \u2014 Second Major",
       "kind": "second",
       "subject": "Political Science",
       "minCohort": 2021,
@@ -202,7 +202,7 @@
     },
     {
       "id": "ps-minor",
-      "name": "Political Science — Minor",
+      "name": "Political Science \u2014 Minor",
       "kind": "minor",
       "subject": "Political Science",
       "minCohort": 2021,
@@ -258,7 +258,7 @@
     },
     {
       "id": "ge-primary",
-      "name": "Geography — Primary Major",
+      "name": "Geography \u2014 Primary Major",
       "kind": "primary",
       "subject": "Geography",
       "minCohort": 2021,
@@ -314,11 +314,15 @@
           },
           "manual": true
         }
+      ],
+      "dataComplete": false,
+      "notes": [
+        "GE-recognised non-GE course list not verified; totals currently count GE-coded courses only."
       ]
     },
     {
       "id": "ge-second",
-      "name": "Geography — Second Major",
+      "name": "Geography \u2014 Second Major",
       "kind": "second",
       "subject": "Geography",
       "minCohort": 2021,
@@ -353,11 +357,15 @@
             "minLevel": 3
           }
         }
+      ],
+      "dataComplete": false,
+      "notes": [
+        "GE-recognised non-GE course list not verified; totals currently count GE-coded courses only."
       ]
     },
     {
       "id": "ch-primary",
-      "name": "Chinese Studies — Primary Major",
+      "name": "Chinese Studies \u2014 Primary Major",
       "kind": "primary",
       "subject": "Chinese Studies",
       "minCohort": 2023,
@@ -370,7 +378,7 @@
         {
           "id": "ch:total",
           "label": "Chinese Studies major units (recognised-course exceptions need review)",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 60,
           "selector": {
             "prefixes": [
@@ -378,7 +386,10 @@
               "CL"
             ]
           },
-          "manual": true
+          "manual": true,
+          "recognisedBasket": "chMajorRecognised",
+          "recognisedCap": 8,
+          "detail": "CL courses are permitted outside the PH recognised-course cap. CH courses taught in English also share an 8-unit cap; manual review needed for that combined cap."
         },
         {
           "id": "ch:level-3000",
@@ -465,15 +476,36 @@
               "CL3110"
             ]
           }
+        },
+        {
+          "id": "ch:choice:6",
+          "label": "Choose one additional CH/CL core option",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CH2162",
+              "CL3220",
+              "CH2221",
+              "CL2221",
+              "CH2243",
+              "CL2231",
+              "CH2252",
+              "CL2240"
+            ]
+          }
         }
       ],
       "notes": [
-        "Additional CH/CL choice baskets and recognised-course caps require verification."
-      ]
+        "Additional CH/CL choice baskets and recognised-course caps require verification.",
+        "CH-coded English-taught courses share the 8-unit cap with ordinary CH-recognised courses; combined cap requires specialised validation."
+      ],
+      "recognisedSource": "https://fass.nus.edu.sg/cs/recognised-courses/",
+      "dataComplete": false
     },
     {
       "id": "ch-second",
-      "name": "Chinese Studies — Second Major",
+      "name": "Chinese Studies \u2014 Second Major",
       "kind": "second",
       "subject": "Chinese Studies",
       "minCohort": 2021,
@@ -486,7 +518,7 @@
         {
           "id": "ch2:total",
           "label": "Chinese Studies second-major units (recognised-course exceptions need review)",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 40,
           "selector": {
             "prefixes": [
@@ -494,7 +526,10 @@
               "CL"
             ]
           },
-          "manual": true
+          "manual": true,
+          "recognisedBasket": "chMajorRecognised",
+          "recognisedCap": 8,
+          "detail": "CL courses are permitted outside the PH recognised-course cap. CH courses taught in English also share an 8-unit cap; manual review needed for that combined cap."
         },
         {
           "id": "ch2:level-3000",
@@ -568,12 +603,35 @@
               "CL3110"
             ]
           }
+        },
+        {
+          "id": "ch:choice:6",
+          "label": "Choose one additional CH/CL core option",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CH2162",
+              "CL3220",
+              "CH2221",
+              "CL2221",
+              "CH2243",
+              "CL2231",
+              "CH2252",
+              "CL2240"
+            ]
+          }
         }
+      ],
+      "recognisedSource": "https://fass.nus.edu.sg/cs/recognised-courses/",
+      "dataComplete": false,
+      "notes": [
+        "CH-coded English-taught courses share the 8-unit cap with ordinary CH-recognised courses; combined cap requires specialised validation."
       ]
     },
     {
       "id": "ch-minor",
-      "name": "Chinese Studies — Minor",
+      "name": "Chinese Studies \u2014 Minor",
       "kind": "minor",
       "subject": "Chinese Studies",
       "minCohort": 2021,
@@ -581,6 +639,17 @@
       "source": "https://fass.nus.edu.sg/cs/honours-programme/",
       "core": [],
       "requirements": [
+        {
+          "id": "chm:total",
+          "label": "Chinese Studies minor total (recognised cap applied)",
+          "type": "capped_total_units",
+          "target": 20,
+          "selector": {
+            "prefix": "CH"
+          },
+          "recognisedBasket": "chMinorRecognised",
+          "recognisedCap": 8
+        },
         {
           "id": "chm:intro",
           "label": "CH1101E or GESS1003",
@@ -594,36 +663,22 @@
           }
         },
         {
-          "id": "chm:total",
-          "label": "Chinese Studies minor units (recognised-course cap needs review)",
-          "type": "minimum_units",
-          "target": 20,
-          "selector": {
-            "prefixes": [
-              "CH",
-              "CL"
-            ]
-          },
-          "manual": true
-        },
-        {
           "id": "chm:level-3000",
           "label": "Level-3000 CH/CL units",
           "type": "minimum_units",
           "target": 4,
           "selector": {
-            "prefixes": [
-              "CH",
-              "CL"
-            ],
+            "prefix": "CH",
             "exactLevel": 3
           }
         }
-      ]
+      ],
+      "recognisedSource": "https://fass.nus.edu.sg/cs/recognised-courses/",
+      "dataComplete": true
     },
     {
       "id": "hy-primary",
-      "name": "History — Primary Major",
+      "name": "History \u2014 Primary Major",
       "kind": "primary",
       "subject": "History",
       "minCohort": 2021,
@@ -637,12 +692,14 @@
         {
           "id": "hy:total",
           "label": "History major units (recognised-course cap needs review)",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 60,
           "selector": {
             "prefix": "HY"
           },
-          "manual": true
+          "manual": true,
+          "recognisedBasket": "historyMajor",
+          "recognisedCap": 8
         },
         {
           "id": "hy:level-3000",
@@ -651,7 +708,8 @@
           "target": 36,
           "selector": {
             "prefix": "HY",
-            "minLevel": 3
+            "minLevel": 3,
+            "namedBasket": "historyMajor"
           }
         },
         {
@@ -661,14 +719,27 @@
           "target": 20,
           "selector": {
             "prefix": "HY",
-            "minLevel": 4
+            "minLevel": 4,
+            "namedBasket": "historyMajor"
+          }
+        },
+        {
+          "id": "hy:level-4000-max",
+          "label": "Level-4000 HY units (maximum without approval)",
+          "type": "maximum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "HY",
+            "exactLevel": 4
           }
         }
-      ]
+      ],
+      "recognisedSource": "https://fass.nus.edu.sg/hist/history-recognised-modules/",
+      "dataComplete": true
     },
     {
       "id": "hy-second",
-      "name": "History — Second Major",
+      "name": "History \u2014 Second Major",
       "kind": "second",
       "subject": "History",
       "minCohort": 2021,
@@ -681,12 +752,14 @@
         {
           "id": "hy2:total",
           "label": "History second-major units (recognised-course cap needs review)",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 40,
           "selector": {
             "prefix": "HY"
           },
-          "manual": true
+          "manual": true,
+          "recognisedBasket": "historyShared",
+          "recognisedCap": 8
         },
         {
           "id": "hy2:level-3000",
@@ -695,14 +768,17 @@
           "target": 16,
           "selector": {
             "prefix": "HY",
-            "minLevel": 3
+            "minLevel": 3,
+            "namedBasket": "historyShared"
           }
         }
-      ]
+      ],
+      "recognisedSource": "https://fass.nus.edu.sg/hist/history-recognised-modules/",
+      "dataComplete": true
     },
     {
       "id": "hy-minor",
-      "name": "History — Minor",
+      "name": "History \u2014 Minor",
       "kind": "minor",
       "subject": "History",
       "minCohort": 2023,
@@ -715,12 +791,14 @@
         {
           "id": "hym:total",
           "label": "History minor units (recognised-course cap needs review)",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 20,
           "selector": {
             "prefix": "HY"
           },
-          "manual": true
+          "manual": true,
+          "recognisedBasket": "historyShared",
+          "recognisedCap": 4
         },
         {
           "id": "hym:level-2000",
@@ -729,7 +807,8 @@
           "target": 8,
           "selector": {
             "prefix": "HY",
-            "exactLevel": 2
+            "exactLevel": 2,
+            "namedBasket": "historyShared"
           }
         },
         {
@@ -739,14 +818,17 @@
           "target": 4,
           "selector": {
             "prefix": "HY",
-            "exactLevel": 3
+            "exactLevel": 3,
+            "namedBasket": "historyShared"
           }
         }
-      ]
+      ],
+      "recognisedSource": "https://fass.nus.edu.sg/hist/history-recognised-modules/",
+      "dataComplete": true
     },
     {
       "id": "sc-primary",
-      "name": "Sociology — Primary Major",
+      "name": "Sociology \u2014 Primary Major",
       "kind": "primary",
       "subject": "Sociology",
       "minCohort": 2021,
@@ -762,12 +844,14 @@
         {
           "id": "sc:total",
           "label": "Sociology major units (recognised-course exceptions need review)",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 60,
           "selector": {
             "prefix": "SC"
           },
-          "manual": true
+          "manual": true,
+          "recognisedBasket": "sociologyShared",
+          "recognisedCap": 8
         },
         {
           "id": "sc:level-3000",
@@ -776,7 +860,8 @@
           "target": 36,
           "selector": {
             "prefix": "SC",
-            "minLevel": 3
+            "minLevel": 3,
+            "namedBasket": "sociologyShared"
           }
         },
         {
@@ -786,14 +871,17 @@
           "target": 20,
           "selector": {
             "prefix": "SC",
-            "minLevel": 4
+            "minLevel": 4,
+            "namedBasket": "sociologyShared"
           }
         }
-      ]
+      ],
+      "recognisedSource": "https://fass.nus.edu.sg/socanth/recognised-courses-undergraduate/",
+      "dataComplete": true
     },
     {
       "id": "sc-second",
-      "name": "Sociology — Second Major",
+      "name": "Sociology \u2014 Second Major",
       "kind": "second",
       "subject": "Sociology",
       "minCohort": 2021,
@@ -808,12 +896,14 @@
         {
           "id": "sc2:total",
           "label": "Sociology second-major units (recognised-course exceptions need review)",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 40,
           "selector": {
             "prefix": "SC"
           },
-          "manual": true
+          "manual": true,
+          "recognisedBasket": "sociologyShared",
+          "recognisedCap": 8
         },
         {
           "id": "sc2:level-3000",
@@ -822,14 +912,17 @@
           "target": 16,
           "selector": {
             "prefix": "SC",
-            "minLevel": 3
+            "minLevel": 3,
+            "namedBasket": "sociologyShared"
           }
         }
-      ]
+      ],
+      "recognisedSource": "https://fass.nus.edu.sg/socanth/recognised-courses-undergraduate/",
+      "dataComplete": true
     },
     {
       "id": "sc-minor",
-      "name": "Sociology — Minor",
+      "name": "Sociology \u2014 Minor",
       "kind": "minor",
       "subject": "Sociology",
       "minCohort": 2021,
@@ -842,11 +935,13 @@
         {
           "id": "scm:total",
           "label": "SC-coded units",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 20,
           "selector": {
             "prefix": "SC"
-          }
+          },
+          "recognisedBasket": "sociologyShared",
+          "recognisedCap": 4
         },
         {
           "id": "scm:level-3000",
@@ -855,10 +950,13 @@
           "target": 4,
           "selector": {
             "prefix": "SC",
-            "minLevel": 3
+            "minLevel": 3,
+            "namedBasket": "sociologyShared"
           }
         }
-      ]
+      ],
+      "recognisedSource": "https://fass.nus.edu.sg/socanth/recognised-courses-undergraduate/",
+      "dataComplete": true
     }
   ]
 }

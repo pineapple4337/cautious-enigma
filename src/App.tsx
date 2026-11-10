@@ -17,7 +17,7 @@ import { PRIMARY_MAJORS, SECOND_MAJORS, MINORS } from './programmeCatalog'
 import { checkTimetable, type TimetableResult } from './timetable'
 import { EligibleCourseExplorer } from './EligibleCourseExplorer'
 import { PlanBackup } from './PlanBackup'
-import { requirementOptions } from './requirementOptions'
+import { requirementOptions } from './degreeEngine'
 import './App.css'
 
 const API = APP_CONFIG.apiBase

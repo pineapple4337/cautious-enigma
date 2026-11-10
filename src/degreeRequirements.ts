@@ -1,6 +1,6 @@
-import { auditStructuredProgramme } from './genericRequirementEngine'
+import { auditStructuredProgramme } from './degreeEngine'
 import { ECONOMICS, ECONOMICS_SPECIALISATIONS, ECONOMICS_SPECIALISATION_SOURCE, type EconomicsSpecialisation } from './economicsData'
-import { requirementId } from './requirementRules'
+import { requirementId } from './degreeEngine'
 import { EC_MINOR_RECOGNISED, URBAN_CORE, URBAN_ELECTIVES, CHS_PILLARS } from './academicData'
 export { URBAN_CORE, URBAN_ELECTIVES, CHS_PILLARS } from './academicData'
 import type { PlannedCourse } from './types'

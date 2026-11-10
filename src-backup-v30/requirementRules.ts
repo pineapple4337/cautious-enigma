@@ -1,3 +1,5 @@
+import definitions from './programmeDefinitions.json'
+import fassData from './fassRecognisedCourses.json'
 import { ECONOMICS, ECONOMICS_SPECIALISATIONS } from './economicsData'
 /** Stable requirement identities and course eligibility shared by audit, explorer and optimiser. */
 import { CHS_PILLARS, PS_SINGAPORE, EC_MINOR_RECOGNISED, URBAN_CORE, URBAN_ELECTIVES } from './academicData'
@@ -60,6 +62,32 @@ export function isSpecificRequirement(id: RuleId): boolean {
 }
 
 export function eligibleForRequirement(id: RuleId, code: string): boolean {
+  // Shared JSON-driven eligibility for FASS definitions. UI and audit use the same selector.
+  const matchSelector=(selector:{prefix?:string;prefixes?:string[];codes?:string[];namedBasket?:string;exactLevel?:number;minLevel?:number;maxLevel?:number;excludeCodes?:string[]}|undefined):boolean=>{
+    if(!selector)return false
+    const prefix=!!selector.prefix && code.startsWith(selector.prefix)
+    const prefixes=(selector.prefixes??[]).some(x=>code.startsWith(x))
+    const codes=(selector.codes??[]).includes(code)
+    const basket=selector.namedBasket==='ps-recognised-non-ps'?PS_RECOGNISED_NON_PS:
+      selector.namedBasket==='ps-singapore'?PS_SINGAPORE:
+      (fassData.lists as Record<string,string[]>)[selector.namedBasket??'']??[]
+    if(!(prefix||prefixes||codes||basket.includes(code)))return false
+    const level=Number(code.match(/^[A-Z]+(\d)/)?.[1]??0)
+    if(selector.exactLevel!==undefined&&level!==selector.exactLevel)return false
+    if(selector.minLevel!==undefined&&level<selector.minLevel)return false
+    if(selector.maxLevel!==undefined&&level>selector.maxLevel)return false
+    return !(selector.excludeCodes??[]).includes(code)
+  }
+  for(const programme of definitions.programmes){
+    const rule=programme.requirements.find(r=>r.id===id)
+    if(!rule)continue
+    if(rule.type==='capped_total_units')return matchSelector(rule.selector)||
+      ((fassData.lists as Record<string,string[]>)[rule.recognisedBasket??'']??[]).includes(code)
+    if(rule.type==='basket_groups')return Object.values(PS_SUBFIELDS).some(list=>(list as readonly string[]).includes(code))
+    return matchSelector(rule.selector)
+  }
+  if(id.includes(':core:'))return code===id.split(':core:')[1]
+
   if (id.startsWith('core:')) return code === id.slice(5)
   if (id.startsWith('chs:')) {
     const pillar = CHS_PILLARS.find(p => requirementId('chs',p.label) === id)

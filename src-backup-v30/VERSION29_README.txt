@@ -1,0 +1,1 @@
+Version 29: Adds structured AY2025/26 FASS Political Science, Geography, Chinese Studies, History, Sociology pathways. Geography has no generic Geography minor. Some total-unit checks are manual due to unverified recognised-course exceptions. The current generic engine does not yet model all Chinese Studies alternative baskets. Confirm requirements before registration.
