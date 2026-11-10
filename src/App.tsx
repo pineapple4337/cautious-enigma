@@ -50,8 +50,6 @@ type CourseDetails = {
   semesterData?: {semester: number; timetable?: unknown[]; examDate?: string}[]
 }
 type Semester = {id: string; label: string; year: number; sem: number}
-type SemesterSnapshot = {status: CourseStatus; suExercised: boolean}
-type UndoRecord = { semesterId: string; before: Record<string,SemesterSnapshot> }
 
 function makeSemesters(startYear: number): Semester[] {
   return Array.from({length:8},(_,i)=>{
@@ -67,7 +65,7 @@ function loadPlan(): PlannedCourse[] {
       typeof x.title==='string' && typeof x.units==='number' &&
       Number.isFinite(x.units) && typeof x.semester==='string').map(c=>({
       ...c,
-      status: c.status==='completed'||c.status==='current' ? c.status : 'planned',
+      status: c.status === 'completed' ? 'completed' : 'planned',
       suExercised:c.status==='completed' && c.suExercised===true
     }))
   } catch { return [] }
@@ -105,7 +103,7 @@ function DraggableCourse({course,plan,semesters,onRemove,onUpdate,subjectColors}
             const status=e.target.value as CourseStatus
             onUpdate(course.code,{status,suExercised:status==='completed'?course.suExercised:false})
           }}>
-          <option value="planned">Planned</option><option value="current">Currently taking</option>
+          <option value="planned">Planned</option>
           <option value="completed">Completed</option>
         </select>
         {course.status==='completed' && <label className="su-control">
@@ -145,10 +143,9 @@ function SemesterTimetable({codes,semester}:{codes:string[];semester:number}) {
     </div>
   </details>
 }
-function SemesterCard({semester,plan,semesters,subjectColors,onRemove,onUpdate,onToggle,canUndo,searchOpen,onOpenSearch,search,searchResults,loading,error,selected,onSearch,onSelect,onAdd,availableSemesters}:{
-  semester:Semester;plan:PlannedCourse[];semesters:Semester[];subjectColors:SubjectColorMap
+function SemesterCard({semester,plan,semesters,subjectColors,onRemove,onUpdate,onToggle,searchOpen,onOpenSearch,search,searchResults,loading,error,selected,onSearch,onSelect,onAdd,availableSemesters}:{  semester:Semester;plan:PlannedCourse[];semesters:Semester[];subjectColors:SubjectColorMap
   onRemove:(code:string)=>void;onUpdate:(code:string,changes:Partial<PlannedCourse>)=>void
-  onToggle:(id:string)=>void;canUndo:boolean
+  onToggle:(id:string)=>void;
   searchOpen:boolean;onOpenSearch:(id:string)=>void;search:string
   searchResults:Course[];loading:boolean;error:string;selected:CourseDetails|null;availableSemesters:Record<string,number[]>
   onSearch:(value:string)=>void;onSelect:(code:string)=>void;onAdd:(id:string)=>void
@@ -161,7 +158,10 @@ function SemesterCard({semester,plan,semesters,subjectColors,onRemove,onUpdate,o
       <div className="semester-actions"><span>{units} units</span>
         <button className="complete-semester-button" disabled={!items.length}
           onClick={()=>onToggle(semester.id)}>
-          {canUndo?'↩ Undo completion':'✓ Mark all completed'}
+          {items.length > 0 &&
+            items.every(course => course.status === 'completed')
+            ? '↩ Mark all planned'
+            : '✓ Mark all completed'}
         </button>
       </div>
     </div>
@@ -313,8 +313,6 @@ function App() {
   const [loading,setLoading]=useState(true)
   const [error,setError]=useState('')
   const [explorerSemester,setExplorerSemester]=useState(`${profile.matriculationYear+1}-1`)
-  // Undo is session-only. Editing a course in that semester invalidates the snapshot.
-  const [undo,setUndo]=useState<Record<string,UndoRecord>>({})
   const [lastRemoved,setLastRemoved]=useState<PlannedCourse|null>(null)
   const [requirementMessage,setRequirementMessage]=useState('')
   const planRef=useRef(plan)
@@ -355,11 +353,6 @@ function App() {
       setSelected(await response.json())
     } catch {setError('Unable to load course details.')}
   }
-  function invalidateUndo(ids:string[]) {
-    setUndo(old=>{
-      const next={...old};ids.forEach(id=>delete next[id]);return next
-    })
-  }
   function addCourse(semesterId:string) {
     if(!selected)return
     const target = semesters.find(s=>s.id===semesterId)
@@ -371,7 +364,7 @@ function App() {
     setPlan(old=>[...old,{code:selected.moduleCode,title:selected.title,
       units:Number(selected.moduleCredit),semester:semesterId,status:'planned',
       suExercised:false,prereqTree:selected.prereqTree,prerequisite:selected.prerequisite}])
-    invalidateUndo([semesterId])
+
     setSearch('');setSelected(null);setActiveSearchSemester(null)
   }
   async function addFromRequirement(code:string,semesterId:string):Promise<string|null> {
@@ -388,7 +381,7 @@ function App() {
     const newCourse:PlannedCourse={code,title:detail.title,units,semester:semesterId,status:'planned',suExercised:false,prereqTree:detail.prereqTree,prerequisite:detail.prerequisite}
     const total=planRef.current.filter(c=>c.semester===semesterId).reduce((n,c)=>n+c.units,0)+units
     setPlan(old=>old.some(c=>c.code===code)?old:[...old,newCourse])
-    invalidateUndo([semesterId])
+
     setLastRemoved(null)
     setRequirementMessage(`${code} added to ${semester.label}.${total>24?` Workload: ${total} units (over 24).`:''}`)
     return null
@@ -401,12 +394,10 @@ function App() {
   }
   function removeCourse(code:string) {
     const found=plan.find(c=>c.code===code)
-    if(found){invalidateUndo([found.semester]);setLastRemoved(found)}
+    if(found)setLastRemoved(found)
     setPlan(old=>old.filter(c=>c.code!==code))
   }
   function updateCourse(code:string,changes:Partial<PlannedCourse>) {
-    const found=plan.find(c=>c.code===code)
-    if(found)invalidateUndo([found.semester])
     setPlan(old=>old.map(c=>c.code===code?{...c,...changes}:c))
   }
   function moveCourse(code:string,semester:string) {
@@ -418,22 +409,31 @@ function App() {
     }
     const found=plan.find(c=>c.code===code)
     if(!found||found.semester===semester)return
-    invalidateUndo([found.semester,semester])
+
     setPlan(old=>old.map(c=>c.code===code?{...c,semester}:c))
   }
-  function toggleSemester(id:string) {
-    const current=planRef.current.filter(c=>c.semester===id)
-    if(!current.length)return
-    const record=undo[id]
-    if(record) {
-      setPlan(old=>old.map(c=>c.semester===id && record.before[c.code]
-        ? {...c,...record.before[c.code]} : c))
-      setUndo(old=>{const next={...old};delete next[id];return next})
-    } else {
-      const before=Object.fromEntries(current.map(c=>[c.code,{status:c.status,suExercised:c.suExercised}]))
-      setUndo(old=>({...old,[id]:{semesterId:id,before}}))
-      setPlan(old=>old.map(c=>c.semester===id?{...c,status:'completed' as const}:c))
-    }
+  function toggleSemester(id: string) {
+    setPlan(previous => {
+      const semesterCourses = previous.filter(
+        course => course.semester === id
+      )
+
+      const allCompleted =
+        semesterCourses.length > 0 &&
+        semesterCourses.every(
+          course => course.status === 'completed'
+        )
+
+      return previous.map(course => {
+        if (course.semester !== id) return course
+
+        return {
+          ...course,
+          status: allCompleted ? 'planned' as const : 'completed' as const,
+          suExercised: allCompleted ? false : course.suExercised
+        }
+      })
+    })
   }
   function changeMatriculationYear(year:number) {
     const delta=year-profile.matriculationYear
@@ -441,7 +441,6 @@ function App() {
       const [y,s]=c.semester.split('-').map(Number)
       return {...c,semester:`${y+delta}-${s}`}
     }))
-    setUndo({})
     setProfile(old=>({...old,matriculationYear:year}))
   }
   const sensors=useSensors(
@@ -615,7 +614,7 @@ function App() {
       </div><div className="year-jump" aria-label="Jump to academic year">{[0,1,2,3].map(i=><button key={i} type="button" onClick={()=>jumpToYear(i)}>Year {i+1}</button>)}<span>Scroll sideways to see all semesters</span></div>
       <DndContext sensors={sensors} autoScroll onDragEnd={handleDragEnd}><div className="semester-grid" ref={semesterBoardRef}>
         {semesters.map(s=><SemesterCard key={s.id} semester={s} plan={plan} semesters={semesters} subjectColors={subjectColors}
-          onRemove={removeCourse} onUpdate={updateCourse} onToggle={toggleSemester} canUndo={!!undo[s.id]}
+          onRemove={removeCourse} onUpdate={updateCourse} onToggle={toggleSemester}
           searchOpen={activeSearchSemester===s.id} onOpenSearch={id=>{
             setActiveSearchSemester(old=>old===id?null:id);setSearch('');setSelected(null);setError('')
           }} search={search} searchResults={results} loading={loading} error={error} availableSemesters={availableSemesters}

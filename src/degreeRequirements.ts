@@ -156,7 +156,7 @@ export function auditEconomicsMinor(plan: PlannedCourse[]): Audit {
   const recognised = plan.filter(c => EC_MINOR_RECOGNISED.includes(c.code))
   // The department caps EC-recognised non-EC contributions at 4 units.
   // Prefer completed courses, then currently taking, then planned courses.
-  const rank = (c: PlannedCourse) => c.status === 'completed' ? 0 : c.status === 'current' ? 1 : 2
+  const rank = (c: PlannedCourse) => c.status === 'completed' ? 0 : 1
   const candidates = [...recognised].sort((a,b) => rank(a) - rank(b))
   const allocated: PlannedCourse[] = [...ec]
   let remaining = 4
