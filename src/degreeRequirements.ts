@@ -143,7 +143,7 @@ export function auditEconomicsSpecialisation(plan:PlannedCourse[], key:Economics
       detail:candidates.some(c=>!c.code.startsWith('EC'))?'Non-EC options listed by the department require confirmation before counting.':undefined}
   })
   const eligibleCodes=new Set(spec.groups.flatMap(g=>[...g.codes]))
-  const eligibleEC=plan.filter(c=>c.code.startsWith('EC')&&eligibleCodes.has(c.code))
+  const eligibleEC=plan.filter(c=>c.code.startsWith('EC')&&(eligibleCodes as ReadonlySet<string>).has(c.code))
   checks.push({...check('Specialisation eligible EC-coded units',eligibleEC,20,
     'Courses may count towards the Economics major and specialisation together. FE5213 is listed in course baskets but the department also states that only EC-coded courses count; confirm this exception.'),
     id:`ec-spec:${key}:units`})
