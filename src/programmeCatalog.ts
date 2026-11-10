@@ -1,7 +1,7 @@
 // Programme choices transcribed from the official CHS programmes directory.
 // Availability and admission restrictions can differ by cohort.
 export const PRIMARY_MAJORS = [
-  'Anthropology','Chinese Languages and Cultures','Chinese Studies (Bilingual)',
+  'Anthropology','Chinese Studies','Chinese Languages and Cultures','Chinese Studies (Bilingual)',
   'Chemistry','Communications and New Media','Data Science and Applied AI',
   'Economics','English Language and Linguistics','English Literature',
   'Food Science and Technology','Geography','Global Studies','History',
@@ -13,7 +13,7 @@ export const PRIMARY_MAJORS = [
 ] as const
 
 export const SECOND_MAJORS = [
-  'Anthropology','Chinese Studies (Bilingual)','Chinese Languages and Cultures',
+  'Anthropology','Chinese Studies','Chinese Studies (Bilingual)','Chinese Languages and Cultures',
   'Communications and New Media','Economics','English Language and Linguistics',
   'English Literature','Environmental Science for Sustainability',
   'Theatre and Performance Studies','Geography','Global Studies','History',
@@ -28,7 +28,7 @@ export const SECOND_MAJORS = [
 export const MINORS = [
   'Analytical Chemistry','Anthropology','Aquatic Ecology','Arabic Language Studies',
   'Art History','Asian Studies','Astronomy','Bioinformatics','Biophysics',
-  'Botany','Chemistry','Chinese Language Studies','Chinese Languages and Cultures',
+  'Botany','Chemistry','Chinese Studies','Chinese Language Studies','Chinese Languages and Cultures',
   'Chinese Media','Chinese Studies (Bilingual)','Chinese Translation',
   'Communications and New Media','Computing (Sciences)','Criminal Justice',
   'Cultural Studies','Data Analytics','Economics','Engineering Materials',

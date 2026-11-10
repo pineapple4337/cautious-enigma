@@ -3,7 +3,7 @@
   "programmes": [
     {
       "id": "ps-major",
-      "name": "Political Science \u2014 Primary Major (60 units)",
+      "name": "Political Science — Primary Major (60 units)",
       "kind": "primary",
       "subject": "Political Science",
       "minCohort": 2021,
@@ -63,6 +63,13 @@
           }
         },
         {
+          "id": "ps:subfields",
+          "label": "Political Science subfields",
+          "type": "basket_groups",
+          "namedBasketGroup": "ps-subfields",
+          "targetPerGroup": 1
+        },
+        {
           "id": "ps:level-5000-max",
           "label": "Level-5000 PS courses (maximum one)",
           "type": "maximum_courses",
@@ -72,15 +79,9 @@
             "exactLevel": 5
           },
           "manual": true
-        },
-        {
-          "id": "ps:subfields",
-          "label": "Political Science subfields",
-          "type": "basket_groups",
-          "namedBasketGroup": "ps-subfields",
-          "targetPerGroup": 1
         }
-      ]
+      ],
+      "maxCohort": 2025
     },
     {
       "id": "chs",
@@ -94,7 +95,7 @@
     },
     {
       "id": "ec-primary",
-      "name": "Economics \u2014 Primary Major",
+      "name": "Economics — Primary Major",
       "kind": "primary",
       "subject": "Economics",
       "minCohort": 2021,
@@ -104,7 +105,7 @@
     },
     {
       "id": "ec-second",
-      "name": "Economics \u2014 Second Major",
+      "name": "Economics — Second Major",
       "kind": "second",
       "subject": "Economics",
       "minCohort": 2021,
@@ -114,7 +115,7 @@
     },
     {
       "id": "ec-minor",
-      "name": "Economics \u2014 Minor",
+      "name": "Economics — Minor",
       "kind": "minor",
       "subject": "Economics",
       "minCohort": 2021,
@@ -124,13 +125,740 @@
     },
     {
       "id": "urban-minor",
-      "name": "Urban Studies \u2014 Minor",
+      "name": "Urban Studies — Minor",
       "kind": "minor",
       "subject": "Urban Studies",
       "minCohort": 2024,
       "adapter": "urban-minor",
       "source": "https://cde.nus.edu.sg/",
       "requirements": []
+    },
+    {
+      "id": "ps-second",
+      "name": "Political Science — Second Major",
+      "kind": "second",
+      "subject": "Political Science",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/pol/graduation-requirements-cohort-2021-onwards/",
+      "core": [
+        "PS1101E",
+        "PS3257"
+      ],
+      "requirements": [
+        {
+          "id": "ps2:total",
+          "label": "40 eligible PS / recognised units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "PS",
+            "namedBasket": "ps-recognised-non-ps"
+          },
+          "manual": true
+        },
+        {
+          "id": "ps2:ps-coded",
+          "label": "PS-coded units (minimum 20)",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "PS"
+          }
+        },
+        {
+          "id": "ps2:level-3000",
+          "label": "Level-3000+ PS units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "PS",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "ps:singapore",
+          "label": "Singapore Politics course",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "PS2249",
+              "PS2244",
+              "PS3249",
+              "PS3273"
+            ]
+          }
+        },
+        {
+          "id": "ps:subfields",
+          "label": "Four Political Science subfields",
+          "type": "basket_groups",
+          "target": 4,
+          "namedBasketGroup": "ps-subfields",
+          "targetPerGroup": 1
+        }
+      ]
+    },
+    {
+      "id": "ps-minor",
+      "name": "Political Science — Minor",
+      "kind": "minor",
+      "subject": "Political Science",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/pol/graduation-requirements-cohort-2021-onwards/",
+      "core": [
+        "PS1101E"
+      ],
+      "requirements": [
+        {
+          "id": "psm:total",
+          "label": "20 eligible PS units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "PS"
+          },
+          "manual": true
+        },
+        {
+          "id": "psm:level-3000",
+          "label": "Level-3000 PS units",
+          "type": "minimum_units",
+          "target": 8,
+          "selector": {
+            "prefix": "PS",
+            "exactLevel": 3
+          }
+        },
+        {
+          "id": "ps:singapore",
+          "label": "Singapore Politics course",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "PS2249",
+              "PS2244",
+              "PS3249",
+              "PS3273"
+            ]
+          }
+        },
+        {
+          "id": "ps:subfields",
+          "label": "Four Political Science subfields",
+          "type": "basket_groups",
+          "target": 4,
+          "namedBasketGroup": "ps-subfields",
+          "targetPerGroup": 1
+        }
+      ]
+    },
+    {
+      "id": "ge-primary",
+      "name": "Geography — Primary Major",
+      "kind": "primary",
+      "subject": "Geography",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/geog/graduation-requirements-after-ay2021/",
+      "core": [
+        "GE1101E",
+        "GE2101",
+        "GE2102",
+        "GE2103",
+        "GE2215",
+        "GE2231"
+      ],
+      "requirements": [
+        {
+          "id": "ge:total",
+          "label": "Geography major units (recognised courses require review)",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "GE"
+          },
+          "manual": true
+        },
+        {
+          "id": "ge:level-3000",
+          "label": "Level-3000 GE units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "GE",
+            "exactLevel": 3
+          }
+        },
+        {
+          "id": "ge:level-4000",
+          "label": "Level-4000+ GE units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "GE",
+            "minLevel": 4
+          }
+        },
+        {
+          "id": "ge:level-5000-cap",
+          "label": "Level-5000 GE cap",
+          "type": "maximum_courses",
+          "target": 1,
+          "selector": {
+            "prefix": "GE",
+            "exactLevel": 5
+          },
+          "manual": true
+        }
+      ]
+    },
+    {
+      "id": "ge-second",
+      "name": "Geography — Second Major",
+      "kind": "second",
+      "subject": "Geography",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/geog/graduation-requirements-after-ay2021/",
+      "core": [
+        "GE1101E",
+        "GE2101",
+        "GE2102",
+        "GE2103",
+        "GE2215",
+        "GE2231"
+      ],
+      "requirements": [
+        {
+          "id": "ge2:total",
+          "label": "Geography second-major units (recognised courses require review)",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "GE"
+          },
+          "manual": true
+        },
+        {
+          "id": "ge2:level-3000",
+          "label": "Level-3000+ GE units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "GE",
+            "minLevel": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch-primary",
+      "name": "Chinese Studies — Primary Major",
+      "kind": "primary",
+      "subject": "Chinese Studies",
+      "minCohort": 2023,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/cs/honours-programme/",
+      "core": [
+        "CH1101E"
+      ],
+      "requirements": [
+        {
+          "id": "ch:total",
+          "label": "Chinese Studies major units (recognised-course exceptions need review)",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefixes": [
+              "CH",
+              "CL"
+            ]
+          },
+          "manual": true
+        },
+        {
+          "id": "ch:level-3000",
+          "label": "Level-3000+ CH/CL units",
+          "type": "minimum_units",
+          "target": 28,
+          "selector": {
+            "prefixes": [
+              "CH",
+              "CL"
+            ],
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "ch:level-4000",
+          "label": "Level-4000+ CH/CL units",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefixes": [
+              "CH",
+              "CL"
+            ],
+            "minLevel": 4
+          }
+        },
+        {
+          "id": "ch:choice:1",
+          "label": "One of CH2121 / CL2120",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CH2121",
+              "CL2120"
+            ]
+          }
+        },
+        {
+          "id": "ch:choice:2",
+          "label": "One of CH2141 / CL2130",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CH2141",
+              "CL2130"
+            ]
+          }
+        },
+        {
+          "id": "ch:choice:3",
+          "label": "One of CH2161 / CL2235",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CH2161",
+              "CL2235"
+            ]
+          }
+        },
+        {
+          "id": "ch:choice:4",
+          "label": "One of CL2101 / CL2110",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CL2101",
+              "CL2110"
+            ]
+          }
+        },
+        {
+          "id": "ch:choice:5",
+          "label": "One of CL3104 / CL3110",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CL3104",
+              "CL3110"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Additional CH/CL choice baskets and recognised-course caps require verification."
+      ]
+    },
+    {
+      "id": "ch-second",
+      "name": "Chinese Studies — Second Major",
+      "kind": "second",
+      "subject": "Chinese Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/cs/honours-programme/",
+      "core": [
+        "CH1101E"
+      ],
+      "requirements": [
+        {
+          "id": "ch2:total",
+          "label": "Chinese Studies second-major units (recognised-course exceptions need review)",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefixes": [
+              "CH",
+              "CL"
+            ]
+          },
+          "manual": true
+        },
+        {
+          "id": "ch2:level-3000",
+          "label": "Level-3000+ CH/CL units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefixes": [
+              "CH",
+              "CL"
+            ],
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "ch:choice:1",
+          "label": "One of CH2121 / CL2120",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CH2121",
+              "CL2120"
+            ]
+          }
+        },
+        {
+          "id": "ch:choice:2",
+          "label": "One of CH2141 / CL2130",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CH2141",
+              "CL2130"
+            ]
+          }
+        },
+        {
+          "id": "ch:choice:3",
+          "label": "One of CH2161 / CL2235",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CH2161",
+              "CL2235"
+            ]
+          }
+        },
+        {
+          "id": "ch:choice:4",
+          "label": "One of CL2101 / CL2110",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CL2101",
+              "CL2110"
+            ]
+          }
+        },
+        {
+          "id": "ch:choice:5",
+          "label": "One of CL3104 / CL3110",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CL3104",
+              "CL3110"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ch-minor",
+      "name": "Chinese Studies — Minor",
+      "kind": "minor",
+      "subject": "Chinese Studies",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/cs/honours-programme/",
+      "core": [],
+      "requirements": [
+        {
+          "id": "chm:intro",
+          "label": "CH1101E or GESS1003",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CH1101E",
+              "GESS1003"
+            ]
+          }
+        },
+        {
+          "id": "chm:total",
+          "label": "Chinese Studies minor units (recognised-course cap needs review)",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefixes": [
+              "CH",
+              "CL"
+            ]
+          },
+          "manual": true
+        },
+        {
+          "id": "chm:level-3000",
+          "label": "Level-3000 CH/CL units",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "prefixes": [
+              "CH",
+              "CL"
+            ],
+            "exactLevel": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "hy-primary",
+      "name": "History — Primary Major",
+      "kind": "primary",
+      "subject": "History",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/hist/history-requirements/",
+      "core": [
+        "HY1101E",
+        "HY2259"
+      ],
+      "requirements": [
+        {
+          "id": "hy:total",
+          "label": "History major units (recognised-course cap needs review)",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "HY"
+          },
+          "manual": true
+        },
+        {
+          "id": "hy:level-3000",
+          "label": "Level-3000+ HY units",
+          "type": "minimum_units",
+          "target": 36,
+          "selector": {
+            "prefix": "HY",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "hy:level-4000",
+          "label": "Level-4000+ HY units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "HY",
+            "minLevel": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "hy-second",
+      "name": "History — Second Major",
+      "kind": "second",
+      "subject": "History",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/hist/history-requirements/",
+      "core": [
+        "HY1101E"
+      ],
+      "requirements": [
+        {
+          "id": "hy2:total",
+          "label": "History second-major units (recognised-course cap needs review)",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "HY"
+          },
+          "manual": true
+        },
+        {
+          "id": "hy2:level-3000",
+          "label": "Level-3000+ HY units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "HY",
+            "minLevel": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "hy-minor",
+      "name": "History — Minor",
+      "kind": "minor",
+      "subject": "History",
+      "minCohort": 2023,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/hist/history-requirements/",
+      "core": [
+        "HY1101E"
+      ],
+      "requirements": [
+        {
+          "id": "hym:total",
+          "label": "History minor units (recognised-course cap needs review)",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "HY"
+          },
+          "manual": true
+        },
+        {
+          "id": "hym:level-2000",
+          "label": "Level-2000 HY units",
+          "type": "minimum_units",
+          "target": 8,
+          "selector": {
+            "prefix": "HY",
+            "exactLevel": 2
+          }
+        },
+        {
+          "id": "hym:level-3000",
+          "label": "Level-3000 HY units",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "prefix": "HY",
+            "exactLevel": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc-primary",
+      "name": "Sociology — Primary Major",
+      "kind": "primary",
+      "subject": "Sociology",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/socanth/b-soc-sci-hons-sociology/",
+      "core": [
+        "SC1101E",
+        "SC2101",
+        "SC3101",
+        "SC4101"
+      ],
+      "requirements": [
+        {
+          "id": "sc:total",
+          "label": "Sociology major units (recognised-course exceptions need review)",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "SC"
+          },
+          "manual": true
+        },
+        {
+          "id": "sc:level-3000",
+          "label": "Level-3000+ SC units",
+          "type": "minimum_units",
+          "target": 36,
+          "selector": {
+            "prefix": "SC",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "sc:level-4000",
+          "label": "Level-4000+ SC units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "SC",
+            "minLevel": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc-second",
+      "name": "Sociology — Second Major",
+      "kind": "second",
+      "subject": "Sociology",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/socanth/b-soc-sci-hons-sociology/",
+      "core": [
+        "SC1101E",
+        "SC2101",
+        "SC3101"
+      ],
+      "requirements": [
+        {
+          "id": "sc2:total",
+          "label": "Sociology second-major units (recognised-course exceptions need review)",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "SC"
+          },
+          "manual": true
+        },
+        {
+          "id": "sc2:level-3000",
+          "label": "Level-3000+ SC units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "SC",
+            "minLevel": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc-minor",
+      "name": "Sociology — Minor",
+      "kind": "minor",
+      "subject": "Sociology",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://fass.nus.edu.sg/socanth/b-soc-sci-hons-sociology/",
+      "core": [
+        "SC1101E"
+      ],
+      "requirements": [
+        {
+          "id": "scm:total",
+          "label": "SC-coded units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "SC"
+          }
+        },
+        {
+          "id": "scm:level-3000",
+          "label": "Level-3000+ SC units",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "prefix": "SC",
+            "minLevel": 3
+          }
+        }
+      ]
     }
   ]
 }

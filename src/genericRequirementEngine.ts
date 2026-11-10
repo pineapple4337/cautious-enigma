@@ -5,9 +5,9 @@ import { PS_SINGAPORE } from './academicData'
 import type { PlannedCourse } from './types'
 import type { Audit, Check } from './degreeRequirements'
 
-type Selector = { prefix?: string; namedBasket?: string; exactLevel?: number; minLevel?: number }
+type Selector = { prefix?: string; prefixes?: string[]; codes?: string[]; namedBasket?: string; exactLevel?: number; minLevel?: number }
 type Rule = { id:string; label:string; type:'minimum_units'|'minimum_courses'|'maximum_units'|'maximum_courses'|'basket_groups'; target?:number; selector?:Selector; namedBasketGroup?:string; targetPerGroup?:number; detail?:string; manual?:boolean }
-type Definition = {id:string;name:string;kind:string;subject:string;minCohort:number;source:string;core:string[];requirements:Rule[]}
+type Definition = {id:string;name:string;kind:string;subject?:string;minCohort:number;maxCohort?:number;source:string;core?:string[];requirements:Rule[];notes?:string[]}
 
 const baskets: Record<string,readonly string[]> = {
   'ps-recognised-non-ps': PS_RECOGNISED_NON_PS,
@@ -18,9 +18,10 @@ const groups: Record<string,Record<string,readonly string[]>> = {
 }
 
 function matches(code:string, selector:Selector):boolean {
-  const prefixMatch = !!selector.prefix && code.startsWith(selector.prefix)
+  const prefixMatch = (!!selector.prefix && code.startsWith(selector.prefix)) || (selector.prefixes??[]).some(prefix=>code.startsWith(prefix))
+  const explicitMatch = (selector.codes??[]).includes(code)
   const basketMatch = !!selector.namedBasket && (baskets[selector.namedBasket]??[]).includes(code)
-  if(!prefixMatch && !basketMatch) return false
+  if(!prefixMatch && !basketMatch && !explicitMatch) return false
   const levelMatch = code.match(/^[A-Z]+(\d)/)
   const level = levelMatch ? Number(levelMatch[1]) : 0
   if(selector.exactLevel !== undefined && level !== selector.exactLevel)return false
@@ -36,7 +37,7 @@ function makeCheck(rule:Rule, plan:PlannedCourse[], id=rule.id, label=rule.label
     scheduled:count(selected),maximum:rule.type.startsWith('maximum'),manual:rule.manual,detail:rule.detail}
 }
 export function getStructuredDefinition(id:string, cohort:number):Definition|undefined {
-  return (definitions.programmes as Definition[]).find(d=>d.id===id && cohort>=d.minCohort)
+  return (definitions.programmes as Definition[]).find(d=>d.id===id && cohort>=d.minCohort && (d.maxCohort===undefined || cohort<=d.maxCohort))
 }
 export function auditStructuredProgramme(id:string, plan:PlannedCourse[], cohort=2025):Audit|undefined {
   const definition=getStructuredDefinition(id,cohort)
@@ -52,6 +53,6 @@ export function auditStructuredProgramme(id:string, plan:PlannedCourse[], cohort
     }else checks.push(makeCheck(rule,plan))
   }
   return {id:definition.id,programme:definition.name,source:definition.source,checks,
-    core:definition.core.map(code=>({code,status:plan.find(c=>c.code===code)?.status??'missing'})),notes:[]}
+    core:(definition.core??[]).map(code=>({code,status:plan.find(c=>c.code===code)?.status??'missing'})),notes:definition.notes??[]}
 }
 export function structuredProgrammeIds():string[]{return definitions.programmes.map(p=>p.id)}
