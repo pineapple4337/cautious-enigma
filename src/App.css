@@ -275,3 +275,13 @@ main h2{font-size:19px;margin:0 0 12px}
 .explorer-topline h2{font-size:17px;margin:0}
 .explorer-topline label{display:flex;align-items:center;gap:8px;font-size:12px;color:#526071}
 .explorer-topline select{font:inherit;padding:6px 8px;border:1px solid #d2d7de;border-radius:6px;background:white;color:#20242a;max-width:260px}
+
+/* Backup / transfer panel */
+.plan-backup-section { margin: 12px 0; padding: 14px 16px; border: 1px solid #dce2e8; border-radius: 12px; background: #fff; }
+.plan-backup-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.plan-backup-header h2 { font-size: 16px; margin: 0 0 4px; }
+.plan-backup-header p { font-size: 12px; color: #64748b; margin: 0; }
+.plan-backup-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.plan-backup-actions button { border: 1px solid #cbd5e1; background: #f8fafc; color: #1e3a5f; border-radius: 7px; padding: 7px 12px; font-size: 12px; cursor: pointer; }
+.plan-backup-actions button:hover { background: #eaf1fa; }
+.plan-backup-message { font-size: 12px; color: #375b79; margin: 8px 0 0; }

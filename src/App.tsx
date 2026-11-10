@@ -14,6 +14,7 @@ import { auditPoliticalScience, auditEconomicsMinor, auditUrbanStudiesMinor, aud
 import { PRIMARY_MAJORS, SECOND_MAJORS, MINORS } from './programmeCatalog'
 import { checkTimetable, type TimetableResult } from './timetable'
 import { EligibleCourseExplorer } from './EligibleCourseExplorer'
+import { PlanBackup } from './PlanBackup'
 import { requirementOptions } from './requirementOptions'
 import './App.css'
 
@@ -545,6 +546,7 @@ function App() {
           startSemester={semesters.some(s=>s.id===explorerSemester)?explorerSemester:semesters[0].id}
           primaryMajor={profile.primaryMajor} minors={profile.minors} />
       </section>
+      <PlanBackup />
       <section className="planner"><div className="planner-topline"><h2>My Degree Plan</h2><div className="planner-navigation"><button type="button" onClick={()=>scrollSemesters(-1)} aria-label="Previous semester">‹</button><button type="button" onClick={()=>scrollSemesters(1)} aria-label="Next semester">›</button></div></div><div className="summary">
         <div><strong>{plan.length}</strong><span>Courses in plan</span></div>
         <div><strong>{completedUnits}</strong><span>Completed units (self-reported)</span></div>
