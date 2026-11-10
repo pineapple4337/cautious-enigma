@@ -609,7 +609,7 @@ function App() {
       </div>}
       <section className="planner"><div className="planner-topline"><h2>My Degree Plan</h2><div className="planner-navigation"><button type="button" onClick={()=>scrollSemesters(-1)} aria-label="Previous semester">‹</button><button type="button" onClick={()=>scrollSemesters(1)} aria-label="Next semester">›</button></div></div><div className="summary">
         <div><strong>{plan.length}</strong><span>Courses in plan</span></div>
-        <div><strong>{completedUnits}</strong><span>Completed units (self-reported)</span></div>
+        <div><strong>{completedUnits}</strong><span>Completed units</span></div>
         <div><strong>{totalUnits}</strong><span>Total planned + completed units</span></div>
       </div><div className="year-jump" aria-label="Jump to academic year">{[0,1,2,3].map(i=><button key={i} type="button" onClick={()=>jumpToYear(i)}>Year {i+1}</button>)}<span>Scroll sideways to see all semesters</span></div>
       <DndContext sensors={sensors} autoScroll onDragEnd={handleDragEnd}><div className="semester-grid" ref={semesterBoardRef}>
