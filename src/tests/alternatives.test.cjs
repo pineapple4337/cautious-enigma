@@ -1,0 +1,13 @@
+const test=require('node:test'); const assert=require('node:assert/strict'); const fs=require('node:fs'); const ts=require('typescript');
+require.extensions['.ts']=(module,filename)=>{const js=ts.transpileModule(fs.readFileSync(filename,'utf8'),{fileName:filename,compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true,resolveJsonModule:true}}).outputText;module._compile(js,filename)};
+const {auditStructuredProgramme,eligibleForRequirement}=require('../degreeEngine.ts');
+const c=(code,units=4,status='planned')=>({code,title:code,units,semester:'2025-1',status,suExercised:false});
+const check=(p)=>auditStructuredProgramme('science-dsa-primary',p,2025).checks.find(x=>x.id==='science:dsa:advanced-pathway');
+test('no advanced branch gives zero',()=>assert.equal(check([]).scheduled,0));
+test('one advanced elective insufficient',()=>assert.equal(check([c('DSA4211')]).scheduled,0));
+test('two complementary advanced groups pass',()=>assert.equal(check([c('DSA4211'),c('DSA4261')]).scheduled,1));
+test('8-unit honours project passes alone',()=>assert.equal(check([c('DSA4288',8)]).scheduled,1));
+test('4-unit project alone fails',()=>assert.equal(check([c('DSA4288',4)]).scheduled,0));
+test('planned and completed counted separately',()=>{const x=check([c('DSA4211',4,'completed'),c('DSA4261')]);assert.equal(x.scheduled,1);assert.equal(x.completed,0)});
+test('completed project counts as completed',()=>assert.equal(check([c('DSA4288',8,'completed')]).completed,1));
+test('eligible explorer finds all alternatives',()=>{for(const code of ['DSA4211','DSA4261','DSA4288'])assert.equal(eligibleForRequirement('science:dsa:advanced-pathway',code),true)});

@@ -1,3 +1,4 @@
+import definitions from './programmeDefinitions.json'
 import type { Audit } from './degreeRequirements'
 import { ECONOMICS_SPECIALISATIONS, type EconomicsSpecialisation } from './economicsData'
 import { APP_CONFIG } from './config'
@@ -498,6 +499,14 @@ function App() {
           }}>
             <option value="">Add specialisation...</option>
             {Object.entries(ECONOMICS_SPECIALISATIONS).filter(([key])=>!(profile.economicsSpecialisations??[]).includes(key)).map(([key,spec])=><option key={key} value={key}>{spec.name}</option>)}
+          </select>
+        </div>}
+        {['Physics','Mathematics'].includes(profile.primaryMajor) && <div className="minor-picker full-width">
+          <label>Science specialisation (optional)</label>
+          <select value={(profile.scienceSpecialisations??[])[0]??''}
+            onChange={e=>setProfile(p=>({...p,scienceSpecialisations:e.target.value?[e.target.value]:[]}))}>
+            <option value="">None</option>
+            {definitions.programmes.filter(d=>d.kind==='specialisation' && d.subject===profile.primaryMajor && profile.matriculationYear>=d.minCohort && (!('maxCohort' in d) || profile.matriculationYear<=Number(d.maxCohort))).map(d=><option key={d.id} value={d.id}>{d.name.split('Specialisation in ').at(-1)} (provisional audit)</option>)}
           </select>
         </div>}
         <div className="minor-picker full-width">

@@ -2,7 +2,7 @@
 // Availability and admission restrictions can differ by cohort.
 export const PRIMARY_MAJORS = [
   'Anthropology','Chinese Studies','Chinese Languages and Cultures','Chinese Studies (Bilingual)',
-  'Chemistry','Communications and New Media','Data Science and Applied AI',
+  'Chemistry','Communications and New Media','Data Science and Analytics','Data Science and Applied AI','Data Science and Economics','Environmental Studies',
   'Economics','English Language and Linguistics','English Literature',
   'Food Science and Technology','Geography','Global Studies','History',
   'Japanese Studies','Life Sciences','Malay Studies','Mathematics',

@@ -1,0 +1,10 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const ts=require('typescript');
+require.extensions['.ts']=(module,filename)=>{const js=ts.transpileModule(fs.readFileSync(filename,'utf8'),{fileName:filename,compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true,resolveJsonModule:true}}).outputText;module._compile(js,filename)};
+const {auditStructuredProgramme}=require('../degreeEngine.ts');
+const c=(code,units=4)=>({code,title:code,units,semester:'2025-1',status:'planned',suExercised:false});
+const get=(a,id)=>{const x=a.checks.find(x=>x.id===id);assert.ok(x,id);return x};
+for(const id of ['science-qf-primary','science-fst-primary','science-phs-primary','science-dsa-primary'])test(id+' exists for 2025, not 2020',()=>{assert.ok(auditStructuredProgramme(id,[],2025));assert.equal(auditStructuredProgramme(id,[],2020),undefined)});
+test('QF either probability alternative',()=>{const a=auditStructuredProgramme('science-qf-primary',[c('ST2131')],2025);assert.equal(get(a,'science:qf:probability').scheduled,1)});
+test('FST 15 core courses give 60 units',()=>{const d=require('../programmeDefinitions.json').programmes.find(d=>d.id==='science-fst-primary');const a=auditStructuredProgramme(d.id,d.core.map(x=>c(x)),2025);assert.equal(get(a,'science:fst:major').scheduled,60)});
+test('Pharmaceutical Science elective basket counts eight units',()=>{const a=auditStructuredProgramme('science-phs-primary',[c('PHS4201'),c('PR4204')],2025);assert.equal(get(a,'science:phs:electives').scheduled,8)});
+test('DSA honours project recognised as alternative',()=>{const a=auditStructuredProgramme('science-dsa-primary',[c('DSA4288',8)],2025);assert.equal(get(a,'science:dsa:advanced-pathway').scheduled,1)});

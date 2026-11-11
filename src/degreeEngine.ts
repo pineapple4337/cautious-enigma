@@ -3,6 +3,8 @@
  */
 import definitions from './programmeDefinitions.json'
 import fassData from './fassRecognisedCourses.json'
+import specialisedData from './specialisedBaskets.json'
+import scienceData from './scienceBaskets.json'
 import { ECONOMICS, ECONOMICS_SPECIALISATIONS } from './economicsData'
 import { CHS_PILLARS, PS_SINGAPORE, EC_MINOR_RECOGNISED, URBAN_CORE, URBAN_ELECTIVES } from './academicData'
 import { PS_SUBFIELDS } from './politicalScienceSubfields'
@@ -76,7 +78,7 @@ export function eligibleForRequirement(id: RuleId, code: string): boolean {
     const codes=(selector.codes??[]).includes(code)
     const basket=selector.namedBasket==='ps-recognised-non-ps'?PS_RECOGNISED_NON_PS:
       selector.namedBasket==='ps-singapore'?PS_SINGAPORE:
-      (fassData.lists as Record<string,string[]>)[selector.namedBasket??'']??[]
+      (baskets as Record<string,readonly string[]>)[selector.namedBasket??'']??[]
     if(!(prefix||prefixes||codes||basket.includes(code)))return false
     const level=Number(code.match(/^[A-Z]+(\d)/)?.[1]??0)
     if(selector.exactLevel!==undefined&&level!==selector.exactLevel)return false
@@ -87,8 +89,18 @@ export function eligibleForRequirement(id: RuleId, code: string): boolean {
   for(const programme of definitions.programmes){
     const rule=programme.requirements.find(r=>r.id===id)
     if(!rule)continue
+    if (rule.type === 'any_of_groups') {
+      type AlternativePart = { selector?: Parameters<typeof matchSelector>[0] }
+      type AlternativeBranch = { requirements: AlternativePart[] }
+      const alternatives: AlternativeBranch[] =
+        'alternatives' in rule && Array.isArray(rule.alternatives)
+          ? rule.alternatives as AlternativeBranch[]
+          : []
+      return alternatives.some(branch =>
+        branch.requirements.some(part => matchSelector(part.selector)))
+    }
     if(rule.type==='capped_total_units')return matchSelector(rule.selector)||
-      ((fassData.lists as Record<string,string[]>)[('recognisedBasket' in rule && typeof rule.recognisedBasket === 'string' ? rule.recognisedBasket : '')]??[]).includes(code)
+      ((baskets as Record<string,readonly string[]>)[('recognisedBasket' in rule && typeof rule.recognisedBasket === 'string' ? rule.recognisedBasket : '')]??[]).includes(code)
     if(rule.type==='basket_groups')return Object.values(PS_SUBFIELDS).some(list=>(list as readonly string[]).includes(code))
     return matchSelector(rule.selector)
   }
@@ -146,13 +158,16 @@ export function eligibleForRequirement(id: RuleId, code: string): boolean {
 
 
 type Selector = { prefix?: string; prefixes?: string[]; codes?: string[]; namedBasket?: string; exactLevel?: number; minLevel?: number; maxLevel?: number; excludeCodes?: string[] }
-type Rule = { id:string; label:string; type:'minimum_units'|'minimum_courses'|'maximum_units'|'maximum_courses'|'exact_units'|'basket_groups'|'capped_total_units'; target?:number; selector?:Selector; namedBasketGroup?:string; targetPerGroup?:number; detail?:string; manual?:boolean; recognisedBasket?:string; recognisedCap?:number; capSelector?:Selector }
+type AlternativeBranch = { label:string; requirements:{ selector:Selector; minimumCourses?:number; minimumUnits?:number }[] }
+type Rule = { alternatives?:AlternativeBranch[]; id:string; label:string; type:'minimum_units'|'minimum_courses'|'maximum_units'|'maximum_courses'|'exact_units'|'basket_groups'|'capped_total_units'|'single_track_units'|'any_of_groups'; target?:number; selector?:Selector; namedBasketGroup?:string; targetPerGroup?:number; detail?:string; manual?:boolean; recognisedBasket?:string; recognisedCap?:number; capSelector?:Selector; trackPrefixes?:string[]; exclusiveAllocationGroup?:string }
 type Definition = {id:string;name:string;kind:string;subject?:string;minCohort:number;maxCohort?:number;source:string;core?:string[];requirements:Rule[];notes?:string[]}
 
 const baskets: Record<string,readonly string[]> = {
   'ps-recognised-non-ps': PS_RECOGNISED_NON_PS,
   'ps-singapore': PS_SINGAPORE,
   ...fassData.lists,
+  ...specialisedData.lists,
+  ...scienceData.lists,
 }
 const groups: Record<string,Record<string,readonly string[]>> = {
   'ps-subfields': PS_SUBFIELDS,
@@ -187,7 +202,22 @@ export function auditStructuredProgramme(id:string, plan:PlannedCourse[], cohort
   if(!definition)return undefined
   const checks:Check[]=[]
   for(const rule of definition.requirements){
-    if(rule.type==='capped_total_units'){
+    if(rule.type==='any_of_groups'){
+      const branches=(rule.alternatives??[]).map(branch=>{
+        const matched=branch.requirements.map(part=>{
+          const selected=plan.filter(c=>matches(c.code,part.selector))
+          const completed=selected.filter(c=>c.status==='completed')
+          const units=(items:PlannedCourse[])=>items.reduce((n,c)=>n+c.units,0)
+          return {selected, completed, scheduledPass:selected.length>=(part.minimumCourses??0)&&units(selected)>=(part.minimumUnits??0), completedPass:completed.length>=(part.minimumCourses??0)&&units(completed)>=(part.minimumUnits??0)}
+        })
+        return {label:branch.label, matched, scheduledPass:matched.every(x=>x.scheduledPass),completedPass:matched.every(x=>x.completedPass)}
+      })
+      const scheduledPass=branches.some(b=>b.scheduledPass)
+      const completedPass=branches.some(b=>b.completedPass)
+      const winning=branches.find(b=>b.completedPass)||branches.find(b=>b.scheduledPass)||branches[0]
+      const courses=[...new Map((winning?.matched??[]).flatMap(x=>x.selected).map(c=>[c.code,c])).values()]
+      checks.push({id:rule.id,label:rule.label,target:1,unit:'courses',courses,completed:completedPass?1:0,scheduled:scheduledPass?1:0,detail:(rule.detail??'')+` Alternatives: ${branches.map(b=>b.label).join(' OR ')}`})
+    }else if(rule.type==='capped_total_units'){
       const ordinary=plan.filter(c=>rule.selector && matches(c.code,rule.selector))
       const recognised=plan.filter(c=>!ordinary.some(x=>x.code===c.code) && (baskets[rule.recognisedBasket??'']??[]).includes(c.code))
       const cap=rule.recognisedCap??0
@@ -207,6 +237,13 @@ export function auditStructuredProgramme(id:string, plan:PlannedCourse[], cohort
         detail:rule.detail})
       checks.push({id:`${rule.id}:recognised-cap`,label:'Recognised-course units (maximum)',target:cap,unit:'units',maximum:true,
         courses:recognised,completed:unitSum(recognised.filter(c=>c.status==='completed')),scheduled:unitSum(recognised)})
+    }else if(rule.type==='single_track_units'){
+      const prefixes=rule.trackPrefixes??[]
+      const trackTotals=prefixes.map(prefix=>({prefix,courses:plan.filter(c=>c.code.startsWith(prefix))}))
+      const best=trackTotals.sort((a,b)=>b.courses.reduce((n,c)=>n+c.units,0)-a.courses.reduce((n,c)=>n+c.units,0))[0]
+      const sum=(courses:PlannedCourse[])=>courses.reduce((n,c)=>n+c.units,0)
+      const courses=best?.courses??[]
+      checks.push({id:rule.id,label:rule.label,target:rule.target??0,unit:'units',courses,completed:sum(courses.filter(c=>c.status==='completed')),scheduled:sum(courses),detail:(rule.detail??'')+' Only one language track is counted.'})
     }else if(rule.type==='basket_groups'){
       for(const [name,codes] of Object.entries(groups[rule.namedBasketGroup??'']??{})){
         const selected=plan.filter(c=>codes.includes(c.code))
@@ -214,6 +251,38 @@ export function auditStructuredProgramme(id:string, plan:PlannedCourse[], cohort
           completed:selected.some(c=>c.status==='completed')?1:0,scheduled:selected.length?1:0})
       }
     }else checks.push(makeCheck(rule,plan))
+  }
+  // Verify that separate elective slots can be filled by distinct courses.
+  // This is a bipartite matching problem with multiple slots per basket.
+  const allocationGroups=new Map<string,Rule[]>()
+  for(const rule of definition.requirements){
+    if(!rule.exclusiveAllocationGroup)continue
+    const group=allocationGroups.get(rule.exclusiveAllocationGroup)??[]
+    group.push(rule);allocationGroups.set(rule.exclusiveAllocationGroup,group)
+  }
+  for(const [groupId,groupRules] of allocationGroups){
+    const slots=groupRules.flatMap(rule=>Array.from({length:rule.target??0},()=>rule))
+    const allocation=(completedOnly:boolean)=>{
+      const eligible=completedOnly?plan.filter(c=>c.status==='completed'):plan
+      const assignment=new Map<string,number>()
+      const visit=(slotIndex:number,seen:Set<string>):boolean=>{
+        for(const course of eligible){
+          if(!slots[slotIndex].selector||!matches(course.code,slots[slotIndex].selector!))continue
+          if(seen.has(course.code))continue
+          seen.add(course.code)
+          const old=assignment.get(course.code)
+          if(old===undefined||visit(old,seen)){assignment.set(course.code,slotIndex);return true}
+        }
+        return false
+      }
+      let filled=0
+      for(let i=0;i<slots.length;i++)if(visit(i,new Set()))filled++
+      return {filled,courses:eligible.filter(c=>assignment.has(c.code))}
+    }
+    const scheduled=allocation(false),completed=allocation(true)
+    checks.push({id:`${groupId}:distinct`,label:'Distinct courses across elective baskets',target:slots.length,
+      unit:'courses',scheduled:scheduled.filled,completed:completed.filled,courses:scheduled.courses,
+      detail:'Each elective course can occupy only one separate basket slot. It may still count towards the overall programme total and level requirements.'})
   }
   for(const code of definition.core??[]){
     const found=plan.filter(c=>c.code===code)

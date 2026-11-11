@@ -162,3 +162,39 @@ test('History level-4000 exact-unit rule remains intact after expansion',()=>{
  assert.ok(exact)
  assert.equal(exact.scheduled,20)
 })
+test('Psychology advanced groups have separate checks',()=>{
+  const audit=auditStructuredProgramme('pl-primary',[course('PL4201'),course('PL4205')],2025)
+  assert.equal(check(audit,'pl:capstone').scheduled,4)
+  assert.equal(check(audit,'pl:bcd').scheduled,4)
+  assert.equal(check(audit,'pl:asa').scheduled,0)
+})
+test('Southeast Asian Studies requires a single language track',()=>{
+  const mixed=auditStructuredProgramme('se-primary',[course('LAB1201'),course('LAT1201'),course('LAV1201')],2025)
+  assert.equal(check(mixed,'se:language').scheduled,4)
+  const same=auditStructuredProgramme('se-primary',[course('LAB1201'),course('LAB2201'),course('LAB3201')],2025)
+  assert.equal(check(same,'se:language').scheduled,12)
+})
+test('Japanese language courses contribute to JS total',()=>{
+  const audit=auditStructuredProgramme('js-primary',[course('JS1101E'),course('LAJ1201'),course('LAJ2201')],2025)
+  assert.equal(check(audit,'js:total').scheduled,12)
+})
+test('Theatre strands count independently',()=>{
+  const audit=auditStructuredProgramme('ts-primary',[course('TS2221'),course('TS2234'),course('TS3103','planned',8)],2025)
+  assert.equal(check(audit,'ts:framing').scheduled,4)
+  assert.equal(check(audit,'ts:cultures').scheduled,4)
+  assert.equal(check(audit,'ts:research').scheduled,8)
+})
+test('Social Work CHS project courses are not counted in 60 major units',()=>{
+  const audit=auditStructuredProgramme('sw-primary',[course('SW1101E'),course('SW3103C'),course('SW3104B')],2025)
+  assert.equal(check(audit,'sw:total').scheduled,4)
+  assert.equal(check(audit,'sw:chs-project').scheduled,8)
+})
+test('CNM CHS project is separate from major units',()=>{
+  const audit=auditStructuredProgramme('nm-primary',[course('NM1101E'),course('NM3550C','planned',8)],2025)
+  assert.equal(check(audit,'nm:total').scheduled,4)
+  assert.equal(check(audit,'nm:chs-project').scheduled,8)
+})
+test('Global Studies advanced methodology is checked',()=>{
+  const audit=auditStructuredProgramme('gl-primary',[course('PS3257')],2025)
+  assert.equal(check(audit,'gl:advanced-methods').scheduled,1)
+})

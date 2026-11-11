@@ -1528,15 +1528,78 @@
         {
           "id": "js:total",
           "label": "JS eligible units",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 60,
           "selector": {
-            "prefix": "JS"
+            "prefixes": [
+              "JS",
+              "LAJ"
+            ],
+            "excludeCodes": [
+              "LAJ4203",
+              "LAJ4205"
+            ]
+          },
+          "recognisedBasket": "js-recognised",
+          "recognisedCap": 8
+        },
+        {
+          "id": "js:4000",
+          "label": "Level-4000+ JS units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "JS",
+            "minLevel": 4
+          }
+        },
+        {
+          "id": "js:required:LAJ1201",
+          "label": "Required language course LAJ1201",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LAJ1201"
+            ]
+          }
+        },
+        {
+          "id": "js:required:LAJ2201",
+          "label": "Required language course LAJ2201",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LAJ2201"
+            ]
+          }
+        },
+        {
+          "id": "js:required:LAJ2202",
+          "label": "Required language course LAJ2202",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LAJ2202"
+            ]
+          }
+        },
+        {
+          "id": "js:required:LAJ2203",
+          "label": "Required language course LAJ2203",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LAJ2203"
+            ]
           }
         },
         {
           "id": "js:languageadvanced",
-          "label": "One advanced Japanese language course",
+          "label": "Advanced Japanese language option",
           "type": "minimum_courses",
           "target": 1,
           "selector": {
@@ -1550,23 +1613,30 @@
           }
         },
         {
-          "id": "js:3000",
-          "label": "Level-3000+ JS units",
-          "type": "minimum_units",
-          "target": 36,
+          "id": "js:5000cap",
+          "label": "JS level-5000 without approval",
+          "type": "maximum_courses",
+          "target": 0,
           "selector": {
             "prefix": "JS",
-            "minLevel": 3
+            "exactLevel": 5
           }
         },
         {
-          "id": "js:4000",
-          "label": "Level-4000+ JS units",
+          "id": "js:3000",
+          "label": "JS / LAJ level-3000+ units",
           "type": "minimum_units",
-          "target": 20,
+          "target": 36,
           "selector": {
-            "prefix": "JS",
-            "minLevel": 4
+            "prefixes": [
+              "JS",
+              "LAJ"
+            ],
+            "minLevel": 3,
+            "excludeCodes": [
+              "LAJ4203",
+              "LAJ4205"
+            ]
           }
         }
       ],
@@ -1595,11 +1665,20 @@
         {
           "id": "js:total",
           "label": "JS eligible units",
-          "type": "minimum_units",
+          "type": "capped_total_units",
           "target": 40,
           "selector": {
-            "prefix": "JS"
-          }
+            "prefixes": [
+              "JS",
+              "LAJ"
+            ],
+            "excludeCodes": [
+              "LAJ4203",
+              "LAJ4205"
+            ]
+          },
+          "recognisedBasket": "js-recognised",
+          "recognisedCap": 8
         },
         {
           "id": "js-second:3000",
@@ -1609,6 +1688,39 @@
           "selector": {
             "prefix": "JS",
             "minLevel": 3
+          }
+        },
+        {
+          "id": "js-second:required:LAJ1201",
+          "label": "Required language course LAJ1201",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LAJ1201"
+            ]
+          }
+        },
+        {
+          "id": "js-second:required:LAJ2201",
+          "label": "Required language course LAJ2201",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LAJ2201"
+            ]
+          }
+        },
+        {
+          "id": "js-second:languagecap",
+          "label": "LAJ level-1000–3000 maximum 16 units",
+          "type": "maximum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "LAJ",
+            "minLevel": 1,
+            "maxLevel": 3
           }
         }
       ],
@@ -1775,15 +1887,6 @@
       ],
       "requirements": [
         {
-          "id": "se:total",
-          "label": "SE eligible units",
-          "type": "minimum_units",
-          "target": 60,
-          "selector": {
-            "prefix": "SE"
-          }
-        },
-        {
           "id": "se:3000",
           "label": "Level-3000+ SE units",
           "type": "minimum_units",
@@ -1801,6 +1904,51 @@
           "selector": {
             "prefix": "SE",
             "minLevel": 4
+          }
+        },
+        {
+          "id": "se:language",
+          "label": "Southeast Asian language units (one track)",
+          "type": "single_track_units",
+          "target": 12,
+          "selector": {
+            "prefixes": [
+              "LAB",
+              "LAM",
+              "LAT",
+              "LAV"
+            ]
+          },
+          "trackPrefixes": [
+            "LAB",
+            "LAM",
+            "LAT",
+            "LAV"
+          ]
+        },
+        {
+          "id": "se:total",
+          "label": "SE / SE-recognised / language units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefixes": [
+              "SE",
+              "LAB",
+              "LAM",
+              "LAT",
+              "LAV"
+            ]
+          }
+        },
+        {
+          "id": "se:5000cap",
+          "label": "SE level-5000 maximum two courses",
+          "type": "maximum_courses",
+          "target": 2,
+          "selector": {
+            "prefix": "SE",
+            "exactLevel": 5
           }
         }
       ],
@@ -1871,7 +2019,10 @@
           "type": "minimum_units",
           "target": 60,
           "selector": {
-            "prefix": "NM"
+            "prefix": "NM",
+            "excludeCodes": [
+              "NM3550C"
+            ]
           }
         },
         {
@@ -1921,12 +2072,26 @@
             "prefix": "NM",
             "minLevel": 4
           }
+        },
+        {
+          "id": "nm:chs-project",
+          "label": "CHS project internship (8 units)",
+          "type": "minimum_units",
+          "target": 8,
+          "selector": {
+            "codes": [
+              "NM3550C",
+              "TR3202S",
+              "ETP3201S"
+            ]
+          }
         }
       ],
       "notes": [
         "Internship is 8 units IN ADDITION to 60 NM major units; alternatives require combined-unit verification.",
         "This audit implements documented core/numerical checks but is not a complete graduation certification.",
-        "This audit implements documented core/numerical checks but is not a complete graduation certification."
+        "This audit implements documented core/numerical checks but is not a complete graduation certification.",
+        "The CHS project requirement is shown separately and must not be added to the 60-unit major total."
       ],
       "implementationStatus": "partial"
     },
@@ -2029,6 +2194,80 @@
             "prefix": "PL",
             "minLevel": 4
           }
+        },
+        {
+          "id": "pl:capstone",
+          "label": "Capstone group (4 units)",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "namedBasket": "pl-capstone"
+          },
+          "manual": false,
+          "detail": null
+        },
+        {
+          "id": "pl:bcd",
+          "label": "Biological, Cognitive and Developmental group (4 units)",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "namedBasket": "pl-bcd"
+          },
+          "manual": false,
+          "detail": null
+        },
+        {
+          "id": "pl:asa",
+          "label": "Abnormal/Clinical, Social and Applied group (4 units)",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "namedBasket": "pl-asa"
+          },
+          "manual": true,
+          "detail": "Course basket based on departmental course listings; check current course group assignment."
+        },
+        {
+          "id": "pl:extra2000",
+          "label": "Additional level-2000/3000 PL units (excluding core and lab)",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "prefix": "PL",
+            "minLevel": 2,
+            "maxLevel": 3,
+            "excludeCodes": [
+              "PL2131",
+              "PL2132",
+              "PL3102",
+              "PL3103",
+              "PL3104",
+              "PL3105",
+              "PL3106",
+              "PL3231",
+              "PL3280",
+              "PL3281",
+              "PL3282",
+              "PL3283",
+              "PL3284",
+              "PL3285",
+              "PL3286",
+              "PL3287",
+              "PL3288",
+              "PL3289"
+            ]
+          }
+        },
+        {
+          "id": "pl:5000cap",
+          "label": "PL level-5000 maximum 4 units",
+          "type": "maximum_units",
+          "target": 4,
+          "selector": {
+            "prefix": "PL",
+            "exactLevel": 5
+          }
         }
       ],
       "notes": [
@@ -2095,6 +2334,37 @@
             "prefix": "GL",
             "minLevel": 4
           }
+        },
+        {
+          "id": "gl:advanced-methods",
+          "label": "Advanced methodology course",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "namedBasket": "gl-advanced-methods"
+          }
+        },
+        {
+          "id": "gl:theme",
+          "label": "Selected Global Studies theme (12 units)",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "codes": []
+          },
+          "manual": true,
+          "detail": "Choose one of four themes; course-to-theme mapping requires the official recognised-course list. This is not automatically verified."
+        },
+        {
+          "id": "gl:language",
+          "label": "Language pathway (outside major units)",
+          "type": "minimum_units",
+          "target": 0,
+          "selector": {
+            "codes": []
+          },
+          "manual": true,
+          "detail": "For the 2025 cohort, language courses are not part of the 60-unit GL major total; see departmental curriculum."
         }
       ],
       "notes": [
@@ -2128,7 +2398,11 @@
           "type": "minimum_units",
           "target": 60,
           "selector": {
-            "prefix": "SW"
+            "prefix": "SW",
+            "excludeCodes": [
+              "SW3103C",
+              "SW3104B"
+            ]
           }
         },
         {
@@ -2185,11 +2459,24 @@
               "SW3104B"
             ]
           }
+        },
+        {
+          "id": "sw:chs-project",
+          "label": "CHS project: SW3103C and SW3104B (8 units)",
+          "type": "minimum_units",
+          "target": 8,
+          "selector": {
+            "codes": [
+              "SW3103C",
+              "SW3104B"
+            ]
+          }
         }
       ],
       "notes": [
         "SW3103C and SW3104B count to CHS project requirement, not the 60-unit SW major total.",
-        "Partial audit: does not certify full graduation eligibility."
+        "Partial audit: does not certify full graduation eligibility.",
+        "The CHS project requirement is shown separately and must not be added to the 60-unit major total."
       ],
       "implementationStatus": "partial"
     },
@@ -2264,15 +2551,6 @@
       ],
       "requirements": [
         {
-          "id": "ts:total",
-          "label": "TS eligible units",
-          "type": "minimum_units",
-          "target": 60,
-          "selector": {
-            "prefix": "TS"
-          }
-        },
-        {
           "id": "ts:3000",
           "label": "Level-3000+ TS units",
           "type": "minimum_units",
@@ -2283,17 +2561,66 @@
           }
         },
         {
+          "id": "ts:framing",
+          "label": "Framing Histories strand (minimum 4 units)",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "namedBasket": "ts-framing"
+          }
+        },
+        {
+          "id": "ts:cultures",
+          "label": "Cultures in Practice strand (minimum 4 units)",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "namedBasket": "ts-cultures"
+          }
+        },
+        {
+          "id": "ts:research",
+          "label": "Researching Performance strand (minimum 4 units)",
+          "type": "minimum_units",
+          "target": 4,
+          "selector": {
+            "namedBasket": "ts-research"
+          }
+        },
+        {
+          "id": "ts:total",
+          "label": "TS and TS-recognised major units",
+          "type": "capped_total_units",
+          "target": 60,
+          "selector": {
+            "prefix": "TS"
+          },
+          "recognisedBasket": "ts-recognised",
+          "recognisedCap": 8
+        },
+        {
           "id": "ts:4000",
-          "label": "Level-4000+ TS units excluding thesis/ISM",
+          "label": "Level-4000+ qualifying coursework (excluding thesis/ISC)",
           "type": "minimum_units",
           "target": 12,
           "selector": {
             "prefix": "TS",
             "minLevel": 4,
+            "maxLevel": 4,
             "excludeCodes": [
               "TS4401",
               "TS4660"
             ]
+          }
+        },
+        {
+          "id": "ts:5000-cap",
+          "label": "Level-5000 TS courses without approval",
+          "type": "maximum_units",
+          "target": 0,
+          "selector": {
+            "prefix": "TS",
+            "exactLevel": 5
           }
         }
       ],
@@ -2302,6 +2629,2189 @@
         "Partial audit: does not certify full graduation eligibility."
       ],
       "implementationStatus": "partial"
+    },
+    {
+      "id": "science-cm-primary",
+      "name": "Chemistry — Primary Major",
+      "subject": "Chemistry",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://chemistry.nus.edu.sg/education/faqs/",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "CM1102",
+        "CM2112",
+        "CM2122",
+        "CM2133",
+        "CM2143",
+        "CM3111",
+        "CM3121",
+        "CM3131",
+        "CM3141",
+        "CM3191",
+        "CM3192"
+      ],
+      "requirements": [
+        {
+          "id": "science:cm:total",
+          "label": "Chemistry major units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "CM"
+          }
+        },
+        {
+          "id": "science:cm:electives",
+          "label": "Additional Chemistry elective units (excluding compulsory courses)",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "CM",
+            "minLevel": 3,
+            "excludeCodes": [
+              "CM1102",
+              "CM2112",
+              "CM2122",
+              "CM2133",
+              "CM2143",
+              "CM3111",
+              "CM3121",
+              "CM3131",
+              "CM3141",
+              "CM3191",
+              "CM3192"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "The full elective eligibility and specialisation conditions require further encoding."
+      ]
+    },
+    {
+      "id": "science-lsm-primary",
+      "name": "Life Sciences — Primary Major",
+      "subject": "Life Sciences",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.dbs.nus.edu.sg/wp-content/uploads/sites/7/2024/07/lifesciencesAY2122.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "LSM1111",
+        "LSM2105",
+        "LSM2106",
+        "LSM2107"
+      ],
+      "requirements": [
+        {
+          "id": "science:lsm:lab",
+          "label": "Laboratory techniques (one variant)",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LSM2191",
+              "LSM2191A",
+              "LSM2191B"
+            ]
+          }
+        },
+        {
+          "id": "science:lsm:total",
+          "label": "Life Sciences major units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "LSM",
+            "excludeCodes": [
+              "LSM2289",
+              "LSM2289R",
+              "LSM3289",
+              "LSM3289R"
+            ]
+          }
+        },
+        {
+          "id": "science:lsm:advanced",
+          "label": "Advanced LSM elective units (level 4000+)",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "LSM",
+            "minLevel": 4
+          }
+        },
+        {
+          "id": "science:lsm:research",
+          "label": "Research experience (course-coded options)",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LSM4288M",
+              "LSM4288E",
+              "LSM4288X",
+              "LSM2288",
+              "LSM2288R",
+              "LSM3288",
+              "LSM3288R"
+            ]
+          },
+          "detail": "Other eligible research placements require manual confirmation."
+        }
+      ],
+      "notes": [
+        "The 40-unit elective basket and at-most-12 LSM22xx restriction require allocation logic."
+      ]
+    },
+    {
+      "id": "science-ma-primary",
+      "name": "Mathematics — Primary Major",
+      "subject": "Mathematics",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.math.nus.edu.sg/wp-content/uploads/sites/4/2025/10/MA_2122_14102025.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "MA2001",
+        "MA2002",
+        "MA2104"
+      ],
+      "requirements": [
+        {
+          "id": "science:ma:total",
+          "label": "Mathematics major units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "MA"
+          }
+        },
+        {
+          "id": "science:ma:discrete",
+          "label": "Discrete mathematics",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA1100",
+              "MA1100T"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:linear2",
+          "label": "Linear Algebra II",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2101",
+              "MA2101S"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:analysis",
+          "label": "Mathematical Analysis I",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2108",
+              "MA2108S"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:probability",
+          "label": "Probability",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2116",
+              "MA2116T",
+              "MA2216",
+              "ST2131"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:capstone",
+          "label": "Mathematics capstone",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA4198"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "The MA22xx/32xx/42xx and higher-level basket restrictions are not yet completely encoded."
+      ]
+    },
+    {
+      "id": "science-pc-primary",
+      "name": "Physics — Primary Major",
+      "subject": "Physics",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.physics.nus.edu.sg/student/major-in-physics/",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "PC1101",
+        "PC2031",
+        "PC2032",
+        "PC2130",
+        "PC2135",
+        "PC2174A",
+        "PC2193",
+        "PC3193",
+        "PC3274A"
+      ],
+      "requirements": [
+        {
+          "id": "science:pc:total",
+          "label": "Physics major units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "PC"
+          }
+        },
+        {
+          "id": "science:pc:electives",
+          "label": "Physics elective basket units",
+          "type": "minimum_units",
+          "target": 24,
+          "selector": {
+            "namedBasket": "physics-electives"
+          }
+        },
+        {
+          "id": "science:pc:experience",
+          "label": "Physics research/internship experience (course-coded options)",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "PC3288",
+              "PC4288"
+            ]
+          },
+          "detail": "UPIP/NOC and variants are also permitted, but not yet machine-checkable."
+        }
+      ],
+      "notes": [
+        "The MA2002 substitution for PC2174A and internship alternatives need separate validation."
+      ]
+    },
+    {
+      "id": "science-st-primary",
+      "name": "Statistics — Primary Major",
+      "subject": "Statistics",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.stat.nus.edu.sg/wp-content/uploads/sites/8/2024/07/170624-Major-Statistics-Programme-Requirements-AY21-22-and-after.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "ST2132",
+        "ST2137",
+        "MA2001",
+        "MA2002",
+        "ST3131"
+      ],
+      "requirements": [
+        {
+          "id": "science:st:total",
+          "label": "Statistics major units (ST-coded baseline)",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "prefix": "ST"
+          },
+          "detail": "This baseline omits qualifying MA courses and therefore is not a full total."
+        },
+        {
+          "id": "science:st:intro",
+          "label": "Introductory Statistics",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ST1131"
+            ]
+          }
+        },
+        {
+          "id": "science:st:prob",
+          "label": "Probability",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ST2131",
+              "MA2116",
+              "MA2216"
+            ]
+          }
+        },
+        {
+          "id": "science:st:calculus",
+          "label": "Advanced calculus option",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2311",
+              "MA2104"
+            ]
+          }
+        },
+        {
+          "id": "science:st:advanced",
+          "label": "Level-4000 Statistics units",
+          "type": "minimum_units",
+          "target": 16,
+          "selector": {
+            "prefix": "ST",
+            "minLevel": 4,
+            "excludeCodes": [
+              "ST4288"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "ST4288 honours-project alternative and experiential requirement need option-aware allocation."
+      ]
+    },
+    {
+      "id": "science-cm-second",
+      "name": "Chemistry — Second Major",
+      "subject": "Chemistry",
+      "kind": "second",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://chemistry.nus.edu.sg/wp-content/uploads/sites/3/2021/02/2nd-major_CHS-For-cohort-2021_22-onwards.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "CM1102",
+        "CM2112",
+        "CM2122",
+        "CM2133",
+        "CM2143",
+        "CM3111",
+        "CM3121",
+        "CM3131",
+        "CM3141"
+      ],
+      "requirements": [
+        {
+          "id": "science:cm:second:lab",
+          "label": "Choose one chemistry lab",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "CM3191",
+              "CM3192"
+            ]
+          }
+        },
+        {
+          "id": "science:cm:second:total",
+          "label": "Second-major eligible chemistry units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "codes": [
+              "CM1102",
+              "CM2112",
+              "CM2122",
+              "CM2133",
+              "CM2143",
+              "CM3111",
+              "CM3121",
+              "CM3131",
+              "CM3141",
+              "CM3191",
+              "CM3192"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Nine compulsory courses plus one of CM3191/CM3192; ten 4-unit courses total."
+      ]
+    },
+    {
+      "id": "science-cm-minor",
+      "name": "Chemistry — Minor",
+      "subject": "Chemistry",
+      "kind": "minor",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://chemistry.nus.edu.sg/education/faqs/",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "CM1102",
+        "CM2112",
+        "CM2122",
+        "CM2133",
+        "CM2143"
+      ],
+      "requirements": [
+        {
+          "id": "science:cm:minor:total",
+          "label": "Chemistry minor units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "codes": [
+              "CM1102",
+              "CM2112",
+              "CM2122",
+              "CM2133",
+              "CM2143"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Five compulsory Chemistry courses per departmental FAQ."
+      ]
+    },
+    {
+      "id": "science-lsm-second",
+      "name": "Life Sciences — Second Major",
+      "subject": "Life Sciences",
+      "kind": "second",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.dbs.nus.edu.sg/lifesciences/",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [],
+      "requirements": [
+        {
+          "id": "science:lsm:second:essential",
+          "label": "Life Sciences essentials",
+          "type": "minimum_courses",
+          "target": 3,
+          "selector": {
+            "codes": [
+              "LSM2105",
+              "LSM2106",
+              "LSM2107"
+            ]
+          }
+        },
+        {
+          "id": "science:lsm:second:total",
+          "label": "Life Sciences second-major candidate units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "LSM"
+          }
+        },
+        {
+          "id": "science:lsm:second:advanced",
+          "label": "Advanced Life Sciences candidate units",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "LSM",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "Core and elective allocation rules require cohort PDF extraction."
+      ]
+    },
+    {
+      "id": "science-lsm-minor",
+      "name": "Life Sciences — Minor",
+      "subject": "Life Sciences",
+      "kind": "minor",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.dbs.nus.edu.sg/lifesciences/",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [],
+      "requirements": [
+        {
+          "id": "science:lsm:minor:essential",
+          "label": "Life Sciences essentials",
+          "type": "minimum_courses",
+          "target": 3,
+          "selector": {
+            "codes": [
+              "LSM2105",
+              "LSM2106",
+              "LSM2107"
+            ]
+          }
+        },
+        {
+          "id": "science:lsm:minor:total",
+          "label": "Life Sciences minor candidate units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefix": "LSM"
+          }
+        }
+      ],
+      "notes": [
+        "Exact minor elective restrictions and permissible alternatives remain to be encoded from cohort PDF."
+      ]
+    },
+    {
+      "id": "science-ma-second",
+      "name": "Mathematics — Second Major",
+      "subject": "Mathematics",
+      "kind": "second",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.math.nus.edu.sg/wp-content/uploads/sites/4/2025/10/MA2_2122_14102025.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [],
+      "requirements": [
+        {
+          "id": "science:ma:second:discrete",
+          "label": "Discrete mathematics",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA1100",
+              "MA1100T",
+              "CS1231",
+              "CS1231S"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:second:foundations",
+          "label": "8 units from MA15xx/MA20xx/MA22xx",
+          "type": "minimum_units",
+          "target": 8,
+          "selector": {
+            "prefix": "MA",
+            "minLevel": 1,
+            "maxLevel": 2,
+            "excludeCodes": [
+              "MA2288",
+              "MA2289"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:second:linear",
+          "label": "Linear Algebra II",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2101",
+              "MA2101S"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:second:analysis",
+          "label": "Mathematical Analysis I",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2108",
+              "MA2108S"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:second:multivariable",
+          "label": "Multivariable calculus / advanced methods",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2104",
+              "MA2311"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:second:probability",
+          "label": "Probability alternative",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2116",
+              "MA2116T",
+              "MA2216",
+              "ST2131",
+              "ST2334"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:second:advanced",
+          "label": "Three approved advanced mathematics electives",
+          "type": "minimum_courses",
+          "target": 3,
+          "selector": {
+            "prefix": "MA",
+            "minLevel": 3
+          }
+        },
+        {
+          "id": "science:ma:second:total",
+          "label": "Mathematics second-major candidate units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefixes": [
+              "MA",
+              "ST"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Advanced electives additionally admit specified ST, ME and PC courses; programme total needs allocation of overlapping baskets."
+      ]
+    },
+    {
+      "id": "science-ma-minor",
+      "name": "Mathematics — Minor",
+      "subject": "Mathematics",
+      "kind": "minor",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.math.nus.edu.sg/ug/majmin/minors/mamin/",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [],
+      "requirements": [
+        {
+          "id": "science:ma:minor:discrete",
+          "label": "Discrete mathematics",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA1100",
+              "MA1100T",
+              "CS1231",
+              "CS1231S"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:minor:total",
+          "label": "Mathematics minor candidate units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefixes": [
+              "MA",
+              "ST"
+            ]
+          }
+        },
+        {
+          "id": "science:ma:minor:advanced",
+          "label": "Advanced mathematics course",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "prefix": "MA",
+            "minLevel": 3
+          }
+        }
+      ],
+      "notes": [
+        "Detailed minor baskets must follow the AY2021/22+ departmental PDF; prefix-only total is not a full audit."
+      ]
+    },
+    {
+      "id": "science-pc-second",
+      "name": "Physics — Second Major",
+      "subject": "Physics",
+      "kind": "second",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.physics.nus.edu.sg/student/second-major-in-physics/",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "PC1101",
+        "PC2174A",
+        "PC2193"
+      ],
+      "requirements": [
+        {
+          "id": "science:pc:second:choices",
+          "label": "Two foundational Physics choices",
+          "type": "minimum_courses",
+          "target": 2,
+          "selector": {
+            "codes": [
+              "PC2031",
+              "PC2032",
+              "PC2130",
+              "PC2135"
+            ]
+          }
+        },
+        {
+          "id": "science:pc:second:electives",
+          "label": "Five approved Physics electives",
+          "type": "minimum_courses",
+          "target": 5,
+          "selector": {
+            "prefix": "PC",
+            "minLevel": 2,
+            "excludeCodes": [
+              "PC1101",
+              "PC2174A",
+              "PC2193",
+              "PC2031",
+              "PC2032",
+              "PC2130",
+              "PC2135",
+              "PC3289",
+              "PC4288"
+            ]
+          }
+        },
+        {
+          "id": "science:pc:second:advanced",
+          "label": "At least 12 units of approved level-3000+ electives",
+          "type": "minimum_units",
+          "target": 12,
+          "selector": {
+            "prefix": "PC",
+            "minLevel": 3,
+            "excludeCodes": [
+              "PC3289",
+              "PC4288",
+              "PC3288"
+            ]
+          }
+        },
+        {
+          "id": "science:pc:second:total",
+          "label": "Physics second-major candidate units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefix": "PC",
+            "excludeCodes": [
+              "PC3289",
+              "PC4288"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Electives restricted to PC21xx/PC31xx/PC32xx/PC3991/PC42xx/PC4991; generic prefix selector is a provisional superset.",
+        "Maths and engineering substitutions and the UROPS cap still require dedicated allocation rules."
+      ]
+    },
+    {
+      "id": "science-pc-minor",
+      "name": "Physics — Minor",
+      "subject": "Physics",
+      "kind": "minor",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.physics.nus.edu.sg/student/minor-in-physics/",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "PC1101",
+        "PC2174A",
+        "PC2193"
+      ],
+      "requirements": [
+        {
+          "id": "science:pc:minor:choices",
+          "label": "Two foundational Physics choices",
+          "type": "minimum_courses",
+          "target": 2,
+          "selector": {
+            "codes": [
+              "PC2031",
+              "PC2032",
+              "PC2130",
+              "PC2135"
+            ]
+          }
+        },
+        {
+          "id": "science:pc:minor:total",
+          "label": "Physics minor eligible units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "codes": [
+              "PC1101",
+              "PC2174A",
+              "PC2193",
+              "PC2031",
+              "PC2032",
+              "PC2130",
+              "PC2135"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Approved engineering and mathematics substitutions are not automatically applied."
+      ]
+    },
+    {
+      "id": "science-st-second",
+      "name": "Statistics — Second Major",
+      "subject": "Statistics",
+      "kind": "second",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.stat.nus.edu.sg/wp-content/uploads/sites/8/2025/10/18062025-ST2MJ-AY21-22-after_22-Aug-2023.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "ST1131",
+        "ST2132"
+      ],
+      "requirements": [
+        {
+          "id": "science:st:second:linear",
+          "label": "Linear algebra alternative",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2001",
+              "MA1508E",
+              "MA1513",
+              "MA1522"
+            ]
+          }
+        },
+        {
+          "id": "science:st:second:calc",
+          "label": "Calculus alternative",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2002",
+              "MA1312",
+              "MA1505",
+              "MA1521",
+              "MA1511",
+              "MA1512"
+            ]
+          }
+        },
+        {
+          "id": "science:st:second:advancedcalc",
+          "label": "Advanced calculus",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2311",
+              "MA2104"
+            ]
+          }
+        },
+        {
+          "id": "science:st:second:prob",
+          "label": "Probability alternative",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ST2131",
+              "MA2116",
+              "MA2216",
+              "ST2334"
+            ]
+          }
+        },
+        {
+          "id": "science:st:second:computing",
+          "label": "Statistical computing or advanced elective",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ST2137"
+            ]
+          }
+        },
+        {
+          "id": "science:st:second:advanced",
+          "label": "At least three advanced Statistics courses",
+          "type": "minimum_courses",
+          "target": 3,
+          "selector": {
+            "prefix": "ST",
+            "minLevel": 3,
+            "excludeCodes": [
+              "ST3288",
+              "ST3289",
+              "ST4288"
+            ]
+          }
+        },
+        {
+          "id": "science:st:second:total",
+          "label": "Statistics second-major candidate units",
+          "type": "minimum_units",
+          "target": 40,
+          "selector": {
+            "prefixes": [
+              "ST",
+              "MA"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Some alternative groups admit ST32xx/ST42xx; engineering 2-unit combinations and advanced elective exclusions need allocation checks."
+      ]
+    },
+    {
+      "id": "science-st-minor",
+      "name": "Statistics — Minor",
+      "subject": "Statistics",
+      "kind": "minor",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.stat.nus.edu.sg/wp-content/uploads/sites/8/2026/02/STMIN-AY21-22-after_updated-Feb-2026.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "ST1131"
+      ],
+      "requirements": [
+        {
+          "id": "science:st:minor:calc",
+          "label": "Calculus option",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2002",
+              "MA1312",
+              "MA1505",
+              "MA1521"
+            ]
+          }
+        },
+        {
+          "id": "science:st:minor:prob",
+          "label": "Probability option",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ST2131",
+              "MA2116",
+              "MA2216",
+              "ST2334"
+            ]
+          }
+        },
+        {
+          "id": "science:st:minor:methods",
+          "label": "Statistics methods option",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ST2132",
+              "ST2137"
+            ]
+          }
+        },
+        {
+          "id": "science:st:minor:advanced",
+          "label": "Level-3000 Statistics elective",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "prefix": "ST",
+            "exactLevel": 3,
+            "excludeCodes": [
+              "ST3288",
+              "ST3289"
+            ]
+          }
+        },
+        {
+          "id": "science:st:minor:total",
+          "label": "Statistics minor candidate units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "prefixes": [
+              "ST",
+              "MA"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "The total must allocate one course per required group; ST328x UROPS is excluded.",
+        "Engineering-specific 2-unit course combinations require manual handling."
+      ]
+    },
+    {
+      "id": "science-qf-primary",
+      "name": "Quantitative Finance — Primary Major",
+      "subject": "Quantitative Finance",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.math.nus.edu.sg/wp-content/uploads/sites/4/2025/10/QF_2122_14102025.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "QF1100",
+        "MA2001",
+        "MA2002",
+        "MA2104",
+        "QF2103",
+        "QF2104",
+        "QF3101",
+        "QF3103",
+        "QF4102",
+        "QF4103"
+      ],
+      "requirements": [
+        {
+          "id": "science:qf:numerical",
+          "label": "Numerical Analysis I or DSA2102",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2213",
+              "DSA2102"
+            ]
+          }
+        },
+        {
+          "id": "science:qf:probability",
+          "label": "Probability alternative",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2116",
+              "MA2116T",
+              "ST2131"
+            ]
+          }
+        },
+        {
+          "id": "science:qf:regression",
+          "label": "Regression or Mathematics for AI",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ST3131",
+              "MA3270"
+            ]
+          }
+        },
+        {
+          "id": "science:qf:advanced",
+          "label": "8 units of approved advanced Quantitative Finance options",
+          "type": "minimum_units",
+          "target": 8,
+          "selector": {
+            "codes": [
+              "QF4104",
+              "QF4204",
+              "QF4205",
+              "QF4211",
+              "DSE4211",
+              "QF4212",
+              "DSE4212",
+              "QF4288"
+            ]
+          }
+        },
+        {
+          "id": "science:qf:total",
+          "label": "Eligible Quantitative Finance major units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "codes": [
+              "QF1100",
+              "MA2001",
+              "MA2002",
+              "MA2104",
+              "QF2103",
+              "QF2104",
+              "QF3101",
+              "QF3103",
+              "QF4102",
+              "QF4103",
+              "MA2213",
+              "DSA2102",
+              "MA2116",
+              "MA2116T",
+              "ST2131",
+              "ST3131",
+              "MA3270",
+              "QF4104",
+              "QF4204",
+              "QF4205",
+              "QF4211",
+              "DSE4211",
+              "QF4212",
+              "DSE4212",
+              "QF4288"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "The QF4288 project is 8 units and QF4104/QF4204 options need programme-specific allocation. Verify course units from NUSMods."
+      ]
+    },
+    {
+      "id": "science-fst-primary",
+      "name": "Food Science and Technology — Primary Major",
+      "subject": "Food Science and Technology",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.fst.nus.edu.sg/education/undergraduate-programme/course-structure/primary-major-in-fst/",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "FST1101B",
+        "FST2102B",
+        "FST2106",
+        "FST2109",
+        "FST2110",
+        "FST2201",
+        "FST3103",
+        "FST3107",
+        "FST3108",
+        "FST3109",
+        "FST3110",
+        "FST3111",
+        "FST3112",
+        "FST4103",
+        "FST4104"
+      ],
+      "requirements": [
+        {
+          "id": "science:fst:major",
+          "label": "Food Science and Technology major units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "codes": [
+              "FST1101B",
+              "FST2102B",
+              "FST2106",
+              "FST2109",
+              "FST2110",
+              "FST2201",
+              "FST3103",
+              "FST3107",
+              "FST3108",
+              "FST3109",
+              "FST3110",
+              "FST3111",
+              "FST3112",
+              "FST4103",
+              "FST4104"
+            ]
+          }
+        },
+        {
+          "id": "science:fst:experience",
+          "label": "Research or industry experience (FST-coded options)",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "FST2288",
+              "FST2288R",
+              "FST3288",
+              "FST3288R",
+              "FST4288",
+              "FST3287",
+              "FST4277"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Experiential requirement can alternatively be fulfilled through an approved UPIP or NOC internship, which cannot be inferred solely from FST course codes. The specialisations are not yet separately audited."
+      ]
+    },
+    {
+      "id": "science-phs-primary",
+      "name": "Pharmaceutical Science — Primary Major",
+      "subject": "Pharmaceutical Science",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://pharmacy.nus.edu.sg/wp-content/uploads/sites/6/2025/07/BSc-Pharm-Science-Course-Table-for-Cohort-AY2021-22-onwards-updated-2-Jul-2025.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "PHS1101",
+        "PHS2101",
+        "PHS2102",
+        "PHS2103",
+        "PHS2104",
+        "PHS2105",
+        "PHS2191",
+        "PHS3101",
+        "PHS3102",
+        "PHS3191",
+        "LSM3211",
+        "PHS4101",
+        "PHS4121"
+      ],
+      "requirements": [
+        {
+          "id": "science:phs:electives",
+          "label": "8 units of approved Pharmaceutical Science electives",
+          "type": "minimum_units",
+          "target": 8,
+          "selector": {
+            "codes": [
+              "PHS4201",
+              "PR4204",
+              "PR4205",
+              "PR4207",
+              "PHS4288"
+            ]
+          }
+        },
+        {
+          "id": "science:phs:major",
+          "label": "Eligible Pharmaceutical Science major units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "codes": [
+              "PHS1101",
+              "PHS2101",
+              "PHS2102",
+              "PHS2103",
+              "PHS2104",
+              "PHS2105",
+              "PHS2191",
+              "PHS3101",
+              "PHS3102",
+              "PHS3191",
+              "LSM3211",
+              "PHS4101",
+              "PHS4121",
+              "PHS4201",
+              "PR4204",
+              "PR4205",
+              "PR4207",
+              "PHS4288"
+            ]
+          }
+        },
+        {
+          "id": "science:phs:experience",
+          "label": "Research experience (PHS-coded options)",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "PHS3288",
+              "PHS3288R",
+              "PHS4288"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Approved UPIP and NOC internship alternatives for the experiential requirement are not detected by this course-code-only check. PHS4288 is an 8-unit project."
+      ]
+    },
+    {
+      "id": "science-dsa-primary",
+      "name": "Data Science and Analytics — Primary Major",
+      "subject": "Data Science and Analytics",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "source": "https://www.stat.nus.edu.sg/wp-content/uploads/sites/8/2026/07/DSAHON-AY22-23-AY25-26_updated-July-2026.pdf",
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "core": [
+        "DSA1101",
+        "CS2040",
+        "DSA2101",
+        "DSA2102",
+        "MA2001",
+        "MA2002",
+        "ST2132",
+        "CS3244",
+        "DSA3101",
+        "DSA3102",
+        "ST3131"
+      ],
+      "requirements": [
+        {
+          "id": "science:dsa:calculus",
+          "label": "MA2104 or MA2311",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2104",
+              "MA2311"
+            ]
+          }
+        },
+        {
+          "id": "science:dsa:probability",
+          "label": "Probability alternative",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ST2131",
+              "MA2116",
+              "MA2116T"
+            ]
+          }
+        },
+        {
+          "id": "science:dsa:advanced-pathway",
+          "label": "Advanced electives OR Honours project",
+          "type": "any_of_groups",
+          "alternatives": [
+            {
+              "label": "Two advanced electives (one from each basket)",
+              "requirements": [
+                {
+                  "selector": {
+                    "codes": [
+                      "DSA4211",
+                      "DSA4212",
+                      "DSA4213",
+                      "DSE4211",
+                      "QF4211",
+                      "DSE4212",
+                      "QF4212"
+                    ]
+                  },
+                  "minimumCourses": 1
+                },
+                {
+                  "selector": {
+                    "codes": [
+                      "DSA4261",
+                      "DSA4262",
+                      "DSA4263",
+                      "DSA4264"
+                    ]
+                  },
+                  "minimumCourses": 1
+                }
+              ]
+            },
+            {
+              "label": "8-unit Honours project",
+              "requirements": [
+                {
+                  "selector": {
+                    "codes": [
+                      "DSA4288",
+                      "DSA4288M",
+                      "DSA4288S"
+                    ]
+                  },
+                  "minimumUnits": 8,
+                  "minimumCourses": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "science:dsa:total",
+          "label": "Eligible DSA major candidate units",
+          "type": "minimum_units",
+          "target": 60,
+          "selector": {
+            "codes": [
+              "DSA1101",
+              "CS2040",
+              "DSA2101",
+              "DSA2102",
+              "MA2001",
+              "MA2002",
+              "ST2132",
+              "CS3244",
+              "DSA3101",
+              "DSA3102",
+              "ST3131",
+              "MA2104",
+              "MA2311",
+              "ST2131",
+              "MA2116",
+              "MA2116T",
+              "DSA4211",
+              "DSA4212",
+              "DSA4213",
+              "DSE4211",
+              "QF4211",
+              "DSE4212",
+              "QF4212",
+              "DSA4261",
+              "DSA4262",
+              "DSA4263",
+              "DSA4264",
+              "DSA4288",
+              "DSA4288M",
+              "DSA4288S"
+            ]
+          }
+        },
+        {
+          "id": "science:dsa:experience",
+          "label": "Research experience (DSA-coded options)",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "DSA3288",
+              "DSA3288R",
+              "DSA4288",
+              "DSA4288M",
+              "DSA4288S"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Advanced electives and 8-unit Honours project are evaluated as alternative pathways. UPIP/NOC alternatives still require separate eligibility data."
+      ]
+    },
+    {
+      "id": "science-dse-primary",
+      "name": "Data Science and Economics — Cross-disciplinary Primary Major",
+      "subject": "Data Science and Economics",
+      "kind": "primary",
+      "minCohort": 2021,
+      "maxCohort": 2025,
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "source": "https://www.stat.nus.edu.sg/wp-content/uploads/sites/8/2024/06/120624-Major-Data-Science-and-Economics-Programme-Requirements-AY21-22-and-after.pdf",
+      "core": [
+        "DSE1101",
+        "EC1101E",
+        "CS2040",
+        "DSA2101",
+        "DSA2102",
+        "EC2101",
+        "EC2102",
+        "MA2001",
+        "MA2002",
+        "ST2132",
+        "DSA3102",
+        "DSE3101",
+        "EC3101",
+        "EC3102",
+        "EC3304",
+        "ST3131",
+        "DSE4101",
+        "EC4305"
+      ],
+      "requirements": [
+        {
+          "id": "dse:calculus",
+          "label": "Advanced calculus alternative",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "MA2311",
+              "MA2104"
+            ]
+          }
+        },
+        {
+          "id": "dse:probability",
+          "label": "Probability alternative",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ST2131",
+              "MA2116",
+              "MA2216"
+            ]
+          }
+        },
+        {
+          "id": "dse:advanced",
+          "label": "Four approved advanced elective courses",
+          "type": "minimum_courses",
+          "target": 4,
+          "selector": {
+            "codes": [
+              "DSA4264",
+              "DSA4265",
+              "DSE4211",
+              "QF4211",
+              "DSE4212",
+              "QF4212",
+              "DSE4231",
+              "EC4308",
+              "FE5213"
+            ]
+          }
+        },
+        {
+          "id": "dse:major-units",
+          "label": "DSE major candidate units (96-unit programme)",
+          "type": "minimum_units",
+          "target": 96,
+          "selector": {
+            "codes": [
+              "CS2040",
+              "DSA2101",
+              "DSA2102",
+              "DSA3102",
+              "DSA4264",
+              "DSA4265",
+              "DSE1101",
+              "DSE3101",
+              "DSE4101",
+              "DSE4201",
+              "DSE4211",
+              "DSE4212",
+              "DSE4231",
+              "EC1101E",
+              "EC2101",
+              "EC2102",
+              "EC3101",
+              "EC3102",
+              "EC3304",
+              "EC4305",
+              "EC4308",
+              "FE5213",
+              "MA2001",
+              "MA2002",
+              "MA2104",
+              "MA2116",
+              "MA2216",
+              "MA2311",
+              "QF4211",
+              "QF4212",
+              "ST2131",
+              "ST2132",
+              "ST3131"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "DSE uses a 96-unit major and 44-unit CHS/GE pathway, not the standard 60+52 CHS major split.",
+        "DSE1101 fulfils CHS Data Literacy and CS1010S fulfils Digital Literacy; distinct-unit totals must not count either course twice.",
+        "DSE4201 requires programme approval and is excluded from the ordinary no-approval advanced-elective route.",
+        "The four advanced electives must follow departmental pairing and course-equivalence rules; this initial basket is a candidate audit, not certification."
+      ]
+    },
+    {
+      "id": "science-env-primary",
+      "name": "Environmental Studies — Cross-disciplinary Primary Degree",
+      "subject": "Environmental Studies",
+      "kind": "primary",
+      "minCohort": 2024,
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "source": "https://envstudies.nus.edu.sg/wp-content/uploads/sites/2/2026/04/FoS_BES-XDP-Cohort-AY24-onwards-revised.pdf",
+      "core": [
+        "ENV1101",
+        "ENV2102",
+        "ENV2103",
+        "ENV2301",
+        "ENV2302",
+        "ENV4101",
+        "GE2103",
+        "LSM3257"
+      ],
+      "requirements": [
+        {
+          "id": "env:integrated-options",
+          "label": "Two approved ENV integrated-core options",
+          "type": "minimum_courses",
+          "target": 2,
+          "selector": {
+            "codes": [
+              "ENV3101",
+              "ENV3104",
+              "ENV3202A",
+              "ENV3206",
+              "GE3551",
+              "GE3551R",
+              "LSM3288",
+              "LSM3288R",
+              "ENV3288",
+              "ENV3288R"
+            ]
+          },
+          "exclusiveAllocationGroup": "env:elective-slots"
+        },
+        {
+          "id": "env:field",
+          "label": "Environmental Studies field course or approved alternative",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "ENV3102",
+              "GEN2007",
+              "GE3230A",
+              "GE4221",
+              "GE4220"
+            ]
+          }
+        },
+        {
+          "id": "env:lsm2",
+          "label": "One approved level-2000 Life Sciences elective",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LSM2251",
+              "LSM2252"
+            ]
+          },
+          "exclusiveAllocationGroup": "env:elective-slots"
+        },
+        {
+          "id": "env:lsm3",
+          "label": "Two approved level-3000 Life Sciences electives",
+          "type": "minimum_courses",
+          "target": 2,
+          "selector": {
+            "codes": [
+              "LSM3252",
+              "LSM3254",
+              "LSM3255",
+              "LSM3256",
+              "LSM3258",
+              "LSM3259",
+              "LSM3265",
+              "LSM3266",
+              "LSM3267"
+            ]
+          },
+          "exclusiveAllocationGroup": "env:elective-slots"
+        },
+        {
+          "id": "env:lsm4",
+          "label": "One approved level-4000 Life Sciences elective",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "LSM4201",
+              "LSM4251",
+              "LSM4254",
+              "LSM4255",
+              "LSM4256",
+              "LSM4257",
+              "LSM4258",
+              "LSM4261",
+              "LSM4262",
+              "LSM4263",
+              "LSM4264",
+              "LSM4266",
+              "LSM4267",
+              "LSM4268"
+            ]
+          },
+          "exclusiveAllocationGroup": "env:elective-slots"
+        },
+        {
+          "id": "env:ge2",
+          "label": "One approved level-2000 Geography elective",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "GE2101",
+              "GE2102",
+              "GE2215",
+              "GE2231"
+            ]
+          },
+          "exclusiveAllocationGroup": "env:elective-slots"
+        },
+        {
+          "id": "env:ge3",
+          "label": "Two approved level-3000 Geography electives",
+          "type": "minimum_courses",
+          "target": 2,
+          "selector": {
+            "codes": [
+              "GE3226",
+              "GE3231",
+              "GE3238",
+              "GE3240",
+              "GE3250",
+              "GE3251",
+              "GE3253",
+              "GE3254",
+              "GE3255",
+              "GE3256",
+              "GE3259"
+            ]
+          },
+          "exclusiveAllocationGroup": "env:elective-slots"
+        },
+        {
+          "id": "env:ge4",
+          "label": "One approved level-4000 Geography elective",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "GE4207",
+              "GE4211",
+              "GE4212",
+              "GE4214",
+              "GE4218",
+              "GE4219",
+              "GE4220",
+              "GE4221",
+              "GE4222",
+              "GE4224",
+              "GE4227",
+              "GE4232",
+              "GE4233",
+              "GE4234",
+              "GE4235",
+              "GE4237",
+              "GE4239",
+              "GE4240",
+              "GE4241"
+            ]
+          },
+          "exclusiveAllocationGroup": "env:elective-slots"
+        },
+        {
+          "id": "env:capstone",
+          "label": "8-unit project or two advanced common-core courses",
+          "type": "any_of_groups",
+          "alternatives": [
+            {
+              "label": "8-unit research project",
+              "requirements": [
+                {
+                  "selector": {
+                    "codes": [
+                      "LSM4288E",
+                      "GE4401"
+                    ]
+                  },
+                  "minimumUnits": 8,
+                  "minimumCourses": 1
+                }
+              ]
+            },
+            {
+              "label": "8 units of approved advanced electives",
+              "requirements": [
+                {
+                  "selector": {
+                    "codes": [
+                      "LSM4201",
+                      "LSM4251",
+                      "LSM4254",
+                      "LSM4255",
+                      "LSM4256",
+                      "LSM4257",
+                      "LSM4258",
+                      "LSM4261",
+                      "LSM4262",
+                      "LSM4263",
+                      "LSM4264",
+                      "LSM4266",
+                      "LSM4267",
+                      "LSM4268",
+                      "GE4207",
+                      "GE4211",
+                      "GE4212",
+                      "GE4214",
+                      "GE4218",
+                      "GE4219",
+                      "GE4220",
+                      "GE4221",
+                      "GE4222",
+                      "GE4224",
+                      "GE4227",
+                      "GE4232",
+                      "GE4233",
+                      "GE4234",
+                      "GE4235",
+                      "GE4237",
+                      "GE4239",
+                      "GE4240",
+                      "GE4241"
+                    ]
+                  },
+                  "minimumUnits": 8,
+                  "minimumCourses": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "env:recognised",
+          "label": "One approved ENV-recognised course",
+          "type": "minimum_courses",
+          "target": 1,
+          "selector": {
+            "codes": [
+              "AN2203",
+              "AN2206",
+              "EC2383",
+              "ESE2000",
+              "ESE3101",
+              "ESE3201",
+              "ESE3301",
+              "GEN2004",
+              "GL3203",
+              "HY2235",
+              "JS2234",
+              "LAD2004",
+              "LAD3006",
+              "PC3442",
+              "PH2216",
+              "PH2226",
+              "PF3504",
+              "PS3274",
+              "RE2701",
+              "RE3901",
+              "SC3212",
+              "ENV2991",
+              "ENV3991",
+              "ENV4991"
+            ]
+          }
+        },
+        {
+          "id": "env:programme-total",
+          "label": "Environmental Studies programme candidate units (88 required)",
+          "type": "minimum_units",
+          "target": 88,
+          "selector": {
+            "codes": [
+              "AN2203",
+              "AN2206",
+              "EC2383",
+              "ENV1101",
+              "ENV2102",
+              "ENV2103",
+              "ENV2301",
+              "ENV2302",
+              "ENV2991",
+              "ENV3101",
+              "ENV3102",
+              "ENV3104",
+              "ENV3202A",
+              "ENV3206",
+              "ENV3288",
+              "ENV3288R",
+              "ENV3991",
+              "ENV4101",
+              "ENV4991",
+              "ESE2000",
+              "ESE3101",
+              "ESE3201",
+              "ESE3301",
+              "GE2101",
+              "GE2102",
+              "GE2103",
+              "GE2215",
+              "GE2231",
+              "GE3226",
+              "GE3230A",
+              "GE3231",
+              "GE3238",
+              "GE3240",
+              "GE3250",
+              "GE3251",
+              "GE3253",
+              "GE3254",
+              "GE3255",
+              "GE3256",
+              "GE3259",
+              "GE3551",
+              "GE3551R",
+              "GE4207",
+              "GE4211",
+              "GE4212",
+              "GE4214",
+              "GE4218",
+              "GE4219",
+              "GE4220",
+              "GE4221",
+              "GE4222",
+              "GE4224",
+              "GE4227",
+              "GE4232",
+              "GE4233",
+              "GE4234",
+              "GE4235",
+              "GE4237",
+              "GE4239",
+              "GE4240",
+              "GE4241",
+              "GE4401",
+              "GEN2004",
+              "GEN2007",
+              "GL3203",
+              "HY2235",
+              "JS2234",
+              "LAD2004",
+              "LAD3006",
+              "LSM2251",
+              "LSM2252",
+              "LSM3252",
+              "LSM3254",
+              "LSM3255",
+              "LSM3256",
+              "LSM3257",
+              "LSM3258",
+              "LSM3259",
+              "LSM3265",
+              "LSM3266",
+              "LSM3267",
+              "LSM3288",
+              "LSM3288R",
+              "LSM4201",
+              "LSM4251",
+              "LSM4254",
+              "LSM4255",
+              "LSM4256",
+              "LSM4257",
+              "LSM4258",
+              "LSM4261",
+              "LSM4262",
+              "LSM4263",
+              "LSM4264",
+              "LSM4266",
+              "LSM4267",
+              "LSM4268",
+              "LSM4288E",
+              "PC3442",
+              "PF3504",
+              "PH2216",
+              "PH2226",
+              "PS3274",
+              "RE2701",
+              "RE3901",
+              "SC3212"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "For AY2024/25 onward, BES uses 88 programme units + 40 CHS units + 32 unrestricted elective units.",
+        "This audit does not yet enforce non-reuse of a course between the 8-unit capstone alternative and the required 4000-level elective baskets.",
+        "ENV3102 alternatives and study-abroad mapping may require approval; no exceptional approvals assumed.",
+        "The integrated-core 36-unit and common-core 52-unit allocation requires separate course assignment to avoid double use."
+      ]
+    },
+    {
+      "id": "science-pc-spec-astro",
+      "name": "Physics — Specialisation in Astrophysics",
+      "subject": "Physics",
+      "kind": "specialisation",
+      "minCohort": 2021,
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "source": "https://www.physics.nus.edu.sg/student/specialisation-in-astrophysics/",
+      "requirements": [
+        {
+          "id": "spec:pc:astro:units",
+          "label": "Astrophysics specialisation units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "codes": [
+              "PC3232",
+              "PC3246",
+              "PC3261",
+              "PC3288A",
+              "PC4248",
+              "PC4249",
+              "PC4288A"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Only up to 8 units may double count with the Physics major per department; the app does not yet allocate this overlap."
+      ]
+    },
+    {
+      "id": "science-ma-spec-pure",
+      "name": "Mathematics — Specialisation in Pure Mathematics",
+      "subject": "Mathematics",
+      "kind": "specialisation",
+      "minCohort": 2021,
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "source": "https://www.math.nus.edu.sg/wp-content/uploads/sites/4/2025/10/MA_PM_2122_14102025.pdf",
+      "core": [
+        "MA4198"
+      ],
+      "requirements": [
+        {
+          "id": "spec:ma:pure:options",
+          "label": "Five approved Pure Mathematics advanced options",
+          "type": "minimum_courses",
+          "target": 5,
+          "selector": {
+            "codes": [
+              "MA4203",
+              "MA4207",
+              "MA4211",
+              "MA4221",
+              "MA4233",
+              "MA4235",
+              "MA4262",
+              "MA4263",
+              "MA4266",
+              "MA4271",
+              "MA4273",
+              "MA4288P"
+            ]
+          }
+        }
+      ],
+      "notes": [
+        "Five specialisation electives cannot concurrently fulfil two other Mathematics-major elective requirements; allocation not yet enforced.",
+        "Core mathematics degree requirements are evaluated by the primary-major audit."
+      ]
+    },
+    {
+      "id": "science-pc-spec-nano",
+      "name": "Physics — Specialisation in Nanophysics",
+      "subject": "Physics",
+      "kind": "specialisation",
+      "minCohort": 2022,
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "source": "https://www.physics.nus.edu.sg/student/specialisation-in-nanophysics/",
+      "requirements": [
+        {
+          "id": "spec:pc:nano:units",
+          "label": "Nanophysics specialisation units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "codes": [
+              "SP2251",
+              "PC3235",
+              "PC3242",
+              "PC3243",
+              "PC3251",
+              "PC3288N",
+              "PC4246",
+              "PC4253",
+              "PC4264",
+              "PC4288N"
+            ]
+          },
+          "detail": "20 units from the department list; check specialisation overlap and NUS residency separately."
+        }
+      ],
+      "notes": [
+        "Department lists the course basket. Specialisation overlap and residency require manual verification."
+      ]
+    },
+    {
+      "id": "science-pc-spec-quantum",
+      "name": "Physics — Specialisation in Quantum Technologies",
+      "subject": "Physics",
+      "kind": "specialisation",
+      "minCohort": 2021,
+      "implementationStatus": "partial",
+      "dataComplete": false,
+      "source": "https://www.physics.nus.edu.sg/student/specialisation-in-quantum-technologies/",
+      "requirements": [
+        {
+          "id": "spec:pc:quantum:units",
+          "label": "Quantum Technologies specialisation units",
+          "type": "minimum_units",
+          "target": 20,
+          "selector": {
+            "codes": [
+              "PC3233",
+              "PC3130",
+              "PC3288Q",
+              "PC4228",
+              "PC4230",
+              "PC4243",
+              "PC4246",
+              "PC4288Q"
+            ]
+          },
+          "detail": "20 units from the department list; check specialisation overlap and NUS residency separately."
+        }
+      ],
+      "notes": [
+        "Department lists the course basket. Specialisation overlap and residency require manual verification."
+      ]
     }
   ]
 }

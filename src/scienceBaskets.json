@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "lists": {
+    "chemistry-core": [
+      "CM1102",
+      "CM2112",
+      "CM2122",
+      "CM2133",
+      "CM2143",
+      "CM3111",
+      "CM3121",
+      "CM3131",
+      "CM3141",
+      "CM3191",
+      "CM3192"
+    ],
+    "physics-core": [
+      "PC1101",
+      "PC2031",
+      "PC2032",
+      "PC2130",
+      "PC2135",
+      "PC2174A",
+      "PC2193",
+      "PC3193",
+      "PC3274A"
+    ],
+    "physics-electives": [
+      "PC3130",
+      "PC3231",
+      "PC3232",
+      "PC3233",
+      "PC3235",
+      "PC3236",
+      "PC3238",
+      "PC3242",
+      "PC3243",
+      "PC3246",
+      "PC3247",
+      "PC3251",
+      "PC3261",
+      "PC3267",
+      "PC3270",
+      "PC3288",
+      "PC3294",
+      "PC3295",
+      "PC4228",
+      "PC4230",
+      "PC4236",
+      "PC4240",
+      "PC4241",
+      "PC4243",
+      "PC4245",
+      "PC4246",
+      "PC4248",
+      "PC4249",
+      "PC4253",
+      "PC4259",
+      "PC4262",
+      "PC4264",
+      "PC4267",
+      "PC4268",
+      "PC4274A",
+      "PC3991",
+      "PC4991"
+    ],
+    "life-essentials": [
+      "LSM1111",
+      "LSM2105",
+      "LSM2106",
+      "LSM2107"
+    ],
+    "maths-core": [
+      "MA2001",
+      "MA2002",
+      "MA2104"
+    ],
+    "stats-core": [
+      "ST2132",
+      "ST2137",
+      "MA2001",
+      "MA2002",
+      "ST3131"
+    ]
+  },
+  "notes": "Course lists transcribed from departmental sources. Not all programme-specific exceptions are encoded."
+}
