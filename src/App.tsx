@@ -262,7 +262,6 @@ function AuditPanel({audit,catalogue,plan,semesters,onAdd}:{audit:Audit;catalogu
         )}</div>
       </details>}
       {compulsory.length > 0 && <details className="audit-subsection">
-        <summary>Required courses ({compulsory.filter(c=>c.completed>=c.target).length}/{compulsory.length} completed · {compulsory.filter(c=>c.scheduled>=c.target).length}/{compulsory.length} in plan)</summary>
         <div className="audit-checks">{compulsory.map(c=><details className="audit-check" key={c.id||c.label}>
           <summary className="audit-check-heading">
             <span className={`audit-dot ${c.completed>=c.target?'is-complete':''}`} aria-hidden="true" />
