@@ -12,7 +12,7 @@ const norm = (s: string) => s.trim().toLowerCase()
 function isPartial(subject:string,kind:ProgrammeKind):boolean {
   return defined.some(d=>d.subject && norm(d.subject)===norm(subject) && d.kind===kind && d.implementationStatus==='partial')
 }
-type DefinitionRef = {id:string;subject?:string;kind:string;adapter?:string;dataComplete?:boolean;implementationStatus?:string}
+type DefinitionRef = {id:string;subject?:string;kind:string;adapter?:string;dataComplete?:boolean;implementationStatus?:string;minCohort?:number;maxCohort?:number}
 const defined = definitions.programmes as DefinitionRef[]
 function structuredAudit(subject:string, kind:ProgrammeKind, plan:PlannedCourse[], cohort:number):Audit|undefined {
   const definition=defined.find(d=>d.subject && norm(d.subject)===norm(subject) && d.kind===kind && !d.adapter)
@@ -72,4 +72,15 @@ export function coverageVector(entries: ProgrammeEntry[]): number[] {
   return entries.map(e=> !e.supported||!e.audit ? 0 :
     e.audit.core.reduce((n,c)=>n+(c.status==='missing'?0:1),0) +
     e.audit.checks.filter(c=>!c.maximum&&!c.manual&&c.target>0).reduce((n,c)=>n+Math.min(1,c.scheduled/c.target),0))
+}
+
+/** Conservative cohort-specific UI status; audit availability alone is insufficient. */
+export function getProgrammeSupport(subject:string,kind:'primary'|'second'|'minor',cohort:number):'Supported'|'Not supported' {
+  const name=norm(subject)
+  const def=defined.find(d=>norm(d.subject??'')===name && d.kind===kind &&
+    cohort >= (('minCohort' in d && typeof d.minCohort==='number')?d.minCohort:2021) &&
+    cohort <= (('maxCohort' in d && typeof d.maxCohort==='number')?d.maxCohort:9999))
+  if(def) return def.dataComplete===true && def.implementationStatus!=='partial' ? 'Supported':'Not supported'
+  // Legacy audits have not yet been certified with the same completeness metadata.
+  return 'Not supported'
 }

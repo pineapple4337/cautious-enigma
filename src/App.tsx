@@ -13,7 +13,7 @@ import type { PrereqTree } from './prerequisites'
 import type { AcademicProfile, PlannedCourse, CourseStatus } from './types'
 import { DEFAULT_PROFILE } from './types'
 import { overlapCandidates } from './degreeRequirements'
-import { getProgrammeRegistry } from './programmeRegistry'
+import { getProgrammeRegistry, getProgrammeSupport } from './programmeRegistry'
 import { PRIMARY_MAJORS, SECOND_MAJORS, MINORS } from './programmeCatalog'
 import { checkTimetable, type TimetableResult } from './timetable'
 import { EligibleCourseExplorer } from './EligibleCourseExplorer'
@@ -242,6 +242,8 @@ function RequirementCourseOption({option,plan,semesters,onAdd}:{
 }
 
 function AuditPanel({audit,catalogue,plan,semesters,onAdd}:{audit:Audit;catalogue:Course[];plan:PlannedCourse[];semesters:Semester[];onAdd:(code:string,semesterId:string)=>Promise<string|null>}) {
+  const compulsory = audit.checks.filter(c => /^Required:\s*/i.test(c.label))
+  const otherChecks = audit.checks.filter(c => !/^Required:\s*/i.test(c.label))
   const done = audit.checks.filter(c => !c.maximum && (c.exact ? c.completed === c.target : c.completed >= c.target)).length
   const total = audit.checks.filter(c => !c.maximum).length
   return <details className="audit-panel" >
@@ -259,7 +261,22 @@ function AuditPanel({audit,catalogue,plan,semesters,onAdd}:{audit:Audit;catalogu
           </div>
         )}</div>
       </details>}
-      <div className="audit-checks">{audit.checks.map(c => {
+      {compulsory.length > 0 && <details className="audit-subsection">
+        <summary>Required courses ({compulsory.filter(c=>c.completed>=c.target).length}/{compulsory.length} completed · {compulsory.filter(c=>c.scheduled>=c.target).length}/{compulsory.length} in plan)</summary>
+        <div className="audit-checks">{compulsory.map(c=><details className="audit-check" key={c.id||c.label}>
+          <summary className="audit-check-heading">
+            <span className={`audit-dot ${c.completed>=c.target?'is-complete':''}`} aria-hidden="true" />
+            <strong>{c.label.replace(/^Required:\s*/i,'')}</strong>
+            <span className="audit-values">{c.completed}/{c.target} completed · {c.scheduled} in plan</span>
+          </summary>
+          <div className="audit-check-body">
+            {c.courses.map(course=><p key={course.code}>{course.code} · {course.status}</p>)}
+            {(()=>{const eligible=requirementOptions(audit,c.label,catalogue);return eligible.length?<details className="eligible-courses-list"><summary>Eligible course options ({eligible.length})</summary><div className="eligible-courses-scroll">{eligible.map(option=><RequirementCourseOption key={option.moduleCode} option={option} plan={plan} semesters={semesters} onAdd={onAdd}/>)}</div></details>:null})()}
+            {c.detail&&<p>{c.detail}</p>}
+          </div>
+        </details>)}</div>
+      </details>}
+      <div className="audit-checks">{otherChecks.map(c => {
         const isCap = Boolean(c.maximum)
         const complete = isCap ? c.scheduled <= c.target : c.exact ? c.completed === c.target : c.completed >= c.target
         return <details className="audit-check" key={c.label}>
@@ -477,14 +494,14 @@ function App() {
           <select value={profile.primaryMajor} onChange={e=>setProfile(p=>({...p,primaryMajor:e.target.value}))}>
             <option value="">Select primary major</option>
             {profile.primaryMajor && !PRIMARY_MAJORS.some(name=>name===profile.primaryMajor) && <option value={profile.primaryMajor}>{profile.primaryMajor} (previous value)</option>}
-            {PRIMARY_MAJORS.map(name=><option key={name} value={name}>{name}</option>)}
+            {PRIMARY_MAJORS.map(name=><option key={name} value={name}>{name} — {getProgrammeSupport(name,'primary',profile.matriculationYear)}</option>)}
           </select>
         </label>
         <label>Second Major
           <select value={profile.secondMajor} onChange={e=>setProfile(p=>({...p,secondMajor:e.target.value}))}>
             <option value="">None</option>
             {profile.secondMajor && !SECOND_MAJORS.some(name=>name===profile.secondMajor) && <option value={profile.secondMajor}>{profile.secondMajor} (previous value)</option>}
-            {SECOND_MAJORS.filter(name=>name!==profile.primaryMajor).map(name=><option key={name} value={name}>{name}</option>)}
+            {SECOND_MAJORS.filter(name=>name!==profile.primaryMajor).map(name=><option key={name} value={name}>{name} — {getProgrammeSupport(name,'second',profile.matriculationYear)}</option>)}
           </select>
         </label>
         {profile.primaryMajor === 'Economics' && <div className="minor-picker full-width">
@@ -520,7 +537,7 @@ function App() {
               ...p,minors:p.minors.includes(name)||p.minors.length>=3?p.minors:[...p.minors,name]
             }))}}>
             <option value="">{profile.minors.length>=3?'Maximum three minors':'Add a minor...'}</option>
-            {MINORS.filter(name=>!profile.minors.includes(name) && name!==profile.primaryMajor).map(name=><option key={name} value={name}>{name}</option>)}
+            {MINORS.filter(name=>!profile.minors.includes(name) && name!==profile.primaryMajor).map(name=><option key={name} value={name}>{name} — {getProgrammeSupport(name,'minor',profile.matriculationYear)}</option>)}
           </select>
         </div>
       </div></section>
@@ -564,6 +581,7 @@ function App() {
             const planned = applicable.filter(c => c.exact ? c.scheduled === c.target : c.scheduled >= c.target).length
             return <div className="degree-overview-card" key={a.id}>
               <strong>{a.programme.split(' — ')[0]}</strong>
+              <span>{(()=>{const totalCheck=a.checks.find(c=>/^(Major total|Total (?:major|eligible|programme)|Eligible .* units|.* total units)/i.test(c.label)&&c.unit!=='courses');return totalCheck?`${totalCheck.scheduled}/${totalCheck.target} programme units planned`:''})()}</span>
               <span>{complete}/{applicable.length} checks completed · {planned}/{applicable.length} covered in plan</span>
               <div className="degree-progress-track"><div style={{width:`${applicable.length ? complete / applicable.length * 100 : 0}%`}} /></div>
             </div>
